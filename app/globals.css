@@ -156,8 +156,6 @@
 .gold-btn {
   background: linear-gradient(180deg, #fbc24a 0%, #e89a1f 100%);
   color: #1a1410;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset,
-    0 8px 24px -8px rgba(245, 184, 54, 0.55);
 }
 .gold-btn:hover {
   filter: brightness(1.05);
@@ -177,6 +175,14 @@
 .card {
   background: linear-gradient(180deg, #1f1814 0%, #1a1410 100%);
   border: 1px solid var(--line);
+}
+
+/* Dropdown - Higher opacity for better readability */
+.dropdown-menu {
+  background: rgba(31, 24, 20, 0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--gold-500);
+  border-opacity: 0.2;
 }
 
 /* Tab Pill */
@@ -327,4 +333,23 @@
 /* Nav Indicator Animation */
 .nav-indicator {
   transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Logo Hover Animation */
+.logo-hover {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.logo-hover:hover {
+  transform: scale(1.03) translateY(-2px);
+  filter: drop-shadow(0 4px 16px rgba(245, 184, 54, 0.25)) brightness(1.05);
+}
+
+/* Section Header Style */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(90deg, rgba(245, 184, 54, 0.06) 0%, transparent 60%);
 }

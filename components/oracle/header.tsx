@@ -44,7 +44,11 @@ import {
   IconSearch,
   IconBell,
   IconWallet,
+  IconLogin,
 } from "@tabler/icons-react"
+import { AuthModal } from "./auth-modal"
+import { SearchModal } from "./search-modal"
+import { NotificationsDropdown } from "./notifications-dropdown"
 
 // Menu data with icons and submenus
 const menuItems = [
@@ -60,35 +64,35 @@ const menuItems = [
     href: "/rehber",
     icon: IconBook,
     submenu: [
-      { label: "Başlangıç Rehberi", href: "/rehber/baslangic", icon: IconStar, desc: "Yeni oyuncular için" },
-      { label: "Sınıf Rehberleri", href: "/rehber/siniflar", icon: IconShield, desc: "Warrior, Rogue, Mage, Priest" },
-      { label: "Harita Rehberi", href: "/rehber/harita", icon: IconMap, desc: "Bölgeler ve rotalar" },
-      { label: "PvP Rehberi", href: "/rehber/pvp", icon: IconSword, desc: "Savaş taktikleri" },
-      { label: "Ekonomi Rehberi", href: "/rehber/ekonomi", icon: IconCoins, desc: "Ticaret ve kazanç" },
+      { label: "Baslangic Rehberi", href: "/rehber/baslangic", icon: IconStar, desc: "Yeni oyuncular icin" },
+      { label: "Sinif Rehberleri", href: "/rehber/siniflar", icon: IconShield, desc: "Warrior, Rogue, Mage, Priest" },
+      { label: "Harita Rehberi", href: "/rehber/harita", icon: IconMap, desc: "Bolgeler ve rotalar" },
+      { label: "PvP Rehberi", href: "/rehber/pvp", icon: IconSword, desc: "Savas taktikleri" },
+      { label: "Ekonomi Rehberi", href: "/rehber/ekonomi", icon: IconCoins, desc: "Ticaret ve kazanc" },
     ],
   },
   {
     id: "rankings",
-    label: "Sıralamalar",
+    label: "Siralamalar",
     href: "/siralamalar",
     icon: IconTrophy,
     submenu: [
-      { label: "Oyuncu Sıralaması", href: "/siralamalar/oyuncu", icon: IconCrown, desc: "En güçlü oyuncular" },
-      { label: "Lonca Sıralaması", href: "/siralamalar/lonca", icon: IconUsers, desc: "Klan sıralamaları" },
-      { label: "PvP Sıralaması", href: "/siralamalar/pvp", icon: IconFlame, desc: "Kill sayıları" },
-      { label: "Haftalık Sıralama", href: "/siralamalar/haftalik", icon: IconTarget, desc: "Bu hafta liderler" },
+      { label: "Oyuncu Siralamasi", href: "/siralamalar/oyuncu", icon: IconCrown, desc: "En guclu oyuncular" },
+      { label: "Lonca Siralamasi", href: "/siralamalar/lonca", icon: IconUsers, desc: "Klan siralamalari" },
+      { label: "PvP Siralamasi", href: "/siralamalar/pvp", icon: IconFlame, desc: "Kill sayilari" },
+      { label: "Haftalik Siralama", href: "/siralamalar/haftalik", icon: IconTarget, desc: "Bu hafta liderler" },
     ],
   },
   {
     id: "shop",
-    label: "Mağaza",
+    label: "Magaza",
     href: "/magaza",
     icon: IconShoppingCart,
     submenu: [
       { label: "Premium Paketler", href: "/magaza/premium", icon: IconGift, desc: "VIP avantajlar" },
-      { label: "Kostümler", href: "/magaza/kostumler", icon: IconHeart, desc: "Görsel öğeler" },
-      { label: "Özel Eşyalar", href: "/magaza/ozel", icon: IconAward, desc: "Nadir itemler" },
-      { label: "Bakiye Yükle", href: "/magaza/bakiye", icon: IconPlus, desc: "Coin satın al" },
+      { label: "Kostumler", href: "/magaza/kostumler", icon: IconHeart, desc: "Gorsel ogeler" },
+      { label: "Ozel Esyalar", href: "/magaza/ozel", icon: IconAward, desc: "Nadir itemler" },
+      { label: "Bakiye Yukle", href: "/magaza/bakiye", icon: IconPlus, desc: "Coin satin al" },
     ],
   },
   {
@@ -97,10 +101,10 @@ const menuItems = [
     href: "/topluluk",
     icon: IconUsers,
     submenu: [
-      { label: "Forum", href: "/forum", icon: IconMessageCircle, desc: "Tartışmalar" },
-      { label: "Discord", href: "https://discord.gg/oracle", icon: IconBrandDiscord, desc: "Canlı sohbet", external: true },
-      { label: "Haberler", href: "/haberler", icon: IconNews, desc: "Son gelişmeler" },
-      { label: "Etkinlikler", href: "/etkinlikler", icon: IconStar, desc: "Özel eventler" },
+      { label: "Forum", href: "/forum", icon: IconMessageCircle, desc: "Tartismalar" },
+      { label: "Discord", href: "https://discord.gg/oracle", icon: IconBrandDiscord, desc: "Canli sohbet", external: true },
+      { label: "Haberler", href: "/haberler", icon: IconNews, desc: "Son gelismeler" },
+      { label: "Etkinlikler", href: "/etkinlikler", icon: IconStar, desc: "Ozel eventler" },
     ],
   },
   {
@@ -109,15 +113,15 @@ const menuItems = [
     href: "/destek",
     icon: IconQuestionMark,
     submenu: [
-      { label: "Yardım Merkezi", href: "/destek/yardim", icon: IconInfoCircle, desc: "SSS ve çözümler" },
-      { label: "İndirme", href: "/indir", icon: IconDownload, desc: "Oyun istemcisi" },
-      { label: "Hesap Kurtarma", href: "/destek/hesap", icon: IconShield, desc: "Şifre sıfırlama" },
+      { label: "Yardim Merkezi", href: "/destek/yardim", icon: IconInfoCircle, desc: "SSS ve cozumler" },
+      { label: "Indirme", href: "/indir", icon: IconDownload, desc: "Oyun istemcisi" },
+      { label: "Hesap Kurtarma", href: "/destek/hesap", icon: IconShield, desc: "Sifre sifirlama" },
     ],
   },
 ]
 
 const languages = [
-  { code: "tr", label: "Türkçe", flag: "https://flagcdn.com/w40/tr.png" },
+  { code: "tr", label: "Turkce", flag: "https://flagcdn.com/w40/tr.png" },
   { code: "en", label: "English", flag: "https://flagcdn.com/w40/gb.png" },
   { code: "de", label: "Deutsch", flag: "https://flagcdn.com/w40/de.png" },
   { code: "ru", label: "Русский", flag: "https://flagcdn.com/w40/ru.png" },
@@ -140,9 +144,13 @@ export function Header({ onOpenServerModal }: HeaderProps) {
   const [langDropdownOpen, setLangDropdownOpen] = useState(false)
   const [serverDropdownOpen, setServerDropdownOpen] = useState(false)
   const [accountDropdownOpen, setAccountDropdownOpen] = useState(false)
+  const [notificationsOpen, setNotificationsOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [authModalOpen, setAuthModalOpen] = useState(false)
   const [currentLang, setCurrentLang] = useState(languages[0])
   const [currentServer, setCurrentServer] = useState(servers[0])
-  const [isLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [username, setUsername] = useState("")
   const navRef = useRef<HTMLElement>(null)
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 })
   const navItemRefs = useRef<{ [key: string]: HTMLElement | null }>({})
@@ -165,6 +173,18 @@ export function Header({ onOpenServerModal }: HeaderProps) {
     setActiveDropdown(null)
   }
 
+  const handleLogin = (user: string) => {
+    setUsername(user)
+    setIsLoggedIn(true)
+    setAuthModalOpen(false)
+  }
+
+  const handleLogout = () => {
+    setIsLoggedIn(false)
+    setUsername("")
+    setAccountDropdownOpen(false)
+  }
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (!(e.target as Element).closest(".dropdown-container")) {
@@ -172,6 +192,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
         setLangDropdownOpen(false)
         setServerDropdownOpen(false)
         setAccountDropdownOpen(false)
+        setNotificationsOpen(false)
       }
     }
     document.addEventListener("click", handleClickOutside)
@@ -188,6 +209,18 @@ export function Header({ onOpenServerModal }: HeaderProps) {
       document.body.style.overflow = ""
     }
   }, [mobileMenuOpen])
+
+  // Global keyboard shortcut for search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault()
+        setSearchOpen(true)
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [])
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -221,17 +254,17 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                 <span className="font-medium text-cream">{currentServer.name}</span>
                 <span className="text-cream-dim/40">|</span>
                 <span className={getStatusColor(currentServer.status)}>
-                  {currentServer.status === "online" ? `${currentServer.players} Oyuncu` : "Bakımda"}
+                  {currentServer.status === "online" ? `${currentServer.players} Oyuncu` : "Bakimda"}
                 </span>
                 <IconChevronDown className="w-3 h-3 text-cream-dim group-hover:text-cream transition-colors" />
               </button>
 
               {serverDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden">
+                <div className="absolute top-full left-0 mt-2 w-72 bg-ink-800 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden">
                   <div className="p-3 border-b border-ink-700 bg-gradient-to-r from-gold-500/5 to-transparent">
                     <span className="text-xs font-bold text-gold-400 uppercase tracking-wider flex items-center gap-2">
                       <IconServer className="w-3.5 h-3.5" />
-                      Sunucu Seç
+                      Sunucu Sec
                     </span>
                   </div>
                   <div className="p-2">
@@ -253,7 +286,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                           <div className="text-left">
                             <div className="text-sm font-medium text-cream">{server.name}</div>
                             <div className={`text-xs ${getStatusColor(server.status)}`}>
-                              {server.status === "online" ? "Çevrimiçi" : "Bakımda"}
+                              {server.status === "online" ? "Cevrimici" : "Bakimda"}
                             </div>
                           </div>
                         </div>
@@ -271,7 +304,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                     className="w-full px-4 py-3 text-xs text-gold-400 hover:bg-gold-500/10 border-t border-ink-700 flex items-center gap-2 justify-center font-medium transition-colors"
                   >
                     <IconTrendingUp className="w-3.5 h-3.5" />
-                    Detaylı Sunucu Durumu
+                    Detayli Sunucu Durumu
                   </button>
                 </div>
               )}
@@ -279,13 +312,30 @@ export function Header({ onOpenServerModal }: HeaderProps) {
 
             {/* Right Actions */}
             <div className="flex items-center gap-4">
-              <button className="text-cream-dim hover:text-cream transition-colors">
+              {/* Search */}
+              <button 
+                onClick={() => setSearchOpen(true)}
+                className="text-cream-dim hover:text-cream transition-colors flex items-center gap-2"
+              >
                 <IconSearch className="w-4 h-4" />
+                <span className="text-xs hidden xl:inline">Ara</span>
+                <kbd className="hidden xl:inline text-[10px] px-1.5 py-0.5 bg-ink-700 rounded border border-line">⌘K</kbd>
               </button>
-              <button className="text-cream-dim hover:text-cream transition-colors relative">
-                <IconBell className="w-4 h-4" />
-                <span className="absolute -top-1 -right-1 w-2 h-2 bg-rose-500 rounded-full" />
-              </button>
+
+              {/* Notifications */}
+              <div className="dropdown-container relative">
+                <button 
+                  onClick={() => setNotificationsOpen(!notificationsOpen)}
+                  className="text-cream-dim hover:text-cream transition-colors relative"
+                >
+                  <IconBell className="w-4 h-4" />
+                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-rose-500 rounded-full" />
+                </button>
+                <NotificationsDropdown 
+                  isOpen={notificationsOpen} 
+                  onClose={() => setNotificationsOpen(false)} 
+                />
+              </div>
 
               {/* Language */}
               <div className="dropdown-container relative">
@@ -299,7 +349,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                 </button>
 
                 {langDropdownOpen && (
-                  <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden">
+                  <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-[60]">
                     <div className="p-1.5">
                       {languages.map((lang) => (
                         <button
@@ -331,7 +381,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
         <div className="max-w-[1400px] mx-auto px-4 lg:px-6">
           <div className="h-16 lg:h-[72px] flex items-center justify-between gap-4">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
+            <Link href="/" className="flex-shrink-0 logo-hover">
               <Image
                 src="https://media.oraclegamer.net/game/logo/logov4.webp"
                 alt="Oracle Gamer"
@@ -385,7 +435,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                         onMouseEnter={() => setActiveDropdown(item.id)}
                         onMouseLeave={() => setActiveDropdown(null)}
                       >
-                        <div className="w-72 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden">
+                        <div className="w-72 bg-ink-800 backdrop-blur-xl border border-gold-500/20 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden">
                           {/* Arrow */}
                           <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-ink-800 border-l border-t border-gold-500/20" />
                           
@@ -432,7 +482,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                       <IconUser className="w-5 h-5 text-ink-900" />
                     </div>
                     <div className="text-left">
-                      <div className="text-sm font-semibold text-cream">OracleKnight</div>
+                      <div className="text-sm font-semibold text-cream">{username || "OracleKnight"}</div>
                       <div className="text-[10px] text-gold-400 flex items-center gap-1">
                         <IconCrown className="w-3 h-3" /> Premium
                       </div>
@@ -441,16 +491,16 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                   </button>
 
                   {accountDropdownOpen && (
-                    <div className="absolute top-full right-0 mt-2 w-64 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-2xl shadow-2xl overflow-hidden">
+                    <div className="absolute top-full right-0 mt-2 w-64 bg-ink-800 backdrop-blur-xl border border-gold-500/20 rounded-2xl shadow-2xl overflow-hidden">
                       <div className="p-4 border-b border-ink-700 bg-gradient-to-r from-gold-500/10 to-transparent">
                         <div className="flex items-center gap-3">
                           <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center ring-2 ring-gold-500/30">
                             <IconUser className="w-6 h-6 text-ink-900" />
                           </div>
                           <div>
-                            <div className="font-semibold text-cream">OracleKnight</div>
+                            <div className="font-semibold text-cream">{username || "OracleKnight"}</div>
                             <div className="text-xs text-gold-400 flex items-center gap-1">
-                              <IconCrown className="w-3 h-3" /> Premium Üye
+                              <IconCrown className="w-3 h-3" /> Premium Uye
                             </div>
                           </div>
                         </div>
@@ -462,11 +512,11 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                       <div className="p-2">
                         <Link href="/hesap" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-cream-dim hover:text-cream hover:bg-ink-700/50 transition-colors">
                           <IconUser className="w-4 h-4" />
-                          <span>Hesabım</span>
+                          <span>Hesabim</span>
                         </Link>
                         <Link href="/hesap/cuzdan" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-cream-dim hover:text-cream hover:bg-ink-700/50 transition-colors">
                           <IconWallet className="w-4 h-4" />
-                          <span>Cüzdan</span>
+                          <span>Cuzdan</span>
                         </Link>
                         <Link href="/hesap/mesajlar" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-cream-dim hover:text-cream hover:bg-ink-700/50 transition-colors">
                           <IconMessage className="w-4 h-4" />
@@ -479,22 +529,25 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                         </Link>
                       </div>
                       <div className="p-2 border-t border-ink-700">
-                        <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-rose-400 hover:bg-rose-500/10 transition-colors">
+                        <button 
+                          onClick={handleLogout}
+                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-rose-400 hover:bg-rose-500/10 transition-colors"
+                        >
                           <IconLogout className="w-4 h-4" />
-                          <span>Çıkış Yap</span>
+                          <span>Cikis Yap</span>
                         </button>
                       </div>
                     </div>
                   )}
                 </div>
               ) : (
-                <Link
-                  href="/giris"
+                <button
+                  onClick={() => setAuthModalOpen(true)}
                   className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-sm hover:from-gold-400 hover:to-gold-500 transition-all shadow-lg shadow-gold-500/25"
                 >
-                  <IconUser className="w-4 h-4" />
-                  Giriş Yap
-                </Link>
+                  <IconLogin className="w-4 h-4" />
+                  Giris Yap / Kayit Ol
+                </button>
               )}
 
               {/* Mobile Menu Toggle */}
@@ -535,7 +588,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
             </div>
 
             {/* Account Section - Mobile */}
-            {isLoggedIn && (
+            {isLoggedIn ? (
               <div className="p-4 border-b border-ink-700/50">
                 <Link
                   href="/hesap"
@@ -547,15 +600,28 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                       <IconUser className="w-7 h-7 text-ink-900" />
                     </div>
                     <div>
-                      <div className="font-bold text-lg text-cream">OracleKnight</div>
+                      <div className="font-bold text-lg text-cream">{username || "OracleKnight"}</div>
                       <div className="text-sm text-gold-400 flex items-center gap-1.5">
-                        <IconCrown className="w-4 h-4" /> Premium Üye
+                        <IconCrown className="w-4 h-4" /> Premium Uye
                       </div>
                       <div className="text-xs text-cream-dim mt-0.5">2,450 OG Coin</div>
                     </div>
                   </div>
                   <IconChevronRight className="w-5 h-5 text-cream-dim" />
                 </Link>
+              </div>
+            ) : (
+              <div className="p-4 border-b border-ink-700/50">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    setAuthModalOpen(true)
+                  }}
+                  className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-base"
+                >
+                  <IconLogin className="w-5 h-5" />
+                  Giris Yap / Kayit Ol
+                </button>
               </div>
             )}
 
@@ -577,7 +643,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                     <div className="text-sm flex items-center gap-2 mt-0.5">
                       <span className={`w-2 h-2 rounded-full ${getStatusBg(currentServer.status)} animate-pulse`} />
                       <span className={getStatusColor(currentServer.status)}>
-                        {currentServer.status === "online" ? `${currentServer.players} Oyuncu Çevrimiçi` : "Bakımda"}
+                        {currentServer.status === "online" ? "Cevrimici" : "Bakimda"}
                       </span>
                     </div>
                   </div>
@@ -663,7 +729,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
               <div className="mt-6 pt-6 border-t border-ink-700/50">
                 <p className="text-xs font-bold text-gold-400 uppercase tracking-wider mb-4 px-2 flex items-center gap-2">
                   <IconWorld className="w-4 h-4" />
-                  Dil Seçimi
+                  Dil Secimi
                 </p>
                 <div className="grid grid-cols-2 gap-2">
                   {languages.map((lang) => (
@@ -683,17 +749,19 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                 </div>
               </div>
 
-              {/* Login - Mobile (if not logged in) */}
-              {!isLoggedIn && (
+              {/* Logout - Mobile (if logged in) */}
+              {isLoggedIn && (
                 <div className="mt-6">
-                  <Link
-                    href="/giris"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-3 w-full p-4 rounded-2xl bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-base"
+                  <button
+                    onClick={() => {
+                      handleLogout()
+                      setMobileMenuOpen(false)
+                    }}
+                    className="flex items-center justify-center gap-3 w-full p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-400 font-semibold"
                   >
-                    <IconUser className="w-5 h-5" />
-                    Giriş Yap
-                  </Link>
+                    <IconLogout className="w-5 h-5" />
+                    Cikis Yap
+                  </button>
                 </div>
               )}
             </div>
@@ -709,14 +777,20 @@ export function Header({ onOpenServerModal }: HeaderProps) {
               { icon: IconHome, label: "Ana Sayfa", href: "/" },
               { icon: IconNews, label: "Haberler", href: "/haberler" },
               { icon: IconMessageCircle, label: "Forum", href: "/forum" },
-              { icon: IconShoppingCart, label: "Mağaza", href: "/magaza" },
-              { icon: IconUser, label: "Hesap", href: isLoggedIn ? "/hesap" : "/giris", isAccount: true },
+              { icon: IconShoppingCart, label: "Magaza", href: "/magaza" },
+              { icon: IconUser, label: "Hesap", href: isLoggedIn ? "/hesap" : "#", isAccount: true },
             ].map((item, idx) => {
               const Icon = item.icon
               return (
                 <Link
                   key={idx}
-                  href={item.href}
+                  href={item.isAccount && !isLoggedIn ? "#" : item.href}
+                  onClick={(e) => {
+                    if (item.isAccount && !isLoggedIn) {
+                      e.preventDefault()
+                      setAuthModalOpen(true)
+                    }
+                  }}
                   className="flex flex-col items-center justify-center gap-1 text-cream-dim hover:text-gold-400 active:scale-95 transition-all"
                 >
                   {item.isAccount && isLoggedIn ? (
@@ -733,6 +807,19 @@ export function Header({ onOpenServerModal }: HeaderProps) {
           </div>
         </div>
       </div>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        onLogin={handleLogin}
+      />
+
+      {/* Search Modal */}
+      <SearchModal
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+      />
     </>
   )
 }
