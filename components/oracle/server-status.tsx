@@ -136,28 +136,41 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
           </div>
         </div>
 
-        {/* Status Grid */}
+        {/* Status Grid - Modern Design */}
         <div className="p-4 flex-1 flex flex-col">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-ink-900/50 border border-line">
             {/* Game Server */}
-            <div className={`rounded-xl border p-3 ${gameServerStatus ? "border-emerald-500/40 bg-emerald-500/5" : "border-rose-500/40 bg-rose-500/5"}`}>
-              <div className="flex items-center gap-2 mb-2">
-                <IconWifi className={`w-4 h-4 ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`} />
-                <span className="text-xs text-cream-dim">Oyun Sunucusu</span>
+            <div className="flex-1 flex items-center gap-3">
+              <div className={`relative w-10 h-10 rounded-lg flex items-center justify-center ${gameServerStatus ? "bg-emerald-500/15" : "bg-rose-500/15"}`}>
+                <IconWifi className={`w-5 h-5 ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`} />
+                {gameServerStatus && (
+                  <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-ink-800 animate-pulse" />
+                )}
               </div>
-              <div className={`text-sm font-bold ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`}>
-                {gameServerStatus ? "Cevrimici" : "Cevrimdisi"}
+              <div>
+                <div className="text-[11px] text-cream-dim uppercase tracking-wider">Oyun</div>
+                <div className={`text-sm font-bold ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`}>
+                  {gameServerStatus ? "Aktif" : "Kapali"}
+                </div>
               </div>
             </div>
 
+            {/* Divider */}
+            <div className="w-px h-10 bg-line" />
+
             {/* Login Server */}
-            <div className={`rounded-xl border p-3 ${loginServerStatus ? "border-emerald-500/40 bg-emerald-500/5" : "border-amber-500/40 bg-amber-500/5"}`}>
-              <div className="flex items-center gap-2 mb-2">
-                <IconServer className={`w-4 h-4 ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`} />
-                <span className="text-xs text-cream-dim">Giris Sunucusu</span>
+            <div className="flex-1 flex items-center gap-3">
+              <div className={`relative w-10 h-10 rounded-lg flex items-center justify-center ${loginServerStatus ? "bg-emerald-500/15" : "bg-amber-500/15"}`}>
+                <IconServer className={`w-5 h-5 ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`} />
+                {loginServerStatus && (
+                  <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-ink-800 animate-pulse" />
+                )}
               </div>
-              <div className={`text-sm font-bold ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`}>
-                {loginServerStatus ? "Cevrimici" : "Bakimda"}
+              <div>
+                <div className="text-[11px] text-cream-dim uppercase tracking-wider">Giris</div>
+                <div className={`text-sm font-bold ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`}>
+                  {loginServerStatus ? "Aktif" : "Bakim"}
+                </div>
               </div>
             </div>
           </div>

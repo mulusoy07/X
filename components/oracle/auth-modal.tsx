@@ -153,17 +153,17 @@ export function AuthModal({ isOpen, onClose, onLogin, defaultTab = "login" }: Au
 
             {/* Remember & Forgot */}
             <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer">
+              <label className="flex items-center gap-3 cursor-pointer group">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-line bg-ink-900 text-gold-500 focus:ring-gold-500/50"
+                  className="oracle-checkbox"
                 />
-                <span className="text-sm text-cream-dim">Beni hatirla</span>
+                <span className="text-sm text-cream-dim group-hover:text-cream transition-colors">Beni hatirla</span>
               </label>
               <button type="button" className="text-sm text-gold-400 hover:text-gold-300 font-medium">
-                Sifremi unuttum??
+                Sifremi unuttum?
               </button>
             </div>
 

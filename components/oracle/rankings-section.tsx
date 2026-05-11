@@ -290,77 +290,94 @@ export function RankingsSection() {
           </div>
         )}
 
-        {/* Staff Tab */}
+        {/* Staff Tab - Unified Design */}
         {activeTab === "staff" && (
           <div className="space-y-2">
-            {staff.map((member) => (
+            {staff.map((member, index) => (
               <div
                 key={member.rank}
-                className="flex items-center gap-4 p-3 rounded-xl border border-line hover:bg-ink-800/30 transition-all cursor-pointer"
+                className={`flex items-center gap-4 p-3 rounded-xl border transition-all cursor-pointer border-line hover:bg-ink-800/30`}
               >
-                {/* Rank */}
-                <div className="w-12 h-12 rounded-lg border border-line flex items-center justify-center">
-                  <span className="text-cream-dim font-medium text-lg">{member.rank}</span>
+                {/* Rank Number */}
+                <div className="w-12 h-12 rounded-lg border border-line flex items-center justify-center bg-ink-800/50">
+                  <span className="text-cream-dim font-medium text-lg">{index + 1}</span>
                 </div>
 
-                {/* Avatar */}
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-700/20 border border-emerald-500/30 flex items-center justify-center">
-                    <IconShield className="w-6 h-6 text-emerald-400" />
+                {/* Icon */}
+                <div className="flex items-center gap-1.5">
+                  <div className="w-8 h-8 rounded-lg bg-ink-700/80 border border-line flex items-center justify-center">
+                    <IconShield className="w-4 h-4 text-emerald-500" />
                   </div>
-                  {member.isOnline && (
-                    <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-ink-800" />
-                  )}
                 </div>
 
                 {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-cream">{member.name}</div>
-                  <div className="text-xs text-emerald-400">{member.role}</div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-cream">{member.name}</span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                      {member.role}
+                    </span>
+                  </div>
+                  <div className="text-xs text-cream-dim">Yonetici Ekibi</div>
                 </div>
 
                 {/* Status */}
-                <div className={`text-xs px-3 py-1.5 rounded-full font-medium ${member.isOnline ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30" : "bg-ink-700 text-cream-dim border border-line"}`}>
-                  {member.isOnline ? "Cevrimici" : "Cevrimdisi"}
+                <div className="text-right min-w-[90px]">
+                  <div className="text-[10px] text-cream-dim uppercase tracking-wider">DURUM</div>
+                  <div className={`font-bold ${member.isOnline ? "text-emerald-400" : "text-cream-dim"}`}>
+                    {member.isOnline ? "Cevrimici" : "Cevrimdisi"}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        {/* Kings Tab */}
+        {/* Kings Tab - Unified Design */}
         {activeTab === "kings" && (
           <div className="space-y-2">
-            {kings.map((king) => (
+            {kings.map((king, index) => (
               <div
                 key={king.rank}
-                className={`flex items-center gap-4 p-4 rounded-xl border transition-all cursor-pointer ${
+                className={`flex items-center gap-4 p-3 rounded-xl border transition-all cursor-pointer ${
                   king.nation === "karus" 
                     ? "bg-gradient-to-r from-rose-500/10 via-rose-500/5 to-transparent border-rose-500/20" 
                     : "bg-gradient-to-r from-sky-500/10 via-sky-500/5 to-transparent border-sky-500/20"
                 }`}
               >
-                {/* Crown Icon */}
-                <div className={`w-14 h-14 rounded-full flex items-center justify-center ${
-                  king.nation === "karus" 
-                    ? "bg-gradient-to-br from-rose-500/30 to-rose-700/30 border-2 border-rose-400/50" 
-                    : "bg-gradient-to-br from-sky-500/30 to-sky-700/30 border-2 border-sky-400/50"
-                }`}>
-                  <IconCrown className={`w-7 h-7 ${king.nation === "karus" ? "text-rose-400" : "text-sky-400"}`} />
+                {/* Rank Number */}
+                <div className="w-12 h-12 rounded-lg border border-line flex items-center justify-center bg-ink-800/50">
+                  <span className="text-cream-dim font-medium text-lg">{index + 1}</span>
+                </div>
+
+                {/* Icon */}
+                <div className="flex items-center gap-1.5">
+                  <div className={`w-8 h-8 rounded-lg border border-line flex items-center justify-center ${
+                    king.nation === "karus" ? "bg-rose-500/20" : "bg-sky-500/20"
+                  }`}>
+                    <IconCrown className={`w-4 h-4 ${king.nation === "karus" ? "text-rose-400" : "text-sky-400"}`} />
+                  </div>
                 </div>
 
                 {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <div className={`font-bold text-lg ${king.nation === "karus" ? "text-rose-400" : "text-sky-400"}`}>
-                    {king.name}
+                  <div className="flex items-center gap-2">
+                    <span className={`font-semibold ${king.nation === "karus" ? "text-rose-400" : "text-sky-400"}`}>{king.name}</span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${
+                      king.nation === "karus" 
+                        ? "bg-rose-500/20 text-rose-400 border-rose-500/30" 
+                        : "bg-sky-500/20 text-sky-400 border-sky-500/30"
+                    }`}>
+                      {king.title}
+                    </span>
                   </div>
-                  <div className="text-sm text-amber-400 font-medium">{king.title}</div>
+                  <div className="text-xs text-cream-dim">{king.nation === "karus" ? "Karus Ulkesi" : "El Morad Ulkesi"}</div>
                 </div>
 
                 {/* Since */}
-                <div className="text-right">
-                  <div className="text-xs text-cream-dim">Tahta Cikis</div>
-                  <div className="text-sm text-cream font-medium">{new Date(king.since).toLocaleDateString("tr-TR")}</div>
+                <div className="text-right min-w-[90px]">
+                  <div className="text-[10px] text-cream-dim uppercase tracking-wider">TAHTA</div>
+                  <div className="font-bold text-gold-400">{new Date(king.since).toLocaleDateString("tr-TR")}</div>
                 </div>
               </div>
             ))}

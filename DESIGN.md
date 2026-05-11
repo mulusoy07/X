@@ -288,6 +288,100 @@ Gradient varyantlari:
 - Amber: `from-amber-500 to-amber-400`
 - Rose: `from-rose-500 to-rose-400`
 
+### Checkbox (Custom)
+Tema ile uyumlu ozel checkbox tasarimi. Gold gradient checked state.
+
+```html
+<input type="checkbox" class="oracle-checkbox" />
+```
+
+```css
+.oracle-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--line);
+  border-radius: 4px;
+  background: var(--ink-900);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.oracle-checkbox:hover {
+  border-color: var(--gold-500);
+  background: rgba(245, 184, 54, 0.05);
+}
+
+.oracle-checkbox:checked {
+  background: linear-gradient(180deg, #fbc24a 0%, #e89a1f 100%);
+  border-color: var(--gold-500);
+}
+
+.oracle-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--ink-900);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+```
+
+### Switch (Custom)
+Tema ile uyumlu toggle switch. Gold gradient aktif state.
+
+```html
+<input type="checkbox" class="oracle-switch" />
+```
+
+```css
+.oracle-switch {
+  appearance: none;
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--ink-700);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.oracle-switch::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--cream-dim);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.oracle-switch:checked {
+  background: linear-gradient(180deg, #fbc24a 0%, #e89a1f 100%);
+  border-color: var(--gold-500);
+}
+
+.oracle-switch:checked::before {
+  transform: translateX(20px);
+  background: var(--ink-900);
+}
+```
+
+### Checkbox + Label Pattern
+```html
+<label class="flex items-center gap-3 cursor-pointer group">
+  <input type="checkbox" class="oracle-checkbox" />
+  <span class="text-sm text-cream-dim group-hover:text-cream transition-colors">
+    Beni hatirla
+  </span>
+</label>
+```
+
 ---
 
 ## Hero Section

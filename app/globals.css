@@ -353,3 +353,90 @@
   border-bottom: 1px solid var(--line);
   background: linear-gradient(90deg, rgba(245, 184, 54, 0.06) 0%, transparent 60%);
 }
+
+/* ============ CUSTOM CHECKBOX ============ */
+.oracle-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--line);
+  border-radius: 4px;
+  background: var(--ink-900);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.oracle-checkbox:hover {
+  border-color: var(--gold-500);
+  background: rgba(245, 184, 54, 0.05);
+}
+
+.oracle-checkbox:checked {
+  background: linear-gradient(180deg, #fbc24a 0%, #e89a1f 100%);
+  border-color: var(--gold-500);
+}
+
+.oracle-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--ink-900);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.oracle-checkbox:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(245, 184, 54, 0.2);
+}
+
+/* ============ CUSTOM SWITCH ============ */
+.oracle-switch {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--ink-700);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.oracle-switch::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--cream-dim);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.oracle-switch:hover {
+  border-color: var(--gold-500);
+}
+
+.oracle-switch:checked {
+  background: linear-gradient(180deg, #fbc24a 0%, #e89a1f 100%);
+  border-color: var(--gold-500);
+}
+
+.oracle-switch:checked::before {
+  transform: translateX(20px);
+  background: var(--ink-900);
+}
+
+.oracle-switch:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(245, 184, 54, 0.2);
+}
