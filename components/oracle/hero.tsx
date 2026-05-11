@@ -189,45 +189,35 @@ export function Hero() {
           </div>
         ))}
 
-        {/* Slide Navigation */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4">
-          {/* Prev Button */}
+        {/* Slide Navigation - Dots Center */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`transition-all duration-300 ${
+                index === currentSlide
+                  ? "w-8 h-2 bg-gradient-to-r from-gold-400 to-gold-600 rounded-full"
+                  : "w-2 h-2 bg-cream-dim/30 hover:bg-cream-dim/50 rounded-full"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Arrow Controls - Right Side */}
+        <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-2">
           <button
             onClick={prevSlide}
             className="w-10 h-10 rounded-full bg-ink-800/80 border border-gold-500/30 flex items-center justify-center text-cream-dim hover:text-gold-400 hover:border-gold-500 transition-all hover:scale-110"
           >
             <IconChevronLeft className="w-5 h-5" />
           </button>
-
-          {/* Dots */}
-          <div className="flex items-center gap-2">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`transition-all duration-300 ${
-                  index === currentSlide
-                    ? "w-8 h-2 bg-gradient-to-r from-gold-400 to-gold-600 rounded-full"
-                    : "w-2 h-2 bg-cream-dim/30 hover:bg-cream-dim/50 rounded-full"
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* Next Button */}
           <button
             onClick={nextSlide}
             className="w-10 h-10 rounded-full bg-ink-800/80 border border-gold-500/30 flex items-center justify-center text-cream-dim hover:text-gold-400 hover:border-gold-500 transition-all hover:scale-110"
           >
             <IconChevronRight className="w-5 h-5" />
           </button>
-        </div>
-
-        {/* Slide Counter */}
-        <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-2 text-sm font-mono">
-          <span className="text-gold-400 font-bold">{String(currentSlide + 1).padStart(2, '0')}</span>
-          <span className="text-cream-dim/40">/</span>
-          <span className="text-cream-dim">{String(slides.length).padStart(2, '0')}</span>
         </div>
       </div>
 

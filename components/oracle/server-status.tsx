@@ -136,40 +136,67 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
           </div>
         </div>
 
-        {/* Status Grid - Modern Design */}
+        {/* Status Grid - Modern Animated Design */}
         <div className="p-4 flex-1 flex flex-col">
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-ink-900/50 border border-line">
-            {/* Game Server */}
-            <div className="flex-1 flex items-center gap-3">
-              <div className={`relative w-10 h-10 rounded-lg flex items-center justify-center ${gameServerStatus ? "bg-emerald-500/15" : "bg-rose-500/15"}`}>
-                <IconWifi className={`w-5 h-5 ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`} />
-                {gameServerStatus && (
-                  <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-ink-800 animate-pulse" />
-                )}
-              </div>
-              <div>
-                <div className="text-[11px] text-cream-dim uppercase tracking-wider">Oyun</div>
-                <div className={`text-sm font-bold ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`}>
-                  {gameServerStatus ? "Aktif" : "Kapali"}
+          <div className="grid grid-cols-2 gap-3">
+            {/* Game Server Card */}
+            <div className={`relative overflow-hidden rounded-xl p-3 border transition-all duration-300 ${
+              gameServerStatus 
+                ? "bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-transparent border-emerald-500/30" 
+                : "bg-gradient-to-br from-rose-500/10 via-rose-500/5 to-transparent border-rose-500/30"
+            }`}>
+              {/* Animated glow effect */}
+              {gameServerStatus && (
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 animate-pulse" />
+              )}
+              <div className="relative flex items-center gap-3">
+                <div className={`relative w-10 h-10 rounded-lg flex items-center justify-center ${
+                  gameServerStatus ? "bg-emerald-500/20" : "bg-rose-500/20"
+                }`}>
+                  <IconWifi className={`w-5 h-5 ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`} />
+                  {gameServerStatus && (
+                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-ink-800">
+                      <span className="absolute inset-0 bg-emerald-400 rounded-full animate-ping opacity-75" />
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <div className="text-[10px] text-cream-dim uppercase tracking-widest font-medium">Oyun Sunucusu</div>
+                  <div className={`text-sm font-bold flex items-center gap-1.5 ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`}>
+                    <span className={`w-1.5 h-1.5 rounded-full ${gameServerStatus ? "bg-emerald-400" : "bg-rose-400"}`} />
+                    {gameServerStatus ? "Cevrimici" : "Kapali"}
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Divider */}
-            <div className="w-px h-10 bg-line" />
-
-            {/* Login Server */}
-            <div className="flex-1 flex items-center gap-3">
-              <div className={`relative w-10 h-10 rounded-lg flex items-center justify-center ${loginServerStatus ? "bg-emerald-500/15" : "bg-amber-500/15"}`}>
-                <IconServer className={`w-5 h-5 ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`} />
-                {loginServerStatus && (
-                  <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-ink-800 animate-pulse" />
-                )}
-              </div>
-              <div>
-                <div className="text-[11px] text-cream-dim uppercase tracking-wider">Giris</div>
-                <div className={`text-sm font-bold ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`}>
-                  {loginServerStatus ? "Aktif" : "Bakim"}
+            {/* Login Server Card */}
+            <div className={`relative overflow-hidden rounded-xl p-3 border transition-all duration-300 ${
+              loginServerStatus 
+                ? "bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-transparent border-emerald-500/30" 
+                : "bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent border-amber-500/30"
+            }`}>
+              {/* Animated glow effect */}
+              {loginServerStatus && (
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 animate-pulse" />
+              )}
+              <div className="relative flex items-center gap-3">
+                <div className={`relative w-10 h-10 rounded-lg flex items-center justify-center ${
+                  loginServerStatus ? "bg-emerald-500/20" : "bg-amber-500/20"
+                }`}>
+                  <IconServer className={`w-5 h-5 ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`} />
+                  {loginServerStatus && (
+                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-ink-800">
+                      <span className="absolute inset-0 bg-emerald-400 rounded-full animate-ping opacity-75" />
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <div className="text-[10px] text-cream-dim uppercase tracking-widest font-medium">Giris Sunucusu</div>
+                  <div className={`text-sm font-bold flex items-center gap-1.5 ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`}>
+                    <span className={`w-1.5 h-1.5 rounded-full ${loginServerStatus ? "bg-emerald-400" : "bg-amber-400"}`} />
+                    {loginServerStatus ? "Cevrimici" : "Bakimda"}
+                  </div>
                 </div>
               </div>
             </div>

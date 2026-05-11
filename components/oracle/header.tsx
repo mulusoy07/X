@@ -241,27 +241,32 @@ export function Header({ onOpenServerModal }: HeaderProps) {
   return (
     <>
       <header className="sticky top-0 z-50 bg-ink-900/95 backdrop-blur-xl border-b border-gold-500/10">
-        {/* Top Bar */}
-        <div className="hidden lg:block border-b border-ink-700/50 bg-ink-950/50">
-          <div className="max-w-[1400px] mx-auto px-6 h-9 flex items-center justify-between">
-            {/* Server Status */}
+        {/* Top Bar - Modern Design */}
+        <div className="hidden lg:block border-b border-gold-500/10 bg-gradient-to-r from-ink-950/80 via-ink-900/50 to-ink-950/80">
+          <div className="max-w-[1400px] mx-auto px-6 h-10 flex items-center justify-between">
+            {/* Server Status - Enhanced */}
             <div className="dropdown-container relative">
               <button
                 onClick={() => setServerDropdownOpen(!serverDropdownOpen)}
-                className="flex items-center gap-2 text-xs text-cream-dim hover:text-cream transition-colors group"
+                className="flex items-center gap-3 px-3 py-1.5 rounded-lg bg-ink-800/50 border border-line hover:border-gold-500/30 transition-all group"
               >
-                <span className={`w-2 h-2 rounded-full ${getStatusBg(currentServer.status)} animate-pulse`} />
-                <span className="font-medium text-cream">{currentServer.name}</span>
-                <span className="text-cream-dim/40">|</span>
-                <span className={getStatusColor(currentServer.status)}>
-                  {currentServer.status === "online" ? `${currentServer.players} Oyuncu` : "Bakimda"}
+                <div className="flex items-center gap-2">
+                  <div className="relative">
+                    <IconServer className="w-4 h-4 text-gold-400" />
+                    <span className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${getStatusBg(currentServer.status)} ring-2 ring-ink-800`} />
+                  </div>
+                  <span className="font-semibold text-xs text-cream">{currentServer.name}</span>
+                </div>
+                <div className="h-4 w-px bg-line" />
+                <span className={`text-xs font-medium ${getStatusColor(currentServer.status)}`}>
+                  {currentServer.status === "online" ? "Aktif" : "Bakim"}
                 </span>
-                <IconChevronDown className="w-3 h-3 text-cream-dim group-hover:text-cream transition-colors" />
+                <IconChevronDown className={`w-3.5 h-3.5 text-cream-dim group-hover:text-gold-400 transition-all ${serverDropdownOpen ? "rotate-180" : ""}`} />
               </button>
 
               {serverDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-ink-800 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden">
-                  <div className="p-3 border-b border-ink-700 bg-gradient-to-r from-gold-500/5 to-transparent">
+                <div className="absolute top-full left-0 mt-2 w-72 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden">
+                  <div className="p-3 border-b border-ink-700 bg-gradient-to-r from-gold-500/10 to-transparent">
                     <span className="text-xs font-bold text-gold-400 uppercase tracking-wider flex items-center gap-2">
                       <IconServer className="w-3.5 h-3.5" />
                       Sunucu Sec
@@ -290,9 +295,6 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                             </div>
                           </div>
                         </div>
-                        <span className="text-xs text-cream-dim bg-ink-700/50 px-2 py-1 rounded">
-                          {server.status === "online" ? `${server.players}` : "-"}
-                        </span>
                       </button>
                     ))}
                   </div>
@@ -310,26 +312,31 @@ export function Header({ onOpenServerModal }: HeaderProps) {
               )}
             </div>
 
-            {/* Right Actions */}
-            <div className="flex items-center gap-4">
-              {/* Search */}
+            {/* Right Actions - Enhanced */}
+            <div className="flex items-center gap-1">
+              {/* Search - Enhanced */}
               <button 
                 onClick={() => setSearchOpen(true)}
-                className="text-cream-dim hover:text-cream transition-colors flex items-center gap-2"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-ink-800/50 border border-line hover:border-gold-500/30 hover:bg-ink-700/50 transition-all group"
               >
-                <IconSearch className="w-4 h-4" />
-                <span className="text-xs hidden xl:inline">Ara</span>
-                <kbd className="hidden xl:inline text-[10px] px-1.5 py-0.5 bg-ink-700 rounded border border-line">⌘K</kbd>
+                <IconSearch className="w-4 h-4 text-cream-dim group-hover:text-gold-400 transition-colors" />
+                <span className="text-xs text-cream-dim group-hover:text-cream transition-colors">Ara...</span>
+                <kbd className="text-[10px] px-1.5 py-0.5 bg-ink-700 rounded border border-line text-cream-dim ml-2">⌘K</kbd>
               </button>
 
-              {/* Notifications */}
+              {/* Divider */}
+              <div className="h-5 w-px bg-line mx-2" />
+
+              {/* Notifications - Enhanced */}
               <div className="dropdown-container relative">
                 <button 
                   onClick={() => setNotificationsOpen(!notificationsOpen)}
-                  className="text-cream-dim hover:text-cream transition-colors relative"
+                  className="relative w-9 h-9 rounded-lg bg-ink-800/50 border border-line hover:border-gold-500/30 hover:bg-ink-700/50 flex items-center justify-center transition-all group"
                 >
-                  <IconBell className="w-4 h-4" />
-                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-rose-500 rounded-full" />
+                  <IconBell className="w-4 h-4 text-cream-dim group-hover:text-gold-400 transition-colors" />
+                  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-ink-800">
+                    <span className="absolute inset-0 bg-rose-400 rounded-full animate-ping opacity-75" />
+                  </span>
                 </button>
                 <NotificationsDropdown 
                   isOpen={notificationsOpen} 
@@ -337,19 +344,19 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                 />
               </div>
 
-              {/* Language */}
+              {/* Language - Enhanced */}
               <div className="dropdown-container relative">
                 <button
                   onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                  className="flex items-center gap-2 text-xs text-cream-dim hover:text-cream transition-colors"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-ink-800/50 border border-line hover:border-gold-500/30 hover:bg-ink-700/50 transition-all group"
                 >
-                  <Image src={currentLang.flag} alt={currentLang.label} width={18} height={13} className="rounded-sm object-cover" />
-                  <span className="font-medium">{currentLang.code.toUpperCase()}</span>
-                  <IconChevronDown className="w-3 h-3" />
+                  <Image src={currentLang.flag} alt={currentLang.label} width={20} height={14} className="rounded-sm object-cover shadow-sm" />
+                  <span className="text-xs font-medium text-cream-dim group-hover:text-cream transition-colors">{currentLang.code.toUpperCase()}</span>
+                  <IconChevronDown className={`w-3 h-3 text-cream-dim group-hover:text-gold-400 transition-all ${langDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {langDropdownOpen && (
-                  <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-[60]">
+                  <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-[60]">
                     <div className="p-1.5">
                       {languages.map((lang) => (
                         <button
