@@ -101,7 +101,8 @@ export function Footer() {
           {/* Newsletter */}
           <div className="col-span-12 sm:col-span-6 lg:col-span-2">
             <h5 className="font-display text-gold-400 text-sm tracking-[0.2em] uppercase">Bülten</h5>
-            <p className="text-xs text-cream-dim leading-relaxed mt-5">Etkinlik ve duyurular için e-postanı bırak.</p>
+            <div className="mt-2 h-px bg-gradient-to-r from-gold-500/40 to-transparent w-12" />
+            <p className="text-xs text-cream-dim leading-relaxed mt-4">Etkinlik ve duyurular için e-postanı bırak.</p>
             <form className="mt-3 flex flex-col gap-2">
               <input
                 type="email"

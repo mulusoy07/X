@@ -10,6 +10,7 @@ import {
   IconX,
   IconCheck,
   IconWifi,
+  IconActivity,
 } from "@tabler/icons-react"
 
 interface ServerData {
@@ -294,12 +295,14 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
                         />
                       </div>
                     </div>
-                    <div className="text-right shrink-0">
-                      <div className="text-sm font-bold text-cream">
-                        {server.online.toLocaleString("tr-TR")}
-                        <span className="text-muted font-normal">/{server.cap.toLocaleString("tr-TR")}</span>
-                      </div>
-                      {server.ping > 0 && <div className="text-xs text-emerald-400 mt-0.5">{server.ping} ms</div>}
+                    <div className="shrink-0">
+                      {server.ping > 0 && (
+                        <div className="flex items-center gap-1.5 text-emerald-400">
+                          <IconActivity className="w-4 h-4" />
+                          <span className="text-sm font-bold">{server.ping}</span>
+                          <span className="text-[10px] text-cream-dim">ms</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )

@@ -84,11 +84,11 @@ export function NewsGrid() {
         </Link>
       </div>
 
-      {/* Grid */}
-      <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Big featured post */}
+      {/* Grid - 1 big left, 3 small right */}
+      <div className="p-4 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4">
+        {/* Big featured post - Left */}
         {featuredNews && (
-          <article className="rounded-xl overflow-hidden group flex flex-col row-span-3 bg-ink-800/50 border border-line">
+          <article className="rounded-xl overflow-hidden group flex flex-col bg-ink-800/50 border border-line h-full">
             <div className="relative aspect-[16/10] placeholder-img flex items-center justify-center">
               <span className="font-mono text-xs text-cream-dim/70 px-3 py-1 rounded bg-ink-900/70 border border-line">
                 [ clan war artwork ]
@@ -117,36 +117,38 @@ export function NewsGrid() {
           </article>
         )}
 
-        {/* Right column: 3 stacked posts - equal height to featured */}
-        {sideNews.map((news) => (
-          <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line">
-            <div className="grid grid-cols-[100px_1fr] h-full">
-              <div className="placeholder-img relative flex items-center justify-center aspect-square">
-                <span className="font-mono text-[10px] text-cream-dim/50 text-center px-1">img</span>
-              </div>
-              <div className="p-3 pr-4 relative flex flex-col justify-center">
-                <div className="flex items-start justify-between gap-2">
-                  <h4 className="font-semibold text-sm text-cream group-hover:text-gold-300 leading-snug line-clamp-2 pr-1 flex-1">
-                    {news.title}
-                  </h4>
-                  <span
-                    className={`text-[10px] font-bold px-2 py-0.5 rounded ${news.tagColor} text-white tracking-wider shrink-0`}
-                  >
-                    {news.tag}
-                  </span>
+        {/* Right column: 3 stacked posts */}
+        <div className="flex flex-col gap-3">
+          {sideNews.map((news) => (
+            <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line flex-1">
+              <div className="grid grid-cols-[90px_1fr] h-full">
+                <div className="placeholder-img relative flex items-center justify-center">
+                  <span className="font-mono text-[10px] text-cream-dim/50 text-center px-1">img</span>
                 </div>
-                <div className="flex items-center gap-3 mt-2 text-[11px] text-cream-dim">
-                  <span className="flex items-center gap-1">
-                    <IconCalendar className="w-3 h-3" /> {new Date(news.date).toLocaleDateString("tr-TR")}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <IconEye className="w-3 h-3" /> {news.views}
-                  </span>
+                <div className="p-3 pr-4 relative flex flex-col justify-center">
+                  <div className="flex items-start justify-between gap-2">
+                    <h4 className="font-semibold text-sm text-cream group-hover:text-gold-300 leading-snug line-clamp-2 pr-1 flex-1">
+                      {news.title}
+                    </h4>
+                    <span
+                      className={`text-[10px] font-bold px-2 py-0.5 rounded ${news.tagColor} text-white tracking-wider shrink-0`}
+                    >
+                      {news.tag}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3 mt-2 text-[11px] text-cream-dim">
+                    <span className="flex items-center gap-1">
+                      <IconCalendar className="w-3 h-3" /> {new Date(news.date).toLocaleDateString("tr-TR")}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <IconEye className="w-3 h-3" /> {news.views}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   )
