@@ -179,6 +179,14 @@
   border: 1px solid var(--line);
 }
 
+/* Dropdown - Higher opacity for better readability */
+.dropdown-menu {
+  background: rgba(31, 24, 20, 0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--gold-500);
+  border-opacity: 0.2;
+}
+
 /* Tab Pill */
 .tab-pill {
   background: var(--ink-800);
