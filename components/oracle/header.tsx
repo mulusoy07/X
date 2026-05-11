@@ -543,7 +543,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
               ) : (
                 <button
                   onClick={() => setAuthModalOpen(true)}
-                  className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-sm hover:from-gold-400 hover:to-gold-500 transition-all shadow-lg shadow-gold-500/25"
+                  className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-sm hover:from-gold-400 hover:to-gold-500 transition-all"
                 >
                   <IconLogin className="w-4 h-4" />
                   Giris Yap / Kayit Ol

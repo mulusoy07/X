@@ -124,9 +124,9 @@ export function NewsGrid() {
               <div className="placeholder-img relative flex items-center justify-center">
                 <span className="font-mono text-[10px] text-cream-dim/50 text-center px-1">img</span>
               </div>
-              <div className="p-3 pr-4 relative flex flex-col">
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <h4 className="font-semibold text-sm text-cream group-hover:text-gold-300 leading-tight line-clamp-2 pr-2">
+              <div className="p-3 pr-4 relative flex flex-col justify-center">
+                <div className="flex items-start justify-between gap-2">
+                  <h4 className="font-semibold text-sm text-cream group-hover:text-gold-300 leading-snug line-clamp-2 pr-2 flex-1">
                     {news.title}
                   </h4>
                   <span
@@ -135,7 +135,7 @@ export function NewsGrid() {
                     {news.tag}
                   </span>
                 </div>
-                <div className="flex items-center gap-3 mt-auto text-[11px] text-cream-dim">
+                <div className="flex items-center gap-3 mt-1.5 text-[11px] text-cream-dim">
                   <span className="flex items-center gap-1">
                     <IconCalendar className="w-3 h-3" /> {new Date(news.date).toLocaleDateString("tr-TR")}
                   </span>

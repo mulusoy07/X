@@ -31,45 +31,44 @@ export default function Home() {
       <QuickActions onServerClick={handleServerClick} />
       <ScrollProgress />
 
-      {/* Main Content */}
-      <main className="mx-auto max-w-[1400px] px-4 lg:px-6 py-8 lg:py-12 space-y-6">
-        {/* Top Section - Featured + Server */}
+      {/* Main Content - Masonry Layout */}
+      <main className="mx-auto max-w-[1400px] px-4 lg:px-6 py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Featured News - Full Width on Left */}
-          <section className="lg:col-span-2">
-            <FeaturedNews />
-          </section>
+          {/* Left Column - 2/3 width */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
+            {/* Featured News */}
+            <section>
+              <FeaturedNews />
+            </section>
 
-          {/* Server Status - Right Sidebar */}
-          <section className="lg:col-span-1">
-            <ServerStatus ref={serverStatusRef} />
-          </section>
-        </div>
+            {/* News Grid */}
+            <section>
+              <NewsGrid />
+            </section>
 
-        {/* Middle Section - News + Events */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* News Grid */}
-          <section className="lg:col-span-2">
-            <NewsGrid />
-          </section>
+            {/* Rankings */}
+            <section>
+              <RankingsSection />
+            </section>
+          </div>
 
-          {/* Events Sidebar */}
-          <section className="lg:col-span-1">
-            <EventsSection />
-          </section>
-        </div>
+          {/* Right Column - 1/3 width */}
+          <div className="lg:col-span-1 flex flex-col gap-6">
+            {/* Server Status */}
+            <section>
+              <ServerStatus ref={serverStatusRef} />
+            </section>
 
-        {/* Bottom Section - Rankings + Forum */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Rankings */}
-          <section className="lg:col-span-2">
-            <RankingsSection />
-          </section>
+            {/* Events */}
+            <section>
+              <EventsSection />
+            </section>
 
-          {/* Forum Topics */}
-          <section className="lg:col-span-1">
-            <ForumTopics />
-          </section>
+            {/* Forum Topics */}
+            <section>
+              <ForumTopics />
+            </section>
+          </div>
         </div>
       </main>
 

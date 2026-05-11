@@ -187,10 +187,12 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
           </div>
 
           {/* Download Button */}
-          <button className="gold-btn w-full h-12 rounded-xl flex items-center justify-center gap-2 font-bold mt-auto pt-4">
-            <IconDownload className="w-5 h-5" />
-            Oyunu Indir
-          </button>
+          <div className="mt-auto pt-4">
+            <button className="gold-btn w-full h-12 rounded-xl flex items-center justify-center gap-2 font-bold">
+              <IconDownload className="w-5 h-5" />
+              Oyunu Indir
+            </button>
+          </div>
         </div>
       </div>
 
