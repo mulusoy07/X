@@ -67,25 +67,28 @@ export function NewsGrid() {
   const sideNews = newsItems.filter((item) => !item.featured)
 
   return (
-    <div>
+    <div className="card rounded-xl overflow-hidden">
       {/* Section Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="section-header">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-md bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-400">
             <IconNews className="w-4 h-4" />
           </div>
-          <h3 className="text-lg font-semibold text-cream">Son Haberler</h3>
+          <div>
+            <h3 className="font-semibold text-cream">Son Haberler</h3>
+            <p className="text-xs text-cream-dim">En son gelismeler ve duyurular</p>
+          </div>
         </div>
-        <Link href="/haberler" className="text-sm text-gold-400 hover:text-gold-300 flex items-center gap-1">
-          Tumunu Gor <IconChevronRight className="w-4 h-4" />
+        <Link href="/haberler" className="text-xs text-gold-400 hover:text-gold-300 flex items-center gap-1">
+          Tumunu Gor <IconChevronRight className="w-3 h-3" />
         </Link>
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Big featured post */}
         {featuredNews && (
-          <article className="card rounded-xl overflow-hidden group flex flex-col row-span-3">
+          <article className="rounded-xl overflow-hidden group flex flex-col row-span-3 bg-ink-800/50 border border-line">
             <div className="relative aspect-[16/10] placeholder-img flex items-center justify-center">
               <span className="font-mono text-xs text-cream-dim/70 px-3 py-1 rounded bg-ink-900/70 border border-line">
                 [ clan war artwork ]
@@ -116,7 +119,7 @@ export function NewsGrid() {
 
         {/* Right column: 3 stacked posts */}
         {sideNews.map((news) => (
-          <article key={news.id} className="card rounded-xl overflow-hidden group">
+          <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line">
             <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr] h-full">
               <div className="placeholder-img relative flex items-center justify-center">
                 <span className="font-mono text-[10px] text-cream-dim/50 text-center px-1">img</span>

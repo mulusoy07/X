@@ -130,8 +130,8 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Slides */}
-      <div className="relative mx-auto max-w-[1500px] px-6 pt-24 pb-28">
+      {/* Slides - Fixed height container */}
+      <div className="relative mx-auto max-w-[1500px] px-6 pt-24 pb-28 min-h-[480px] md:min-h-[520px] lg:min-h-[560px]">
         {slides.map((slide, index) => (
           <div
             key={slide.id}

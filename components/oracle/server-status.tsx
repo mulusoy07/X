@@ -88,9 +88,9 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
 
   return (
     <>
-      <div className="card rounded-xl overflow-hidden">
+      <div className="card rounded-xl overflow-hidden h-full flex flex-col">
         {/* Server Selector Header */}
-        <div className="p-4 border-b border-line">
+        <div className="p-4 border-b border-line bg-gradient-to-r from-gold-500/[0.06] to-transparent">
           <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -137,7 +137,7 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
         </div>
 
         {/* Status Grid */}
-        <div className="p-4">
+        <div className="p-4 flex-1 flex flex-col">
           <div className="grid grid-cols-2 gap-3">
             {/* Game Server */}
             <div className={`rounded-xl border p-3 ${gameServerStatus ? "border-emerald-500/40 bg-emerald-500/5" : "border-rose-500/40 bg-rose-500/5"}`}>
@@ -187,7 +187,7 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
           </div>
 
           {/* Download Button */}
-          <button className="gold-btn w-full h-12 rounded-xl flex items-center justify-center gap-2 font-bold mt-4">
+          <button className="gold-btn w-full h-12 rounded-xl flex items-center justify-center gap-2 font-bold mt-auto pt-4">
             <IconDownload className="w-5 h-5" />
             Oyunu Indir
           </button>

@@ -131,23 +131,26 @@ export function EventsSection() {
   }
 
   return (
-    <div className="card rounded-xl overflow-hidden">
+    <div className="card rounded-xl overflow-hidden h-full flex flex-col">
       {/* Header */}
-      <div className="px-4 py-3 flex items-center justify-between border-b border-line">
+      <div className="section-header">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-md bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-400">
             <IconCalendar className="w-4 h-4" />
           </div>
-          <h3 className="font-semibold text-cream">Etkinlikler</h3>
+          <div>
+            <h3 className="font-semibold text-cream">Etkinlikler</h3>
+            <p className="text-xs text-cream-dim">Yaklaşan etkinlikler</p>
+          </div>
         </div>
         <Link href="/etkinlikler" className="text-xs text-gold-400 hover:text-gold-300 flex items-center gap-1">
-          Tumunu Gor <span>→</span>
+          Tumunu Gor <IconChevronRight className="w-3 h-3" />
         </Link>
       </div>
 
       {/* Event Card */}
-      <div className="p-4">
-        <div className="relative rounded-xl overflow-hidden">
+      <div className="p-4 flex-1 flex flex-col">
+        <div className="relative rounded-xl overflow-hidden flex-1 min-h-[200px]">
           {/* Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-ink-800 to-ink-900 placeholder-img opacity-40" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/80 to-transparent" />

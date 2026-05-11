@@ -46,13 +46,15 @@ export function Footer() {
         <div className="grid grid-cols-12 gap-10">
           {/* Brand */}
           <div className="col-span-12 lg:col-span-4">
-            <Image
-              src="https://media.oraclegamer.net/game/logo/f2557197-763a-4266-bfee-126e6ac06764.webp"
-              alt="Oracle Gamer"
-              width={200}
-              height={60}
-              className="h-14 w-auto"
-            />
+            <Link href="/" className="inline-block logo-hover">
+              <Image
+                src="https://media.oraclegamer.net/game/logo/f2557197-763a-4266-bfee-126e6ac06764.webp"
+                alt="Oracle Gamer"
+                width={200}
+                height={60}
+                className="h-14 w-auto"
+              />
+            </Link>
             <p className="text-sm text-cream-dim leading-relaxed mt-5 max-w-sm">
               Bir efsanenin yeniden doğuşu. 64-bit altyapı, adil oyun, büyük savaşlar — Oracle Gamer&apos;da kehaneti birlikte
               tamamlıyoruz.

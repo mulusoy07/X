@@ -381,7 +381,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
         <div className="max-w-[1400px] mx-auto px-4 lg:px-6">
           <div className="h-16 lg:h-[72px] flex items-center justify-between gap-4">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
+            <Link href="/" className="flex-shrink-0 logo-hover">
               <Image
                 src="https://media.oraclegamer.net/game/logo/logov4.webp"
                 alt="Oracle Gamer"

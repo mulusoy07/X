@@ -46,14 +46,17 @@ const colorClasses = {
 
 export function ForumTopics() {
   return (
-    <div className="card rounded-xl overflow-hidden">
+    <div className="card rounded-xl overflow-hidden h-full flex flex-col">
       {/* Header */}
-      <div className="px-4 py-3 flex items-center justify-between border-b border-line">
+      <div className="section-header">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-md bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-400">
             <IconMessageCircle className="w-4 h-4" />
           </div>
-          <h3 className="font-semibold text-cream">Forum</h3>
+          <div>
+            <h3 className="font-semibold text-cream">Forum</h3>
+            <p className="text-xs text-cream-dim">Son konular</p>
+          </div>
         </div>
         <Link href="/forum" className="text-xs text-gold-400 hover:text-gold-300 flex items-center gap-1">
           Tumunu Gor <IconChevronRight className="w-3 h-3" />
@@ -61,7 +64,7 @@ export function ForumTopics() {
       </div>
 
       {/* Topics List */}
-      <ul className="divide-y divide-line/50">
+      <ul className="divide-y divide-line/50 flex-1">
         {topics.map((topic) => {
           const colors = colorClasses[topic.categoryColor]
           return (

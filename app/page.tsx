@@ -32,42 +32,42 @@ export default function Home() {
       <ScrollProgress />
 
       {/* Main Content */}
-      <main className="mx-auto max-w-[1400px] px-4 lg:px-6 py-8 lg:py-12">
+      <main className="mx-auto max-w-[1400px] px-4 lg:px-6 py-8 lg:py-12 space-y-6">
         {/* Top Section - Featured + Server */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Featured News - Full Width on Left */}
-          <section className="lg:col-span-8">
+          <section className="lg:col-span-2">
             <FeaturedNews />
           </section>
 
           {/* Server Status - Right Sidebar */}
-          <section className="lg:col-span-4">
+          <section className="lg:col-span-1">
             <ServerStatus ref={serverStatusRef} />
           </section>
         </div>
 
         {/* Middle Section - News + Events */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* News Grid */}
-          <section className="lg:col-span-8">
+          <section className="lg:col-span-2">
             <NewsGrid />
           </section>
 
           {/* Events Sidebar */}
-          <section className="lg:col-span-4">
+          <section className="lg:col-span-1">
             <EventsSection />
           </section>
         </div>
 
         {/* Bottom Section - Rankings + Forum */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Rankings */}
-          <section className="lg:col-span-8">
+          <section className="lg:col-span-2">
             <RankingsSection />
           </section>
 
           {/* Forum Topics */}
-          <section className="lg:col-span-4">
+          <section className="lg:col-span-1">
             <ForumTopics />
           </section>
         </div>
