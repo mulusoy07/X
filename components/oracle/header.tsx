@@ -245,16 +245,16 @@ export function Header({ onOpenServerModal }: HeaderProps) {
         <div className="hidden lg:block border-b border-gold-500/10 bg-ink-950/80">
           <div className="max-w-[1400px] mx-auto px-6 h-10 flex items-center justify-between">
             {/* Left Side - Server Status Display */}
-            <div className="flex items-center gap-2 text-xs">
+            <div className="flex items-center h-7 bg-ink-800/60 rounded-lg border border-line/50 px-3 gap-3">
               <div className="flex items-center gap-2">
                 <div className="relative">
                   <IconServer className="w-4 h-4 text-gold-400" />
-                  <span className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${getStatusBg(currentServer.status)} ring-1 ring-ink-950`} />
+                  <span className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${getStatusBg(currentServer.status)} ring-1 ring-ink-800`} />
                 </div>
-                <span className="font-semibold text-cream">{currentServer.name}</span>
+                <span className="font-semibold text-xs text-cream">{currentServer.name}</span>
               </div>
-              <span className="text-cream-dim/30">|</span>
-              <span className={`font-medium ${getStatusColor(currentServer.status)}`}>
+              <div className="w-px h-4 bg-line/50" />
+              <span className={`text-xs font-medium ${getStatusColor(currentServer.status)}`}>
                 {currentServer.status === "online" ? "Cevrimici" : "Bakimda"}
               </span>
             </div>
@@ -267,7 +267,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                 className="flex items-center gap-2 px-4 h-full hover:bg-ink-700/50 transition-all group rounded-l-lg"
               >
                 <IconSearch className="w-4 h-4 text-cream-dim group-hover:text-gold-400 transition-colors" />
-                <span className="text-xs text-cream-dim group-hover:text-cream transition-colors w-32">Arama yap...</span>
+                <span className="text-xs text-cream-dim group-hover:text-cream transition-colors w-40">Arama yap...</span>
                 <kbd className="text-[10px] px-1.5 py-0.5 bg-ink-900/80 rounded text-cream-dim/60">⌘K</kbd>
               </button>
 
@@ -296,10 +296,10 @@ export function Header({ onOpenServerModal }: HeaderProps) {
               <div className="dropdown-container relative">
                 <button
                   onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                  className="flex items-center gap-2 px-3 h-full hover:bg-ink-700/50 transition-all group rounded-r-lg"
+                  className="flex items-center gap-2 px-4 h-full hover:bg-ink-700/50 transition-all group rounded-r-lg min-w-[90px]"
                 >
                   <Image src={currentLang.flag} alt={currentLang.label} width={18} height={12} className="rounded-sm object-cover" />
-                  <span className="text-xs text-cream-dim group-hover:text-cream transition-colors">{currentLang.code.toUpperCase()}</span>
+                  <span className="text-xs text-cream-dim group-hover:text-cream transition-colors">{currentLang.label}</span>
                 </button>
 
                 {langDropdownOpen && (

@@ -120,9 +120,9 @@ export function NewsGrid() {
         {/* Right column: 3 stacked posts */}
         <div className="flex flex-col gap-3">
           {sideNews.map((news) => (
-            <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line flex-1">
-              <div className="grid grid-cols-[90px_1fr] h-full">
-                <div className="placeholder-img relative flex items-center justify-center">
+            <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line flex-1 min-h-[88px]">
+              <div className="grid grid-cols-[88px_1fr] h-full">
+                <div className="placeholder-img relative flex items-center justify-center aspect-square">
                   <span className="font-mono text-[10px] text-cream-dim/50 text-center px-1">img</span>
                 </div>
                 <div className="p-3 pr-4 relative flex flex-col justify-center">

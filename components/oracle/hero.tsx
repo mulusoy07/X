@@ -189,10 +189,17 @@ export function Hero() {
           </div>
         ))}
 
-        {/* Slide Navigation - All Controls Right Side */}
-        <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-3">
+        {/* Slide Navigation - Arrow Dot Dot Arrow */}
+        <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-2">
+          {/* Prev Arrow */}
+          <button
+            onClick={prevSlide}
+            className="w-10 h-10 rounded-full bg-ink-800/80 border border-gold-500/30 flex items-center justify-center text-cream-dim hover:text-gold-400 hover:border-gold-500 transition-all hover:scale-110"
+          >
+            <IconChevronLeft className="w-5 h-5" />
+          </button>
           {/* Dots */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 px-2">
             {slides.map((_, index) => (
               <button
                 key={index}
@@ -205,15 +212,7 @@ export function Hero() {
               />
             ))}
           </div>
-          {/* Divider */}
-          <div className="w-px h-6 bg-cream-dim/20" />
-          {/* Arrows */}
-          <button
-            onClick={prevSlide}
-            className="w-10 h-10 rounded-full bg-ink-800/80 border border-gold-500/30 flex items-center justify-center text-cream-dim hover:text-gold-400 hover:border-gold-500 transition-all hover:scale-110"
-          >
-            <IconChevronLeft className="w-5 h-5" />
-          </button>
+          {/* Next Arrow */}
           <button
             onClick={nextSlide}
             className="w-10 h-10 rounded-full bg-ink-800/80 border border-gold-500/30 flex items-center justify-center text-cream-dim hover:text-gold-400 hover:border-gold-500 transition-all hover:scale-110"
