@@ -108,10 +108,11 @@ export function RankingsSection() {
   const [activeTab, setActiveTab] = useState<TabType>("players")
 
   const getRowBg = (rank: number) => {
-    if (rank === 1) return "bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border-amber-500/20"
-    if (rank === 2) return "bg-gradient-to-r from-slate-400/10 via-slate-400/5 to-transparent border-slate-400/20"
-    if (rank === 3) return "bg-gradient-to-r from-amber-700/10 via-amber-700/5 to-transparent border-amber-700/20"
-    return "border-line hover:bg-ink-800/30"
+    const baseHover = "hover:scale-[1.01] hover:shadow-lg hover:shadow-black/20 hover:-translate-y-0.5 cursor-pointer"
+    if (rank === 1) return `bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border-amber-500/20 hover:border-amber-500/40 hover:from-amber-500/15 ${baseHover}`
+    if (rank === 2) return `bg-gradient-to-r from-slate-400/10 via-slate-400/5 to-transparent border-slate-400/20 hover:border-slate-400/40 hover:from-slate-400/15 ${baseHover}`
+    if (rank === 3) return `bg-gradient-to-r from-amber-700/10 via-amber-700/5 to-transparent border-amber-700/20 hover:border-amber-700/40 hover:from-amber-700/15 ${baseHover}`
+    return `border-line hover:border-gold-500/30 hover:bg-ink-800/40 ${baseHover}`
   }
 
   return (
@@ -163,7 +164,7 @@ export function RankingsSection() {
             {players.map((player) => (
               <div
                 key={player.rank}
-                className={`relative overflow-hidden rounded-xl border transition-colors duration-200 ${getRowBg(player.rank)}`}
+                className={`relative overflow-hidden rounded-xl border transition-all duration-300 ease-out ${getRowBg(player.rank)}`}
               >
                 <div className="relative flex items-stretch">
                   {/* Rank Section */}
@@ -215,7 +216,7 @@ export function RankingsSection() {
             {clans.map((clan) => (
               <div
                 key={clan.rank}
-                className={`relative overflow-hidden rounded-xl border transition-colors duration-200 ${getRowBg(clan.rank)}`}
+                className={`relative overflow-hidden rounded-xl border transition-all duration-300 ease-out ${getRowBg(clan.rank)}`}
               >
                 <div className="relative flex items-stretch">
                   {/* Rank Section */}
@@ -266,7 +267,7 @@ export function RankingsSection() {
             {staff.map((member, index) => (
               <div
                 key={member.rank}
-                className="relative overflow-hidden rounded-xl bg-ink-800/30 border border-line hover:border-gold-500/30 transition-colors duration-200"
+                className="relative overflow-hidden rounded-xl bg-ink-800/30 border border-line hover:border-gold-500/30 hover:bg-ink-800/50 hover:scale-[1.01] hover:shadow-lg hover:shadow-black/20 hover:-translate-y-0.5 transition-all duration-300 ease-out cursor-pointer"
               >
                 <div className="relative flex items-stretch">
                   {/* Rank Section */}
@@ -311,10 +312,10 @@ export function RankingsSection() {
             {kings.map((king, index) => (
               <div
                 key={king.rank}
-                className={`relative overflow-hidden rounded-xl border transition-colors duration-200 ${
+                className={`relative overflow-hidden rounded-xl border transition-all duration-300 ease-out hover:scale-[1.01] hover:shadow-lg hover:shadow-black/20 hover:-translate-y-0.5 cursor-pointer ${
                   king.nation === "karus" 
-                    ? "bg-gradient-to-r from-rose-500/10 via-rose-500/5 to-transparent border-rose-500/20" 
-                    : "bg-gradient-to-r from-sky-500/10 via-sky-500/5 to-transparent border-sky-500/20"
+                    ? "bg-gradient-to-r from-rose-500/10 via-rose-500/5 to-transparent border-rose-500/20 hover:border-rose-500/40 hover:from-rose-500/15" 
+                    : "bg-gradient-to-r from-sky-500/10 via-sky-500/5 to-transparent border-sky-500/20 hover:border-sky-500/40 hover:from-sky-500/15"
                 }`}
               >
                 <div className="relative flex items-stretch">
