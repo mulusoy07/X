@@ -9,13 +9,7 @@ import { ScrollProgress } from "@/components/oracle/scroll-progress"
 import { FeaturedNews } from "@/components/oracle/featured-news"
 import { NewsGrid } from "@/components/oracle/news-grid"
 import { ServerStatus, type ServerStatusHandle } from "@/components/oracle/server-status"
-import { ServerStatusV1 } from "@/components/oracle/server-status-v1"
-import { ServerStatusV2 } from "@/components/oracle/server-status-v2"
-import { ServerStatusV3 } from "@/components/oracle/server-status-v3"
-import { ServerStatusV4 } from "@/components/oracle/server-status-v4"
-import { ServerStatusV5 } from "@/components/oracle/server-status-v5"
 import { ForumTopics } from "@/components/oracle/forum-topics"
-import { PlayersClansSection } from "@/components/oracle/players-clans-section"
 import { StaffKingsSection } from "@/components/oracle/staff-kings-section"
 import { RankingsSection } from "@/components/oracle/rankings-section"
 import { EventsSection } from "@/components/oracle/events-section"
@@ -32,7 +26,7 @@ export default function Home() {
     <div className="min-h-screen pb-16 lg:pb-0">
       <Header onOpenServerModal={handleServerClick} />
       <Hero />
-      
+
       {/* Floating Panels */}
       <GameFeed defaultOpen={false} />
       <QuickActions onServerClick={handleServerClick} />
@@ -68,35 +62,6 @@ export default function Home() {
               <ServerStatus ref={serverStatusRef} />
             </section>
 
-            {/* Variant 1: Compact Horizontal Bar */}
-            <section>
-              <div className="text-xs font-bold text-gold-400/70 uppercase tracking-wider mb-2 px-1">Varyant 1: Compact Bar</div>
-              <ServerStatusV1 />
-            </section>
-
-            {/* Variant 2: 4 Card Grid */}
-            <section>
-              <div className="text-xs font-bold text-gold-400/70 uppercase tracking-wider mb-2 px-1">Varyant 2: Card Grid</div>
-              <ServerStatusV2 />
-            </section>
-
-            {/* Variant 3: Left-Right Split */}
-            <section>
-              <div className="text-xs font-bold text-gold-400/70 uppercase tracking-wider mb-2 px-1">Varyant 3: Split Panel</div>
-              <ServerStatusV3 />
-            </section>
-
-            {/* Variant 4: Big Stats */}
-            <section>
-              <div className="text-xs font-bold text-gold-400/70 uppercase tracking-wider mb-2 px-1">Varyant 4: Big Stats</div>
-              <ServerStatusV4 />
-            </section>
-
-            {/* Variant 5: Stacked Rows */}
-            <section>
-              <div className="text-xs font-bold text-gold-400/70 uppercase tracking-wider mb-2 px-1">Varyant 5: Row List</div>
-              <ServerStatusV5 />
-            </section>
 
             {/* Events */}
             <section>
