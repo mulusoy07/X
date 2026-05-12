@@ -12,6 +12,7 @@ import { ServerStatus, type ServerStatusHandle } from "@/components/oracle/serve
 import { ForumTopics } from "@/components/oracle/forum-topics"
 import { PlayersClansSection } from "@/components/oracle/players-clans-section"
 import { StaffKingsSection } from "@/components/oracle/staff-kings-section"
+import { RankingsSection } from "@/components/oracle/rankings-section"
 import { EventsSection } from "@/components/oracle/events-section"
 import { Footer } from "@/components/oracle/footer"
 
@@ -52,8 +53,9 @@ export default function Home() {
               <PlayersClansSection />
             </section>
 
-            {/* Staff & Kings */}
-            <section>
+            {/* En Iyiler & Yonetim - Side by Side */}
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <RankingsSection />
               <StaffKingsSection />
             </section>
           </div>
