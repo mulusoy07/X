@@ -9,6 +9,11 @@ import { ScrollProgress } from "@/components/oracle/scroll-progress"
 import { FeaturedNews } from "@/components/oracle/featured-news"
 import { NewsGrid } from "@/components/oracle/news-grid"
 import { ServerStatus, type ServerStatusHandle } from "@/components/oracle/server-status"
+import { ServerStatusV1 } from "@/components/oracle/server-status-v1"
+import { ServerStatusV2 } from "@/components/oracle/server-status-v2"
+import { ServerStatusV3 } from "@/components/oracle/server-status-v3"
+import { ServerStatusV4 } from "@/components/oracle/server-status-v4"
+import { ServerStatusV5 } from "@/components/oracle/server-status-v5"
 import { ForumTopics } from "@/components/oracle/forum-topics"
 import { PlayersClansSection } from "@/components/oracle/players-clans-section"
 import { StaffKingsSection } from "@/components/oracle/staff-kings-section"
@@ -57,9 +62,40 @@ export default function Home() {
 
           {/* Right Column - 1/3 width */}
           <div className="lg:col-span-1 flex flex-col gap-6">
-            {/* Server Status */}
+            {/* Server Status - Original */}
             <section>
+              <div className="text-xs font-bold text-gold-400 uppercase tracking-wider mb-2 px-1">Mevcut Tasarim</div>
               <ServerStatus ref={serverStatusRef} />
+            </section>
+
+            {/* Variant 1: Terminal Style */}
+            <section>
+              <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 px-1">Varyant 1: Terminal</div>
+              <ServerStatusV1 />
+            </section>
+
+            {/* Variant 2: Glassmorphism */}
+            <section>
+              <div className="text-xs font-bold text-violet-400 uppercase tracking-wider mb-2 px-1">Varyant 2: Glassmorphism</div>
+              <ServerStatusV2 />
+            </section>
+
+            {/* Variant 3: Horizontal Split */}
+            <section>
+              <div className="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2 px-1">Varyant 3: Horizontal</div>
+              <ServerStatusV3 />
+            </section>
+
+            {/* Variant 4: Minimal Dashboard */}
+            <section>
+              <div className="text-xs font-bold text-cream/60 uppercase tracking-wider mb-2 px-1">Varyant 4: Minimal</div>
+              <ServerStatusV4 />
+            </section>
+
+            {/* Variant 5: Gaming HUD */}
+            <section>
+              <div className="text-xs font-bold text-rose-400 uppercase tracking-wider mb-2 px-1">Varyant 5: Gaming HUD</div>
+              <ServerStatusV5 />
             </section>
 
             {/* Events */}
