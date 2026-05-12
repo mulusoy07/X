@@ -120,14 +120,18 @@ export function NewsGrid() {
         {/* Right column: 3 stacked posts */}
         <div className="flex flex-col gap-3">
           {sideNews.map((news) => (
-            <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line flex-1 min-h-[88px]">
-              <div className="grid grid-cols-[88px_1fr] h-full">
-                <div className="placeholder-img relative flex items-center justify-center aspect-square">
-                  <span className="font-mono text-[10px] text-cream-dim/50 text-center px-1">img</span>
+            <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line flex-1">
+              <div className="flex h-full">
+                {/* Square image container - fixed size */}
+                <div className="w-[72px] h-[72px] shrink-0 relative overflow-hidden">
+                  <div className="absolute inset-0 placeholder-img flex items-center justify-center">
+                    <span className="font-mono text-[9px] text-cream-dim/40">img</span>
+                  </div>
                 </div>
-                <div className="p-3 pr-4 relative flex flex-col justify-center">
+                {/* Content */}
+                <div className="flex-1 p-3 flex flex-col justify-center min-w-0">
                   <div className="flex items-start justify-between gap-2">
-                    <h4 className="font-semibold text-sm text-cream group-hover:text-gold-300 leading-snug line-clamp-2 pr-1 flex-1">
+                    <h4 className="font-semibold text-sm text-cream group-hover:text-gold-300 leading-snug line-clamp-2 flex-1">
                       {news.title}
                     </h4>
                     <span
@@ -136,9 +140,12 @@ export function NewsGrid() {
                       {news.tag}
                     </span>
                   </div>
-                  <div className="flex items-center gap-3 mt-2 text-[11px] text-cream-dim">
+                  <div className="flex items-center gap-3 mt-1.5 text-[11px] text-cream-dim">
                     <span className="flex items-center gap-1">
                       <IconCalendar className="w-3 h-3" /> {new Date(news.date).toLocaleDateString("tr-TR")}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <IconUser className="w-3 h-3" /> <span className="text-gold-400">{news.author}</span>
                     </span>
                     <span className="flex items-center gap-1">
                       <IconEye className="w-3 h-3" /> {news.views}

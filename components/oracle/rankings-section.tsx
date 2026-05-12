@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import {
   IconTrophy,
@@ -9,9 +8,6 @@ import {
   IconShield,
   IconCrown,
   IconChevronRight,
-  IconSword,
-  IconFlame,
-  IconMedal,
 } from "@tabler/icons-react"
 
 type TabType = "players" | "clans" | "staff" | "kings"
@@ -20,7 +16,8 @@ interface Player {
   rank: number
   name: string
   clan: string
-  nation: "karus" | "elmorad"
+  nation: "karus" | "human"
+  playerClass: "warrior" | "rogue" | "mage" | "priest"
   title: string
   level: string
   exp: number
@@ -54,16 +51,11 @@ interface King {
 }
 
 const players: Player[] = [
-  { rank: 1, name: "User1", clan: "IronLegion", nation: "karus", title: "TITLE #1", level: "Sv. 83/3", exp: 30, monthlyNP: 250000 },
-  { rank: 2, name: "User2", clan: "ShadowPact", nation: "elmorad", title: "TITLE #2", level: "Sv. 83/3", exp: 91, monthlyNP: 247550 },
-  { rank: 3, name: "User3", clan: "PhoenixGuard", nation: "karus", title: "TITLE #3", level: "Sv. 83/3", exp: 62, monthlyNP: 245100 },
-  { rank: 4, name: "User4", clan: "FrostBorn", nation: "elmorad", title: "TITLE #4", level: "Sv. 83/3", exp: 31, monthlyNP: 242650 },
-  { rank: 5, name: "User5", clan: "StormRiders", nation: "karus", title: "TITLE #5", level: "Sv. 83/3", exp: 7, monthlyNP: 240200 },
-  { rank: 6, name: "User6", clan: "BloodOath", nation: "elmorad", title: "TITLE #6", level: "Sv. 83/2", exp: 32, monthlyNP: 237750 },
-  { rank: 7, name: "User7", clan: "DarkOrder", nation: "karus", title: "TITLE #7", level: "Sv. 83/2", exp: 9, monthlyNP: 235300 },
-  { rank: 8, name: "User8", clan: "SilverWolves", nation: "elmorad", title: "TITLE #8", level: "Sv. 83/2", exp: 44, monthlyNP: 232850 },
-  { rank: 9, name: "User9", clan: "DragonClaw", nation: "karus", title: "TITLE #9", level: "Sv. 83/2", exp: 84, monthlyNP: 230400 },
-  { rank: 10, name: "User10", clan: "NightWatch", nation: "elmorad", title: "TITLE #10", level: "Sv. 83/2", exp: 12, monthlyNP: 227950 },
+  { rank: 1, name: "Thoketh914", clan: "BrutalGuard", nation: "karus", playerClass: "priest", title: "TITLE #1", level: "Sv. 83/3", exp: 30, monthlyNP: 18200 },
+  { rank: 2, name: "Gorus424", clan: "BrutalGuard", nation: "karus", playerClass: "warrior", title: "TITLE #2", level: "Sv. 83/3", exp: 91, monthlyNP: 15600 },
+  { rank: 3, name: "Cedion252", clan: "SilverEmpire", nation: "human", playerClass: "rogue", title: "TITLE #3", level: "Sv. 83/3", exp: 62, monthlyNP: 14300 },
+  { rank: 4, name: "Arthion93", clan: "SilverForce", nation: "human", playerClass: "mage", title: "TITLE #4", level: "Sv. 83/3", exp: 31, monthlyNP: 12100 },
+  { rank: 5, name: "Kragath680", clan: "ShadowForce", nation: "karus", playerClass: "rogue", title: "TITLE #5", level: "Sv. 83/3", exp: 7, monthlyNP: 10800 },
 ]
 
 const clans: Clan[] = [
@@ -94,48 +86,23 @@ const tabs = [
   { id: "kings" as TabType, label: "Krallar", icon: IconCrown },
 ]
 
-// Medal icons for top 3
-const MedalIcon = ({ rank }: { rank: number }) => {
-  if (rank === 1) {
+// Rank icon - uses external images for top 3, number badge for others
+const RankIcon = ({ rank }: { rank: number }) => {
+  if (rank <= 3) {
     return (
-      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 flex items-center justify-center border-2 border-amber-300/50">
-        <span className="text-ink-900 font-bold text-lg">1</span>
-      </div>
-    )
-  }
-  if (rank === 2) {
-    return (
-      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-slate-300 via-slate-400 to-slate-500 flex items-center justify-center border-2 border-slate-200/50">
-        <span className="text-ink-900 font-bold text-lg">2</span>
-      </div>
-    )
-  }
-  if (rank === 3) {
-    return (
-      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-600 via-amber-700 to-amber-800 flex items-center justify-center border-2 border-amber-500/50">
-        <span className="text-cream font-bold text-lg">3</span>
+      <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+        <div className={`rank-icon rank-${rank}`} />
       </div>
     )
   }
   return (
-    <div className="w-12 h-12 rounded-lg border border-line flex items-center justify-center">
-      <span className="text-cream-dim font-medium text-lg">{rank}</span>
+    <div className="w-8 h-8 rounded-lg bg-ink-700 border border-line flex items-center justify-center">
+      <span className="text-xs font-bold text-cream-dim">{rank}</span>
     </div>
   )
 }
 
-// Progress bar component
-const ProgressBar = ({ value, color = "pink" }: { value: number; color?: "pink" | "gold" }) => {
-  const bgColor = color === "pink" ? "bg-pink-500" : "bg-gold-500"
-  return (
-    <div className="w-24 h-1.5 bg-ink-700 rounded-full overflow-hidden">
-      <div 
-        className={`h-full ${bgColor} rounded-full transition-all`}
-        style={{ width: `${Math.min(value, 100)}%` }}
-      />
-    </div>
-  )
-}
+
 
 export function RankingsSection() {
   const [activeTab, setActiveTab] = useState<TabType>("players")
@@ -192,55 +159,50 @@ export function RankingsSection() {
       <div className="p-4">
         {/* Players Tab */}
         {activeTab === "players" && (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {players.map((player) => (
               <div
                 key={player.rank}
-                className={`flex items-center gap-4 p-3 rounded-xl border transition-all cursor-pointer ${getRowBg(player.rank)}`}
+                className={`relative overflow-hidden rounded-xl border transition-colors duration-200 ${getRowBg(player.rank)}`}
               >
-                {/* Rank Medal/Number */}
-                <MedalIcon rank={player.rank} />
-
-                {/* Player Icons */}
-                <div className="flex items-center gap-1.5">
-                  <div className="w-8 h-8 rounded-lg bg-ink-700/80 border border-line flex items-center justify-center">
-                    <IconSword className="w-4 h-4 text-amber-500" />
+                <div className="relative flex items-stretch">
+                  {/* Rank Section */}
+                  <div className="flex items-center justify-center px-3 py-3 bg-ink-800/20 border-r border-line/50">
+                    <RankIcon rank={player.rank} />
                   </div>
-                  <div className="w-8 h-8 rounded-lg bg-ink-700/80 border border-line flex items-center justify-center">
-                    <IconFlame className="w-4 h-4 text-rose-500" />
+
+                  {/* Content */}
+                  <div className="flex-1 flex items-center px-3 gap-3">
+                    {/* Nation & Class Icons */}
+                    <div className="flex gap-1 shrink-0">
+                      <div className="w-8 h-8 rounded overflow-hidden bg-ink-700/50 p-0.5">
+                        <div className={`nation-icon nation-${player.nation}`} style={{ width: 28, height: 28 }} />
+                      </div>
+                      <div className="w-8 h-8 rounded overflow-hidden bg-ink-700/50 p-0.5">
+                        <div className={`class-icon class-${player.playerClass}`} style={{ width: 28, height: 28 }} />
+                      </div>
+                    </div>
+
+                    {/* Name & Clan */}
+                    <div className="min-w-0 flex-1">
+                      <Link href={`/profile/user/${player.rank}/${player.name.toLowerCase()}`} className="font-bold text-cream text-sm truncate block max-w-[150px] hover:text-gold-400 transition-colors">
+                        {player.name}
+                      </Link>
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <Link href="#" className="flex items-center gap-1 hover:opacity-80 transition-opacity">
+                          <span className="text-[11px] text-cream-dim truncate">{player.clan}</span>
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Monthly NP */}
+                    <div className="text-center min-w-[4rem] shrink-0">
+                      <div className="text-[11px] text-cream-dim uppercase tracking-wider font-medium">Aylik NP</div>
+                      <div className="text-sm font-black bg-gradient-to-r from-gold-400 to-gold-500 bg-clip-text text-transparent">
+                        {player.monthlyNP.toLocaleString()}
+                      </div>
+                    </div>
                   </div>
-                  <div className="w-8 h-8 rounded-lg bg-ink-700/80 border border-line flex items-center justify-center">
-                    <IconMedal className="w-4 h-4 text-violet-500" />
-                  </div>
-                </div>
-
-                {/* Name & Clan */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-cream">{player.name}</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                      {player.title}
-                    </span>
-                  </div>
-                  <div className="text-xs text-cream-dim">{player.clan}</div>
-                </div>
-
-                {/* Level & Progress */}
-                <div className="hidden md:block text-right">
-                  <div className="text-sm text-gold-400 font-medium">{player.level}</div>
-                  <ProgressBar value={player.exp} color="pink" />
-                </div>
-
-                {/* DEY % */}
-                <div className="hidden lg:block text-right min-w-[80px]">
-                  <div className="text-xs text-cream-dim">DEY. {player.exp}%</div>
-                  <ProgressBar value={player.exp} color="pink" />
-                </div>
-
-                {/* Monthly NP */}
-                <div className="text-right min-w-[90px]">
-                  <div className="text-[10px] text-cream-dim uppercase tracking-wider">ULUSAL</div>
-                  <div className="font-bold text-gold-400">{player.monthlyNP.toLocaleString()}</div>
                 </div>
               </div>
             ))}
@@ -249,83 +211,93 @@ export function RankingsSection() {
 
         {/* Clans Tab */}
         {activeTab === "clans" && (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {clans.map((clan) => (
               <div
                 key={clan.rank}
-                className={`flex items-center gap-4 p-3 rounded-xl border transition-all cursor-pointer ${getRowBg(clan.rank)}`}
+                className={`relative overflow-hidden rounded-xl border transition-colors duration-200 ${getRowBg(clan.rank)}`}
               >
-                {/* Rank Medal/Number */}
-                <MedalIcon rank={clan.rank} />
-
-                {/* Clan Icon */}
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500/20 to-violet-500/20 border border-gold-500/30 flex items-center justify-center">
-                  <IconShield className="w-6 h-6 text-gold-400" />
-                </div>
-
-                {/* Name & Leader */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-cream">{clan.name}</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-violet-500/20 text-violet-400 border border-violet-500/30">
-                      {clan.members} Uye
-                    </span>
+                <div className="relative flex items-stretch">
+                  {/* Rank Section */}
+                  <div className="flex items-center justify-center px-3 py-3 bg-ink-800/20 border-r border-line/50">
+                    <RankIcon rank={clan.rank} />
                   </div>
-                  <div className="text-xs text-cream-dim">Lider: {clan.leader}</div>
-                </div>
 
-                {/* Level */}
-                <div className="hidden md:block text-right">
-                  <div className="text-sm text-gold-400 font-medium">{clan.level}</div>
-                  <ProgressBar value={clan.exp} color="gold" />
-                </div>
+                  {/* Content */}
+                  <div className="flex-1 flex items-center px-3 gap-3">
+                    {/* Clan Icon */}
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-500/20 to-amber-500/10 border border-gold-500/30 flex items-center justify-center shrink-0">
+                      <IconShield className="w-5 h-5 text-gold-400" />
+                    </div>
 
-                {/* Points */}
-                <div className="text-right min-w-[100px]">
-                  <div className="text-[10px] text-cream-dim uppercase tracking-wider">PUAN</div>
-                  <div className="font-bold text-gold-400">{clan.points.toLocaleString()}</div>
+                    {/* Name & Leader */}
+                    <div className="min-w-0 flex-1">
+                      <Link href={`/profile/clan/${clan.rank}/${clan.name.toLowerCase()}`} className="font-bold text-cream text-sm truncate block max-w-[150px] hover:text-gold-400 transition-colors">
+                        {clan.name}
+                      </Link>
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <span className="text-[11px] text-cream-dim">Lider: {clan.leader}</span>
+                      </div>
+                    </div>
+
+                    {/* Members */}
+                    <div className="hidden sm:block text-center min-w-[3rem] shrink-0">
+                      <div className="text-[11px] text-cream-dim uppercase tracking-wider font-medium">Uye</div>
+                      <div className="text-sm font-bold text-cream">{clan.members}</div>
+                    </div>
+
+                    {/* Points */}
+                    <div className="text-center min-w-[5rem] shrink-0">
+                      <div className="text-[11px] text-cream-dim uppercase tracking-wider font-medium">Puan</div>
+                      <div className="text-sm font-black bg-gradient-to-r from-gold-400 to-gold-500 bg-clip-text text-transparent">
+                        {clan.points.toLocaleString()}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        {/* Staff Tab - Unified Design */}
+        {/* Staff Tab */}
         {activeTab === "staff" && (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {staff.map((member, index) => (
               <div
                 key={member.rank}
-                className={`flex items-center gap-4 p-3 rounded-xl border transition-all cursor-pointer border-line hover:bg-ink-800/30`}
+                className="relative overflow-hidden rounded-xl bg-ink-800/30 border border-line hover:border-gold-500/30 transition-colors duration-200"
               >
-                {/* Rank Number */}
-                <div className="w-12 h-12 rounded-lg border border-line flex items-center justify-center bg-ink-800/50">
-                  <span className="text-cream-dim font-medium text-lg">{index + 1}</span>
-                </div>
-
-                {/* Icon */}
-                <div className="flex items-center gap-1.5">
-                  <div className="w-8 h-8 rounded-lg bg-ink-700/80 border border-line flex items-center justify-center">
-                    <IconShield className="w-4 h-4 text-emerald-500" />
+                <div className="relative flex items-stretch">
+                  {/* Rank Section */}
+                  <div className="flex items-center justify-center px-3 py-3 bg-ink-800/20 border-r border-line/50">
+                    <div className="w-8 h-8 rounded-lg bg-ink-700 border border-line flex items-center justify-center">
+                      <span className="text-xs font-bold text-cream-dim">{index + 1}</span>
+                    </div>
                   </div>
-                </div>
 
-                {/* Info */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-cream">{member.name}</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                      {member.role}
-                    </span>
-                  </div>
-                  <div className="text-xs text-cream-dim">Yonetici Ekibi</div>
-                </div>
+                  {/* Content */}
+                  <div className="flex-1 flex items-center px-3 gap-3">
+                    {/* Icon */}
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                      <IconShield className="w-4 h-4 text-emerald-400" />
+                    </div>
 
-                {/* Status */}
-                <div className="text-right min-w-[90px]">
-                  <div className="text-[10px] text-cream-dim uppercase tracking-wider">DURUM</div>
-                  <div className={`font-bold ${member.isOnline ? "text-emerald-400" : "text-cream-dim"}`}>
-                    {member.isOnline ? "Cevrimici" : "Cevrimdisi"}
+                    {/* Info */}
+                    <div className="min-w-0 flex-1">
+                      <span className="font-bold text-cream text-sm truncate block">{member.name}</span>
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <span className="text-[11px] text-cream-dim">{member.role}</span>
+                      </div>
+                    </div>
+
+                    {/* Status */}
+                    <div className="text-center min-w-[5rem] shrink-0">
+                      <div className="text-[11px] text-cream-dim uppercase tracking-wider font-medium">Durum</div>
+                      <div className={`text-sm font-bold ${member.isOnline ? "text-emerald-400" : "text-cream-dim"}`}>
+                        {member.isOnline ? "Cevrimici" : "Cevrimdisi"}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -333,51 +305,53 @@ export function RankingsSection() {
           </div>
         )}
 
-        {/* Kings Tab - Unified Design */}
+        {/* Kings Tab */}
         {activeTab === "kings" && (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {kings.map((king, index) => (
               <div
                 key={king.rank}
-                className={`flex items-center gap-4 p-3 rounded-xl border transition-all cursor-pointer ${
+                className={`relative overflow-hidden rounded-xl border transition-colors duration-200 ${
                   king.nation === "karus" 
                     ? "bg-gradient-to-r from-rose-500/10 via-rose-500/5 to-transparent border-rose-500/20" 
                     : "bg-gradient-to-r from-sky-500/10 via-sky-500/5 to-transparent border-sky-500/20"
                 }`}
               >
-                {/* Rank Number */}
-                <div className="w-12 h-12 rounded-lg border border-line flex items-center justify-center bg-ink-800/50">
-                  <span className="text-cream-dim font-medium text-lg">{index + 1}</span>
-                </div>
-
-                {/* Icon */}
-                <div className="flex items-center gap-1.5">
-                  <div className={`w-8 h-8 rounded-lg border border-line flex items-center justify-center ${
-                    king.nation === "karus" ? "bg-rose-500/20" : "bg-sky-500/20"
-                  }`}>
-                    <IconCrown className={`w-4 h-4 ${king.nation === "karus" ? "text-rose-400" : "text-sky-400"}`} />
+                <div className="relative flex items-stretch">
+                  {/* Rank Section */}
+                  <div className="flex items-center justify-center px-3 py-3 bg-ink-800/20 border-r border-line/50">
+                    <div className="w-8 h-8 rounded-lg bg-ink-700 border border-line flex items-center justify-center">
+                      <span className="text-xs font-bold text-cream-dim">{index + 1}</span>
+                    </div>
                   </div>
-                </div>
 
-                {/* Info */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className={`font-semibold ${king.nation === "karus" ? "text-rose-400" : "text-sky-400"}`}>{king.name}</span>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${
-                      king.nation === "karus" 
-                        ? "bg-rose-500/20 text-rose-400 border-rose-500/30" 
-                        : "bg-sky-500/20 text-sky-400 border-sky-500/30"
+                  {/* Content */}
+                  <div className="flex-1 flex items-center px-3 gap-3">
+                    {/* Nation Icon */}
+                    <div className={`w-8 h-8 rounded-lg border flex items-center justify-center shrink-0 ${
+                      king.nation === "karus" ? "bg-rose-500/20 border-rose-500/30" : "bg-sky-500/20 border-sky-500/30"
                     }`}>
-                      {king.title}
-                    </span>
-                  </div>
-                  <div className="text-xs text-cream-dim">{king.nation === "karus" ? "Karus Ulkesi" : "El Morad Ulkesi"}</div>
-                </div>
+                      <IconCrown className={`w-4 h-4 ${king.nation === "karus" ? "text-rose-400" : "text-sky-400"}`} />
+                    </div>
 
-                {/* Since */}
-                <div className="text-right min-w-[90px]">
-                  <div className="text-[10px] text-cream-dim uppercase tracking-wider">TAHTA</div>
-                  <div className="font-bold text-gold-400">{new Date(king.since).toLocaleDateString("tr-TR")}</div>
+                    {/* Info */}
+                    <div className="min-w-0 flex-1">
+                      <span className={`font-bold text-sm truncate block ${king.nation === "karus" ? "text-rose-400" : "text-sky-400"}`}>
+                        {king.name}
+                      </span>
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <span className="text-[11px] text-cream-dim">{king.title}</span>
+                      </div>
+                    </div>
+
+                    {/* Since */}
+                    <div className="text-center min-w-[5rem] shrink-0">
+                      <div className="text-[11px] text-cream-dim uppercase tracking-wider font-medium">Tahta</div>
+                      <div className="text-sm font-black bg-gradient-to-r from-gold-400 to-gold-500 bg-clip-text text-transparent">
+                        {new Date(king.since).toLocaleDateString("tr-TR")}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
