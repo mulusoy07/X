@@ -339,7 +339,72 @@ export function Header({ onOpenServerModal }: HeaderProps) {
             <div className="flex items-center gap-2 lg:gap-3">
               {/* Account - Desktop */}
               {isLoggedIn ? (
-                <div className="dropdown-container relative hidden lg:block">
+                <div className="hidden lg:flex items-center gap-3">
+                  {/* Search + Language Container */}
+                  <div className="flex items-center bg-ink-800/60 rounded-xl border border-line/50">
+                    {/* Search */}
+                    <button 
+                      onClick={() => setSearchOpen(true)}
+                      className="flex items-center gap-2 h-10 px-3 hover:bg-ink-700/50 rounded-l-xl transition-all group border-r border-line/30"
+                    >
+                      <IconSearch className="w-4 h-4 text-cream-dim group-hover:text-gold-400 transition-colors" />
+                    </button>
+
+                    {/* Language */}
+                    <div className="dropdown-container relative">
+                      <button
+                        onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                        className="flex items-center gap-2 h-10 px-3 hover:bg-ink-700/50 rounded-r-xl transition-all group"
+                      >
+                        <Image src={currentLang.flag} alt={currentLang.label} width={18} height={13} className="rounded-sm object-cover" />
+                        <span className="text-sm font-medium text-cream">{currentLang.code.toUpperCase()}</span>
+                        <IconChevronDown className={`w-3 h-3 text-cream-dim transition-transform ${langDropdownOpen ? "rotate-180" : ""}`} />
+                      </button>
+
+                      {langDropdownOpen && (
+                        <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-[60]">
+                          <div className="p-1.5">
+                            {languages.map((lang) => (
+                              <button
+                                key={lang.code}
+                                onClick={() => {
+                                  setCurrentLang(lang)
+                                  setLangDropdownOpen(false)
+                                }}
+                                className={`w-full px-3 py-2 rounded-lg flex items-center gap-3 hover:bg-ink-700/50 transition-all ${
+                                  currentLang.code === lang.code ? "bg-gold-500/10" : ""
+                                }`}
+                              >
+                                <Image src={lang.flag} alt={lang.label} width={22} height={16} className="rounded-sm object-cover" />
+                                <span className="text-sm text-cream">{lang.label}</span>
+                                {currentLang.code === lang.code && (
+                                  <IconCircleCheck className="w-4 h-4 text-gold-400 ml-auto" />
+                                )}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Notifications - Only for logged in users */}
+                  <div className="dropdown-container relative">
+                    <button 
+                      onClick={() => setNotificationsOpen(!notificationsOpen)}
+                      className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-ink-800/60 border border-line/50 hover:bg-ink-700/50 transition-all group"
+                    >
+                      <IconBell className="w-5 h-5 text-cream-dim group-hover:text-gold-400 transition-colors" />
+                      <span className="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full" />
+                    </button>
+                    <NotificationsDropdown 
+                      isOpen={notificationsOpen} 
+                      onClose={() => setNotificationsOpen(false)} 
+                    />
+                  </div>
+
+                  {/* Account Dropdown */}
+                  <div className="dropdown-container relative">
                   <button
                     onClick={() => setAccountDropdownOpen(!accountDropdownOpen)}
                     className="flex items-center gap-3 px-3 py-2 rounded-xl bg-gradient-to-r from-ink-800/80 to-ink-800/40 hover:from-ink-700/80 hover:to-ink-700/40 border border-gold-500/20 hover:border-gold-500/30 transition-all"
@@ -405,66 +470,56 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                       </div>
                     </div>
                   )}
+                  </div>
                 </div>
               ) : (
-                <div className="hidden lg:flex items-center gap-2">
-                  {/* Search */}
-                  <button 
-                    onClick={() => setSearchOpen(true)}
-                    className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-ink-700/50 transition-all group"
-                  >
-                    <IconSearch className="w-5 h-5 text-cream-dim group-hover:text-gold-400 transition-colors" />
-                  </button>
-
-                  {/* Notifications */}
-                  <div className="dropdown-container relative">
+                <div className="hidden lg:flex items-center gap-3">
+                  {/* Combined Search + Language + Login Container */}
+                  <div className="flex items-center bg-ink-800/60 rounded-xl border border-line/50">
+                    {/* Search */}
                     <button 
-                      onClick={() => setNotificationsOpen(!notificationsOpen)}
-                      className="relative w-10 h-10 flex items-center justify-center rounded-xl hover:bg-ink-700/50 transition-all group"
+                      onClick={() => setSearchOpen(true)}
+                      className="flex items-center gap-2 h-10 px-3 hover:bg-ink-700/50 rounded-l-xl transition-all group border-r border-line/30"
                     >
-                      <IconBell className="w-5 h-5 text-cream-dim group-hover:text-gold-400 transition-colors" />
-                      <span className="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full" />
-                    </button>
-                    <NotificationsDropdown 
-                      isOpen={notificationsOpen} 
-                      onClose={() => setNotificationsOpen(false)} 
-                    />
-                  </div>
-
-                  {/* Language */}
-                  <div className="dropdown-container relative">
-                    <button
-                      onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                      className="flex items-center gap-2 h-10 px-3 rounded-xl hover:bg-ink-700/50 transition-all group"
-                    >
-                      <Image src={currentLang.flag} alt={currentLang.label} width={20} height={14} className="rounded-sm object-cover" />
-                      <IconChevronDown className={`w-3.5 h-3.5 text-cream-dim transition-transform ${langDropdownOpen ? "rotate-180" : ""}`} />
+                      <IconSearch className="w-4 h-4 text-cream-dim group-hover:text-gold-400 transition-colors" />
                     </button>
 
-                    {langDropdownOpen && (
-                      <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-[60]">
-                        <div className="p-1.5">
-                          {languages.map((lang) => (
-                            <button
-                              key={lang.code}
-                              onClick={() => {
-                                setCurrentLang(lang)
-                                setLangDropdownOpen(false)
-                              }}
-                              className={`w-full px-3 py-2 rounded-lg flex items-center gap-3 hover:bg-ink-700/50 transition-all ${
-                                currentLang.code === lang.code ? "bg-gold-500/10" : ""
-                              }`}
-                            >
-                              <Image src={lang.flag} alt={lang.label} width={22} height={16} className="rounded-sm object-cover" />
-                              <span className="text-sm text-cream">{lang.label}</span>
-                              {currentLang.code === lang.code && (
-                                <IconCircleCheck className="w-4 h-4 text-gold-400 ml-auto" />
-                              )}
-                            </button>
-                          ))}
+                    {/* Language */}
+                    <div className="dropdown-container relative">
+                      <button
+                        onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                        className="flex items-center gap-2 h-10 px-3 hover:bg-ink-700/50 rounded-r-xl transition-all group"
+                      >
+                        <Image src={currentLang.flag} alt={currentLang.label} width={18} height={13} className="rounded-sm object-cover" />
+                        <span className="text-sm font-medium text-cream">{currentLang.code.toUpperCase()}</span>
+                        <IconChevronDown className={`w-3 h-3 text-cream-dim transition-transform ${langDropdownOpen ? "rotate-180" : ""}`} />
+                      </button>
+
+                      {langDropdownOpen && (
+                        <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-[60]">
+                          <div className="p-1.5">
+                            {languages.map((lang) => (
+                              <button
+                                key={lang.code}
+                                onClick={() => {
+                                  setCurrentLang(lang)
+                                  setLangDropdownOpen(false)
+                                }}
+                                className={`w-full px-3 py-2 rounded-lg flex items-center gap-3 hover:bg-ink-700/50 transition-all ${
+                                  currentLang.code === lang.code ? "bg-gold-500/10" : ""
+                                }`}
+                              >
+                                <Image src={lang.flag} alt={lang.label} width={22} height={16} className="rounded-sm object-cover" />
+                                <span className="text-sm text-cream">{lang.label}</span>
+                                {currentLang.code === lang.code && (
+                                  <IconCircleCheck className="w-4 h-4 text-gold-400 ml-auto" />
+                                )}
+                              </button>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
 
                   {/* Login Button */}
