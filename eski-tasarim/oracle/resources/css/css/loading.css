@@ -1,0 +1,379 @@
+/* ===================================
+   LOADING OVERLAY STYLES
+   ===================================*/
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.loading-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===================================
+   LOADING CONTAINER & CONTENT
+   ===================================*/
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 40px 20px;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+}
+
+/* ===================================
+   LOGO WRAPPER & ANIMATIONS
+   ===================================*/
+.loading-logo-wrapper {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-logo-glow {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255, 186, 0, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse-glow 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+.loading-logo {
+  width: auto;
+  max-width: 180px;
+  height: auto;
+  max-height: 120px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0 20px rgba(255, 186, 0, 0.5));
+  animation: float-logo 4s ease-in-out infinite;
+}
+
+/* ===================================
+   PARTICLES ANIMATION
+   ===================================*/
+.loading-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ffba00;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 186, 0, 0.8);
+}
+
+.particle-1 {
+  top: 20%;
+  left: 20%;
+  animation: particle-float 6s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.particle-2 {
+  top: 30%;
+  right: 15%;
+  animation: particle-float 5s ease-in-out infinite reverse;
+  animation-delay: 1s;
+}
+
+.particle-3 {
+  bottom: 25%;
+  left: 15%;
+  animation: particle-float 7s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.particle-4 {
+  bottom: 20%;
+  right: 20%;
+  animation: particle-float 4s ease-in-out infinite reverse;
+  animation-delay: 0.5s;
+}
+
+.particle-5 {
+  top: 50%;
+  left: 10%;
+  animation: particle-float 5.5s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.particle-6 {
+  top: 60%;
+  right: 10%;
+  animation: particle-float 6.5s ease-in-out infinite reverse;
+  animation-delay: 2.5s;
+}
+
+/* ===================================
+   PROGRESS BAR
+   ===================================*/
+body #progress {
+  @apply !z-[9999]
+}
+
+.loading-progress {
+  width: 300px;
+  max-width: 80vw;
+  order: 2;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffba00, #ff9e00, #ffba00);
+  border-radius: 10px;
+  animation: progress-load 3s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(255, 186, 0, 0.4);
+}
+
+/* ===================================
+   LOADING TEXT
+   ===================================*/
+.loading-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  order: 3;
+}
+
+.loading-title {
+  font-family: var(--font-primary), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #978a75;
+  margin: 0;
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  background: #ffba00;
+  border-radius: 50%;
+  animation: dot-bounce 1.5s ease-in-out infinite;
+}
+
+.dot-1 {
+  animation-delay: 0s;
+}
+
+.dot-2 {
+  animation-delay: 0.3s;
+}
+
+.dot-3 {
+  animation-delay: 0.6s;
+}
+
+/* ===================================
+   KEYFRAME ANIMATIONS
+   ===================================*/
+@keyframes pulse-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+@keyframes float-logo {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+
+  75% {
+    transform: translateY(-12px) rotate(-1deg);
+  }
+}
+
+@keyframes particle-float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.6;
+  }
+
+  25% {
+    transform: translateY(-15px) translateX(5px) scale(1.2);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(-8px) translateX(-3px) scale(0.8);
+    opacity: 0.8;
+  }
+
+  75% {
+    transform: translateY(-20px) translateX(8px) scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+@keyframes dot-bounce {
+  0%,
+  60%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  30% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+@keyframes progress-load {
+  0% {
+    width: 0%;
+    transform: translateX(-100%);
+  }
+
+  50% {
+    width: 80%;
+    transform: translateX(0%);
+  }
+
+  100% {
+    width: 100%;
+    transform: translateX(0%);
+  }
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   ===================================*/
+@media (max-width: 768px) {
+  .loading-logo-wrapper {
+    width: 150px;
+    height: 120px;
+  }
+
+  .loading-logo {
+    max-width: 140px;
+    max-height: 90px;
+  }
+
+  .loading-title {
+    font-size: 13px;
+  }
+
+  .loading-content {
+    gap: 30px;
+  }
+
+  .loading-progress {
+    width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loading-logo-wrapper {
+    width: 120px;
+    height: 100px;
+  }
+
+  .loading-logo {
+    max-width: 110px;
+    max-height: 70px;
+  }
+
+  .loading-title {
+    font-size: 12px;
+  }
+
+  .loading-progress {
+    width: 200px;
+  }
+
+  .particle {
+    width: 3px;
+    height: 3px;
+  }
+
+  .loading-content {
+    gap: 25px;
+  }
+}
+
+/* ===================================
+   ACCESSIBILITY - REDUCED MOTION
+   ===================================*/
+@media (prefers-reduced-motion: reduce) {
+  .loading-logo-glow,
+  .loading-logo,
+  .particle,
+  .progress-fill,
+  .dot {
+    animation: none !important;
+  }
+
+  .loading-logo {
+    filter: none;
+  }
+
+  .progress-fill {
+    width: 100%;
+    transform: none;
+  }
+}

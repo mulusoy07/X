@@ -1,0 +1,38 @@
+/* ===================================
+   DIALOG THEME CUSTOMIZATION
+   ===================================*/
+[data-radix-dialog-overlay] {
+  background: rgba(22, 16, 18, 0.8) !important;
+  backdrop-filter: blur(8px);
+}
+
+[data-radix-dialog-content] {
+  background: var(--color-ko-card-bg) !important;
+  border: 1px solid var(--color-ko-border-primary) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+[data-radix-dialog-title] {
+  color: var(--color-ko-text-card-title) !important;
+}
+
+[data-radix-dialog-description] {
+  color: var(--color-ko-text-card-meta) !important;
+}
+
+[data-radix-dialog-close] {
+  color: var(--color-ko-text-card-meta) !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0.375rem !important;
+  padding: 0.5rem !important;
+  transition: all 0.2s ease !important;
+}
+
+[data-radix-dialog-close]:hover {
+  background: var(--color-ko-widget-bg) !important;
+  color: var(--color-ko-brand-primary) !important;
+}

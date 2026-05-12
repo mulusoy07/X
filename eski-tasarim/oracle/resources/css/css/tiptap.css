@@ -1,0 +1,326 @@
+/* Tiptap Content Styling - Isolated & Reset-Based */
+
+/* Container: Reset and base styles */
+.tiptap-content {
+  /* Reset all inherited styles */
+  all: revert;
+
+  /* Base container styles */
+  display: block !important;
+  color: var(--color-ko-text-primary) !important;
+  font-size: 0.875rem !important;
+  line-height: 1.75 !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Reset all child elements first - but preserve inline styles for color/background */
+.tiptap-content * {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  line-height: inherit !important;
+  /* REMOVED: color: inherit !important; - to allow inline styles */
+  /* REMOVED: background: transparent !important; - to allow inline styles */
+  box-sizing: border-box !important;
+}
+
+/* Headings */
+.tiptap-content h1 {
+  display: block !important;
+  font-size: 2.25rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1rem !important;
+  line-height: 1.2 !important;
+}
+
+.tiptap-content h2 {
+  display: block !important;
+  font-size: 1.875rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.75rem !important;
+  line-height: 1.3 !important;
+}
+
+.tiptap-content h3 {
+  display: block !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  margin-top: 1rem !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.4 !important;
+}
+
+/* Paragraphs */
+.tiptap-content p {
+  display: block !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.75 !important;
+}
+
+/* Apply default color only to elements without inline color style */
+.tiptap-content p:not([style*="color"]),
+.tiptap-content span:not([style*="color"]),
+.tiptap-content div:not([style*="color"]) {
+  color: var(--color-ko-text-primary) !important;
+}
+
+.tiptap-content p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Links */
+.tiptap-content a {
+  display: inline !important;
+  color: var(--color-ko-brand-primary) !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+  transition: color 0.2s ease !important;
+}
+
+.tiptap-content a:hover {
+  color: var(--color-ko-brand-secondary) !important;
+}
+
+/* Lists */
+.tiptap-content ul,
+.tiptap-content ol {
+  display: block !important;
+  margin-bottom: 1rem !important;
+  padding-left: 2rem !important;
+}
+
+.tiptap-content ul {
+  list-style-type: disc !important;
+  list-style-position: outside !important;
+}
+
+.tiptap-content ol {
+  list-style-type: decimal !important;
+  list-style-position: outside !important;
+}
+
+.tiptap-content li {
+  display: list-item !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.75 !important;
+}
+
+.tiptap-content li:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Nested lists */
+.tiptap-content ul ul,
+.tiptap-content ol ol,
+.tiptap-content ul ol,
+.tiptap-content ol ul {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Blockquotes */
+.tiptap-content blockquote {
+  display: block !important;
+  border-left: 4px solid var(--color-ko-brand-primary) !important;
+  background: var(--color-ko-widget-bg) !important;
+  padding: 1rem !important;
+  margin: 1rem 0 !important;
+  font-style: italic !important;
+  color: var(--color-ko-text-muted) !important;
+}
+
+.tiptap-content blockquote p {
+  margin-bottom: 0.5rem !important;
+}
+
+.tiptap-content blockquote p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Code */
+.tiptap-content code {
+  display: inline !important;
+  background: var(--color-ko-widget-bg) !important;
+  color: var(--color-ko-brand-primary) !important;
+  padding: 0.125rem 0.375rem !important;
+  border-radius: 0.25rem !important;
+  font-size: 0.875em !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+.tiptap-content pre {
+  display: block !important;
+  background: var(--color-ko-widget-bg) !important;
+  border: 1px solid var(--color-ko-border-primary) !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  margin: 1rem 0 !important;
+  overflow-x: auto !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+.tiptap-content pre code {
+  display: block !important;
+  background: transparent !important;
+  color: #fff !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-size: 0.875rem !important;
+}
+
+/* Horizontal Rule */
+.tiptap-content hr {
+  display: block !important;
+  border: none !important;
+  border-top: 1px solid var(--color-ko-border-primary) !important;
+  margin: 1.5rem 0 !important;
+  height: 0 !important;
+}
+
+/* Images */
+.tiptap-content img {
+  display: block !important;
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 0.5rem !important;
+  margin: 1rem 0 !important;
+}
+
+/* Text Formatting */
+.tiptap-content strong,
+.tiptap-content b {
+  font-weight: 700 !important;
+}
+
+.tiptap-content em,
+.tiptap-content i {
+  font-style: italic !important;
+}
+
+.tiptap-content u {
+  text-decoration: underline !important;
+}
+
+.tiptap-content s,
+.tiptap-content del {
+  text-decoration: line-through !important;
+}
+
+/* Tables */
+.tiptap-content table {
+  display: table !important;
+  width: 100% !important;
+  border-collapse: collapse !important;
+  border: 1px solid var(--color-ko-border-primary) !important;
+  border-radius: 0.5rem !important;
+  overflow: hidden !important;
+  margin: 1rem 0 !important;
+  background: transparent !important;
+}
+
+.tiptap-content thead {
+  display: table-header-group !important;
+  background: var(--color-ko-widget-bg) !important;
+}
+
+.tiptap-content tbody {
+  display: table-row-group !important;
+}
+
+.tiptap-content tr {
+  display: table-row !important;
+  border-bottom: 1px solid var(--color-ko-border-primary) !important;
+}
+
+.tiptap-content tr:last-child {
+  border-bottom: none !important;
+}
+
+.tiptap-content tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.tiptap-content th {
+  display: table-cell !important;
+  border: 1px solid var(--color-ko-border-primary) !important;
+  padding: 0.75rem 1rem !important;
+  text-align: left !important;
+  font-weight: 600 !important;
+  color: #fff !important;
+  vertical-align: top !important;
+}
+
+.tiptap-content td {
+  display: table-cell !important;
+  border: 1px solid var(--color-ko-border-primary) !important;
+  padding: 0.75rem 1rem !important;
+  text-align: left !important;
+  vertical-align: top !important;
+}
+
+/* Selected table cell (in editor) */
+.tiptap-content .selectedCell {
+  background: rgba(255, 186, 0, 0.2) !important;
+}
+
+/* Highlights (mark) */
+.tiptap-content mark {
+  display: inline !important;
+  padding: 0.125rem 0.25rem !important;
+  border-radius: 0.125rem !important;
+}
+
+/* Custom color spans */
+.tiptap-content span[style*="color"] {
+  display: inline !important;
+}
+
+/* Task Lists (if used later) */
+.tiptap-content ul[data-type="taskList"] {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+.tiptap-content ul[data-type="taskList"] li {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.5rem !important;
+}
+
+.tiptap-content ul[data-type="taskList"] li input[type="checkbox"] {
+  display: inline-block !important;
+  margin-top: 0.25rem !important;
+  flex-shrink: 0 !important;
+}
+
+/* Editor-specific styles (when editing) */
+.tiptap-content.ProseMirror {
+  outline: none !important;
+  min-height: 200px !important;
+  padding:25px;
+}
+
+.tiptap-content.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder) !important;
+  float: left !important;
+  color: var(--color-ko-text-placeholder) !important;
+  pointer-events: none !important;
+  height: 0 !important;
+}
+
+/* Ensure proper spacing for first/last elements */
+.tiptap-content > *:first-child {
+  margin-top: 0 !important;
+}
+
+.tiptap-content > *:last-child {
+  margin-bottom: 0 !important;
+}

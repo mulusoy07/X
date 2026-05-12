@@ -1,0 +1,130 @@
+@layer components {
+/* ===================================
+   ORACLE GLOBAL COMPONENT STYLES
+   ===================================*/
+
+/* Card Components */
+.oracle-card {
+    @apply relative bg-theme-card border border-theme-border-primary/6 rounded-lg overflow-hidden transition-all duration-300 flex flex-col;
+}
+
+.oracle-card-header {
+    @apply relative bg-theme-widget-bg p-4 border-b border-theme-border-primary/6 transition-all duration-300;
+}
+
+.oracle-card-header:hover {
+    @apply bg-theme-brand-primary/3;
+}
+
+.oracle-card-content {
+    @apply p-3;
+}
+
+.oracle-card-title {
+    @apply text-sm font-bold text-theme-text-card-title text-center truncate;
+}
+
+/* Badge Components */
+.oracle-badge {
+    @apply bg-theme-brand-primary/20 border border-theme-brand-primary/40 rounded px-2 py-1;
+}
+
+.oracle-badge-content {
+    @apply flex items-center gap-1;
+}
+
+.oracle-badge-icon {
+    @apply w-3.5 h-3.5 text-theme-brand-primary;
+}
+
+.oracle-badge-text {
+    @apply text-xs font-bold text-theme-brand-primary tracking-wide;
+}
+
+/* Icon Containers */
+.oracle-icon-container {
+    @apply w-[45px] h-[45px] bg-theme-widget-bg rounded overflow-hidden flex items-center justify-center cursor-pointer border border-theme-border-primary/10 transition-all duration-300;
+}
+
+.oracle-icon-container-sm {
+    @apply w-[45px] h-[45px] overflow-hidden flex items-center justify-center flex-shrink-0 bg-theme-card rounded border border-theme-border-primary/8 transition-all duration-200;
+}
+
+.oracle-icon-image {
+    @apply w-full h-full object-cover object-center;
+}
+
+.oracle-icon-image-sm {
+    @apply w-full h-full object-contain p-1;
+}
+
+.oracle-icon-fallback {
+    @apply w-7 h-7 text-theme-brand-primary;
+}
+
+.oracle-icon-fallback-sm {
+    @apply w-4 h-4 text-theme-text-card-meta;
+}
+
+/* Section Headers */
+.oracle-section-header {
+    @apply flex items-center gap-1 mb-2;
+}
+
+.oracle-section-divider {
+    @apply w-1 h-3 bg-theme-brand-primary rounded-full;
+}
+
+.oracle-section-title {
+    @apply text-xs font-bold text-theme-text-card-title;
+}
+
+/* Grid Layouts */
+.oracle-grid-items {
+    @apply grid grid-cols-1 gap-2;
+}
+
+/* Item Components */
+.oracle-item {
+    @apply bg-theme-widget-bg/50 border border-theme-border-primary/6 rounded p-2 transition-all duration-200 hover:bg-theme-brand-primary/5 hover:border-theme-brand-primary/20;
+}
+
+.oracle-item-content {
+    @apply flex items-center gap-1;
+}
+
+.oracle-item-text-container {
+    @apply flex-1 min-w-0 overflow-hidden;
+}
+
+.oracle-item-name {
+    @apply text-xs font-semibold text-theme-text-card-title truncate mb-0.5;
+}
+
+.oracle-item-count {
+    @apply text-[10px] text-theme-text-card-meta font-medium truncate;
+}
+
+/* Content Containers */
+.oracle-content-center {
+    @apply flex items-center justify-center;
+}
+
+/* Google Charts Tooltip Override */
+.google-visualization-tooltip {
+    background: #1c1917 !important;
+    border: 1px solid #44403c !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+    padding: 0 !important;
+}
+
+.google-visualization-tooltip-item-list {
+    margin: 0 !important;
+}
+
+.google-visualization-tooltip-item-list .google-visualization-tooltip-item:first-child {
+    display: none !important;
+}
+
+}

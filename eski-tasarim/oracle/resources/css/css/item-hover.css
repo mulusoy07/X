@@ -1,0 +1,366 @@
+/* ===================================
+   Item Tooltip Styles - ItemService.php Çıktısına Göre
+   ===================================*/
+
+/* Ana container - ItemService'deki #item_v2 */
+#item_v2 {
+    font-family: var(--font-primary) !important;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-medium);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 6px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+    /* Tooltip'i sayfadan bağımsız hale getir */
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Z-index ve pozisyonlama iyileştirmeleri */
+    z-index: 9999;
+    font-weight: 500;
+}
+
+#item_v2 * {
+    font-family: var(--font-primary) !important;
+}
+
+/* Item header - ItemService'deki .item-header */
+#item_v2 .item-header {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-bottom: 4px;
+    gap: 6px;
+}
+
+/* Item icon - ItemService'deki .item-icon */
+#item_v2 .item-header .item-icon {
+    width: 38px;
+    height: 38px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-small);
+    background-color: var(--bg-card-secondary);
+}
+
+/* Item başlığı - ItemService'deki h1 */
+#item_v2 .item-header h1 {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 600;
+    flex: 1;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+/* Item Type ve Kind bilgileri - Tek div içinde flex column */
+#item_v2 .item-type-kind {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 4px;
+}
+
+/* Durability Progress Bar - Knight Online tema renkleri */
+#item_v2 .durability-progress {
+    position: relative;
+    width: 100%;
+    height: 16px;
+    background-color: var(--color-ko-card-bg); /* Knight Online kart arka plan */
+    border: 1px solid var(--color-ko-border-card);
+    border-radius: var(--radius-small);
+    margin-top: 2px;
+    overflow: hidden;
+}
+
+#item_v2 .durability-bar {
+    height: 100%;
+    background: #493737; /* Düz Knight Online tema rengi */
+    border-radius: var(--radius-small);
+    transition: width var(--transition-normal);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#item_v2 .durability-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    line-height: 12px;
+    color: var(--color-ko-text-card-title); /* Knight Online kart metin rengi */
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+/* Item Type Colors - Example.css'den Knight Online renk paleti */
+#item_v2 .type_0 {
+    color: #ffffffff !important; /* general - Beyaz */
+}
+
+#item_v2 .type_1 {
+    color: #8080ff !important; /* magic - Mavi */
+}
+
+#item_v2 .type_2 {
+    color: #ff0 !important; /* lair - Sarı */
+}
+
+#item_v2 .type_3 {
+    color: #80ff00 !important; /* craft - Yeşil */
+}
+
+#item_v2 .type_4 {
+    color: #dcc77c !important; /* unique - Altın */
+}
+
+#item_v2 .type_5 {
+    color: #c87cc7 !important; /* upgrade - Mor */
+}
+
+#item_v2 .type_6 {
+    color: #ff3c3c !important; /* set - Kırmızı */
+}
+
+#item_v2 .type_7 {
+    color: #c87cc7 !important; /* familiar - Mor */
+}
+
+#item_v2 .type_8 {
+    color: #1affff !important; /* event - Cyan */
+}
+
+#item_v2 .type_9 {
+    color: #32f7cc !important; /* cosplay - Turkuaz */
+}
+
+#item_v2 .type_11 {
+    color: #ec8ea9 !important; /* rebirth - Pembe */
+}
+
+#item_v2 .type_12 {
+    color: #e99a55 !important; /* rebirth-unique - Turuncu */
+}
+
+/* Headers - ItemService'deki h2, h3 */
+#item_v2 h2 {
+    font-size: 10px;
+    font-weight: 500;
+    margin-bottom: 2px;
+    color: var(--text-primary);
+}
+
+#item_v2 h3 {
+    font-size: 10px;
+    font-weight: 500;
+    margin-bottom: 2px;
+    color: var(--text-primary);
+}
+
+#item_v2 h4 {
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 4px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Separator - ItemService'deki .item-seperator */
+#item_v2 .item-seperator {
+    height: 1px;
+    width: 100%;
+    background: var(--gradient-border-gold);
+    margin: 4px 0;
+}
+
+#item_v2 .item-seperator:last-of-type {
+    margin-bottom: 10px;
+}
+
+/* Lists - ItemService'deki ul, li */
+#item_v2 ul {
+    margin: 4px 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+#item_v2 li {
+    font-size: 11px;
+    margin-bottom: 1px;
+    color: var(--text-primary);
+}
+
+/* Property Colors - Example.css'den Knight Online renk paleti */
+#item_v2 .item-property-bonus {
+    color: #88c329 !important; /* Bonus - Yeşil */
+}
+
+#item_v2 .item-property-resist {
+    color: #5cd1e5 !important; /* Resistance - Açık Mavi */
+}
+
+#item_v2 .item-property-damage {
+    color: #75c76e !important; /* Damage - Yeşil */
+}
+
+#item_v2 .item-property-req {
+    color: #ff3c3c !important; /* Required - Kırmızı */
+}
+
+/* Özel özellikler için cyan renk (Soul Stone gibi) */
+#item_v2 .item-property-special {
+    color: #1affff !important; /* Special - Cyan */
+}
+
+/* Köken bilgisi için yeşil renk */
+#item_v2 .item-property-origin {
+    color: #80ff00 !important; /* Origin - Yeşil */
+}
+
+/* Description - ItemService'deki h4 */
+#item_v2 .item-description {
+    font-size: 10px;
+    text-align: center;
+    line-height: 20px;
+    color: #cccccc;
+}
+
+/* Set properties - ItemService'deki set item özellikleri */
+#item_v2 .item-properties.set-properties {
+    text-align: center;
+}
+
+#item_v2 .item-properties.set-properties .item-set-info .item-set-name {
+    color: #bcc54f;
+}
+
+#item_v2 .item-properties.set-properties .item-set-info .item-set-part {
+    color: #c1c961;
+}
+
+/* Warning - ItemService'deki uyarı mesajları */
+#item_v2 .item-property-warning {
+    color: #ff3c3c;
+    font-size: 10px;
+    text-align: right;
+}
+
+/* Set icon shine effect - ItemService'deki özel efektler */
+.set-icon {
+    position: relative;
+    overflow: hidden;
+}
+
+.set-icon::before {
+    background: linear-gradient(to right,
+            rgb(255 255 255 / 29%) 0,
+            rgb(255 255 255 / 84%) 100%);
+    content: "";
+    display: block;
+    height: 200%;
+    left: -120%;
+    position: absolute;
+    top: 0;
+    transform: skewX(230deg);
+    width: 50%;
+    z-index: 2;
+    filter: brightness(2) blur(5px);
+    -webkit-filter: brightness(2) blur(5px);
+    -webkit-animation: shine 3s infinite ease-in-out;
+    animation: shine 3s infinite ease-in-out;
+}
+
+@-webkit-keyframes shine {
+    0% {
+        left: -120%;
+    }
+
+    25% {
+        left: -120%;
+    }
+
+    50% {
+        left: -120%;
+    }
+
+    100% {
+        left: 230%;
+    }
+}
+
+@keyframes shine {
+    0% {
+        left: -120%;
+    }
+
+    25% {
+        left: -120%;
+    }
+
+    50% {
+        left: -120%;
+    }
+
+    100% {
+        left: 230%;
+    }
+}
+
+/* ===================================
+   Item Hover Component Styles
+   ===================================*/
+
+/* Item hover container */
+.item-hover-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Item hover tooltip */
+.item-hover-tooltip {
+    position: fixed !important;
+    z-index: 9999 !important;
+    pointer-events: none !important;
+    max-width: 300px !important;
+    min-width: 200px !important;
+    border: 1px solid var(--color-ko-border-accent);
+    border-radius: 4px;
+    animation: tooltipFadeIn 0.2s ease-out;
+    background: var(--bg-card) !important;
+}
+
+/* Item hover content */
+.item-hover-content {
+    border-radius: 8px !important;
+    position: relative !important;
+}
+
+
+/* Tooltip animasyonu */
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

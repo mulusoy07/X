@@ -1,0 +1,213 @@
+<?php
+
+return [
+    'dashboard' => 'Hesap Paneli',
+    'my_account' => 'Hesabım',
+    'account_info' => 'Hesap Bilgileri',
+    'last_login' => 'Son Giriş',
+    'email' => 'E-posta Adresi',
+    'phone' => 'Telefon Numarası',
+    'account_status' => 'Hesap Durumu',
+    'until_date' => '{date} tarihine kadar',
+    'my_characters' => 'Karakterlerim',
+    'no_characters' => 'Karakter bulunamadı.',
+    'game_cash' => 'Oyun Nakiti',
+    'forum_profile' => 'Forum Profili',
+    'welcome' => 'Hoş geldin,',
+    'welcome_message' => 'Hesap ayarlarını ve karakterlerini yönet.',
+    'premium_membership' => 'Premium Üyelik',
+    'end_date' => 'Bitiş Tarihi',
+    'default_user' => 'Kullanıcı',
+    'authority' => [
+        'admin' => 'Yönetici',
+        'user' => 'Normal Kullanıcı',
+        'moderator' => 'Moderatör',
+        'banned' => 'Yasaklı',
+        'unknown' => 'Bilinmiyor'
+    ],
+    'security' => [
+        'title' => 'Hesap Güvenliği',
+        'description' => 'Hesap güvenlik ayarlarınızı yönetin ve hesabınızı koruyun.',
+        'coming_soon' => 'Yakında',
+        
+        // Güvenlik Navigasyonu
+        'change_password' => 'Şifre Değiştir',
+        'change_password_desc' => 'Güvenlik için hesap şifrenizi düzenli olarak güncelleyin.',
+        'item_lock' => 'Eşya Kilidi Şifresi',
+        'item_lock_desc' => 'Oyun içi eşyalarınızı korumak için şifre belirleyin.',
+        'change_email' => 'E-posta Değiştir',
+        'change_email_desc' => 'Kayıtlı e-posta adresinizi güncelleyin.',
+        'change_gsm' => 'Telefon Numarası Değiştir',
+        'change_gsm_desc' => 'Kayıtlı telefon numaranızı güncelleyin.',
+        'two_factor' => 'İki Faktörlü Doğrulama',
+        'two_factor_desc' => 'Hesabınıza ekstra bir güvenlik katmanı ekleyin.',
+        
+        // Kayıtlı Bilgiler
+        'registered_info' => 'Kayıtlı Bilgiler',
+        'registered_email' => 'Kayıtlı E-posta',
+        'registered_phone' => 'Kayıtlı Telefon',
+        'not_set' => 'Ayarlanmamış',
+        
+        // Erişilebilirlik
+        'show_password' => 'Şifreyi göster',
+        'hide_password' => 'Şifreyi gizle',
+        
+        // Güvenlik İpuçları
+        'security_tips' => 'Güvenlik İpuçları',
+        'tip_change_password' => 'Şifrenizi düzenli olarak değiştirin.',
+        'tip_strong_password' => 'Güçlü ve benzersiz bir şifre kullanın.',
+        'tip_item_lock' => 'Eşyalarınızı korumak için eşya kilidini etkinleştirin.',
+        'tip_change_regularly' => 'Güvenlik için şifrenizi düzenli olarak güncelleyin.',
+        'tip_item_lock_protect' => 'Oyun içi eşyalarınızı 8 haneli bir şifre ile koruyun.',
+        
+        // İki Faktörlü Doğrulama
+        'two_factor_title' => 'İki Faktörlü Doğrulama',
+        'two_factor_subtitle' => 'Hesabınızı ekstra bir güvenlik katmanı ile koruyun.',
+        'login_types' => 'Giriş Türleri',
+        'game_login' => 'Oyun Girişi',
+        'game_login_desc' => 'Oyun içi giriş için iki faktörlü doğrulama.',
+        'web_login' => 'Web Girişi',
+        'web_login_desc' => 'Web sitesi girişi için iki faktörlü doğrulama.',
+        'sms' => 'SMS',
+        'both' => 'İkisi de (SMS + E-posta)',
+        'both_desc' => 'Hem SMS hem de E-posta ile kod alın',
+        'enable_2fa' => 'Doğrulamayı Etkinleştir',
+        'disable_2fa' => 'Doğrulamayı Devre Dışı Bırak',
+        'select_verification_method' => 'Tercih ettiğiniz doğrulama yöntemini seçin:',
+        'back_to_security' => 'Güvenliğe Dön',
+        'how_it_works' => 'Nasıl Çalışır',
+        'step_login' => 'Giriş Yap',
+        'step_login_desc' => 'Kullanıcı adı ve şifrenizi girin.',
+        'step_get_code' => 'Kod Al',
+        'step_get_code_desc' => 'SMS veya e-posta ile doğrulama kodu alın.',
+        'step_verify' => 'Doğrula',
+        'step_verify_desc' => 'Girişi tamamlamak için kodu girin.',
+        
+        // OTP
+        'otp' => [
+            'description' => 'Kimliğinizi doğrulamak için size bir doğrulama kodu göndereceğiz.',
+            'email' => 'E-posta',
+            'sms' => 'SMS',
+            'send_code' => 'Kod Gönder',
+            'sending' => 'Gönderiliyor...',
+            'send_failed' => 'Doğrulama kodu gönderilemedi. Lütfen tekrar deneyin...',
+            'code_validity' => 'Kod geçerlilik süresi',
+            'verify' => 'Doğrula',
+            'verifying' => 'Doğrulanıyor...',
+            'invalid_code' => 'Geçersiz doğrulama kodu. Lütfen tekrar deneyin.',
+            'resend' => 'Kodu Tekrar Gönder',
+            'resend_available_in' => 'Tekrar gönderim için bekleyin',
+        ],
+        'cancel' => 'İptal',
+        
+        // Adım Etiketleri
+        'verification' => 'Doğrulama',
+        'update' => 'Güncelleme',
+        'identity_verification' => 'Kimlik Doğrulama',
+        'identity_verified' => 'Kimlik Doğrulandı',
+        'verification_successful_sms' => 'SMS ile doğrulama başarılı',
+        'verification_successful_email' => 'E-posta ile doğrulama başarılı',
+        'continue_verification' => 'Devam etmek için lütfen kimliğinizi doğrulayın',
+        'send_verification_code' => 'Doğrulama Kodu Gönder',
+        'enter_6_digit_sent' => 'Cihazınıza gönderilen 6 haneli kodu girin',
+        'wait_to_resend' => 'Tekrar göndermek için bekleyin',
+        'verify_continue' => 'Doğrula & Devam Et',
+        'back' => 'Geri',
+        
+        // Form Başlıkları
+        'set_new_password' => 'Yeni Şifre Belirle',
+        'password_hint' => 'Hesabınızı korumak için güçlü bir şifre seçin',
+        'enter_new_email' => 'Yeni E-posta Girin',
+        'email_format_hint' => 'Geçerli bir e-posta adresi girin',
+        'enter_new_phone' => 'Yeni Telefon Numarası Girin',
+        'phone_format_hint' => 'Geçerli bir Türk cep telefonu numarası girin',
+        'set_new_item_lock' => 'Yeni Eşya Kilidi Belirle',
+        'item_lock_hint' => '8 haneli sayısal bir şifre girin',
+        'phone_requirements' => 'Telefon Gereksinimleri',
+        
+        // Şifre Gereksinimleri
+        'req_4_16_chars' => '4-16 karakter',
+        'req_8_digits' => '8 rakam',
+        'req_passwords_match' => 'Şifreler eşleşiyor',
+        'password_requirements' => 'Şifre Gereksinimleri',
+        
+        // Form Etiketleri & Aksiyonlar
+        'current_password' => 'Mevcut Şifre',
+        'new_password' => 'Yeni Şifre',
+        'new_password_confirm' => 'Yeni Şifreyi Onayla',
+        'confirm_password' => 'Şifreyi Onayla',
+        'save_changes' => 'Değişiklikleri Kaydet',
+        'saving' => 'Kaydediliyor...',
+        'updating' => 'Güncelleniyor...',
+        'update_password' => 'Şifreyi Güncelle',
+        'update_email' => 'E-postayı Güncelle',
+        'update_gsm' => 'Telefon Numarasını Güncelle',
+        'update_item_lock' => 'Eşya Kilidini Güncelle',
+        
+        // Doğrulama Mesajları
+        'verify_identity_password' => 'Şifrenizi değiştirmek için kimliğinizi doğrulayın',
+        'verify_identity_email' => 'E-postanızı değiştirmek için kimliğinizi doğrulayın',
+        'verify_identity_sms' => 'Kimliğinizi SMS ile doğrulayın',
+        'verify_identity_gsm' => 'Telefon numaranızı değiştirmek için kimliğinizi doğrulayın',
+        'verify_identity_item_lock' => 'Eşya kilidi şifrenizi değiştirmek için kimliğinizi doğrulayın',
+        'security_verification' => 'Güvenlik Doğrulaması',
+        
+        // Şifre Değiştirme Sayfası
+        'new_password_set' => 'Yeni Şifre Belirle',
+        'tip_strong_password_title' => 'Güçlü Şifre Kullanın',
+        'tip_strong_password_desc' => 'Harf, rakam ve sembol kombinasyonu kullanın.',
+        'tip_regular_change_title' => 'Düzenli Değiştirin',
+        'tip_regular_change_desc' => 'Şifrenizi her 3-6 ayda bir güncelleyin.',
+        'tip_keep_secret_title' => 'Gizli Tutun',
+        'tip_keep_secret_desc' => 'Şifrenizi asla kimseyle paylaşmayın.',
+        
+        // E-posta Değiştirme Sayfası
+        'change_email_title' => 'E-posta Adresi Değiştir',
+        'change_email_subtitle' => 'Kayıtlı e-posta adresinizi güncelleyin.',
+        'new_email_address' => 'Yeni E-posta Adresi',
+        'email_placeholder' => 'eposta@ornek.com',
+        'email_requirements' => 'E-posta Gereksinimleri',
+        'valid_email_format' => 'Geçerli e-posta formatı',
+        'change_email_code_verified_success' => 'Doğrulama başarılı! Artık yeni e-posta adresinizi girebilirsiniz.',
+        'important_info' => 'Önemli Bilgiler',
+        'verification' => 'E-posta Doğrulama',
+        'verification_desc' => 'Yeni adresinizi doğrulamak için bir onay e-postası alacaksınız.',
+        'notifications' => 'Bildirimler',
+        'notifications_desc' => 'Tüm hesap bildirimleri yeni e-postanıza gönderilecek.',
+        'security_notify' => 'Güvenlik Uyarıları',
+        'security_notify_desc' => 'Önemli güvenlik güncellemeleri bu e-postaya gönderilecek.',
+        
+        // Telefon Değiştirme Sayfası
+        'change_gsm_title' => 'Telefon Numarası Değiştir',
+        'change_gsm_subtitle' => 'Kayıtlı telefon numaranızı güncelleyin.',
+        'new_phone_number' => 'Yeni Telefon Numarası',
+        'phone_placeholder' => '5XX XXX XX XX',
+        'phone_info' => 'Telefon Numarası Bilgisi',
+        'valid_phone_format' => 'Geçerli bir Türk cep telefonu numarası girin (10 hane)',
+        'change_gsm_code_verified_success' => 'Doğrulama başarılı! Artık yeni telefon numaranızı girebilirsiniz.',
+        'sms_verification' => 'SMS Doğrulama',
+        'sms_verification_desc' => 'Yeni numaranızı doğrulamak için SMS alacaksınız.',
+        '2fa_update' => '2FA Güncelleme',
+        '2fa_update_desc' => '2FA için SMS kullanıyorsanız, otomatik olarak güncellenecek.',
+        'instant_change' => 'Anında Değişim',
+        'instant_change_desc' => 'Telefon numaranız hemen güncellenecek.',
+        
+        // Eşya Kilidi Değiştirme Sayfası
+        'new_item_lock' => 'Yeni Eşya Kilidi Şifresi',
+        'new_item_lock_confirm' => 'Eşya Kilidi Şifresini Onayla',
+        'new_item_lock_set' => 'Yeni Eşya Kilidi Şifresi Belirle',
+        'about_item_lock' => 'Eşya Kilidi Hakkında',
+        'item_protection' => 'Eşya Koruması',
+        'item_protection_desc' => 'Değerli eşyalarınızı yetkisiz erişimden koruyun.',
+        'eight_digits' => '8 Rakam',
+        'eight_digits_desc' => 'Eşya kilidi için 8 haneli sayısal şifre kullanın.',
+    ],
+    'shop_history' => [
+        'title' => 'Satın Alma Geçmişi',
+    ],
+    'character' => [
+        'level' => 'Sv.',
+        'exp' => 'DEN.',
+        'national' => 'Ulusal',
+    ]
+];

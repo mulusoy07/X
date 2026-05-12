@@ -440,3 +440,57 @@
   outline: none;
   box-shadow: 0 0 0 3px rgba(245, 184, 54, 0.2);
 }
+
+/* ============ RANKING ICONS ============ */
+.rank-icon {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+  border: 1px solid #332e2f;
+  border-radius: 2px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.rank-1 {
+  background-image: url("https://media.oraclegamer.net/assets/images/icons/rank_1.webp");
+}
+.rank-2 {
+  background-image: url("https://media.oraclegamer.net/assets/images/icons/rank_2.webp");
+}
+.rank-3 {
+  background-image: url("https://media.oraclegamer.net/assets/images/icons/rank_3.webp");
+}
+
+.nation-icon,
+.class-icon {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+  border: 1px solid #332e2f;
+  border-radius: 2px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.nation-karus {
+  background-image: url("https://media.oraclegamer.net/assets/images/icons/karus.webp");
+}
+.nation-human {
+  background-image: url("https://media.oraclegamer.net/assets/images/icons/human.webp");
+}
+
+.class-warrior {
+  background-image: url("https://media.oraclegamer.net/assets/images/icons/warrior.webp");
+}
+.class-rogue {
+  background-image: url("https://media.oraclegamer.net/assets/images/icons/rogue.webp");
+}
+.class-mage {
+  background-image: url("https://media.oraclegamer.net/assets/images/icons/mage.webp");
+}
+.class-priest {
+  background-image: url("https://media.oraclegamer.net/assets/images/icons/priest.webp");
+}

@@ -1,0 +1,14 @@
+{
+    "id": "oracle",
+    "name": "Oracle Theme",
+    "description": "A dark, modern frontend theme",
+    "version": "1.0.0",
+    "author": "Utech",
+    "screenshot": "screenshot.png",
+    "inherit": null,
+    "supports": {
+        "dark_mode": true,
+        "rtl": false,
+        "layouts": ["app"]
+    }
+}

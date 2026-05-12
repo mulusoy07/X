@@ -1,0 +1,693 @@
+/* ===================================
+   APP.CSS - MAIN ENTRY POINT
+   ===================================
+
+   Structure:
+   1. Tailwind & Third-party imports
+   2. CDN Assets (SCSS compiled)
+   3. Theme & Variables
+   4. Component CSS modules
+   5. Base styles & Overrides
+
+   ===================================*/
+
+/* Tailwind & Third-party */
+@import "tailwindcss";
+@import "sonner/dist/styles.css";
+@import "swiper/css";
+@import "swiper/css/effect-fade";
+@import "swiper/css/autoplay";
+
+/* Font Families */
+@theme {
+  --font-family-work-sans: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-family-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: var(--font-family-work-sans);
+}
+
+/* Component Modules */
+@import "./css/cdn-assets.css";
+@import "./css/theme.css";
+@import "./css/loading.css";
+@import "./css/profile.css";
+@import "./css/navigation.css";
+@import "./css/animations.css";
+@import "./css/scrollbar.css";
+@import "./css/dialog.css";
+@import "./css/item-hover.css";
+@import "./css/tiptap.css";
+
+/* Dark mode variant */
+@custom-variant dark (&:is(.dark *));
+
+/* ===================================
+   SCROLLBAR LAYOUT SHIFT FIX
+   ===================================*/
+html {
+  scrollbar-gutter: stable;
+  overflow-x: hidden;
+}
+
+/* ===================================
+   NPROGRESS - Instant hide to avoid z-index flash
+   ===================================*/
+#nprogress {
+  transition: none !important;
+  opacity: 1 !important;
+}
+
+#nprogress .bar {
+  background: var(--color-ko-brand-primary) !important;
+}
+
+#nprogress .bar .peg {
+  box-shadow: 0 0 10px var(--color-ko-brand-primary), 0 0 5px var(--color-ko-brand-primary) !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: var(--color-ko-brand-primary) !important;
+  border-left-color: var(--color-ko-brand-primary) !important;
+}
+
+/* ===================================
+   SHADCN UI SELECT FOCUS RING REMOVAL
+   ===================================*/
+.focus-visible\:ring-ring\/50:focus-visible {
+  --tw-ring-color: transparent !important;
+  --tw-ring-offset-width: 0px !important;
+  --tw-ring-offset-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.focus-visible\:border-ring {
+  &:focus-visible {
+    border-color: transparent !important;
+  }
+}
+
+/* ===================================
+   TAILWIND THEME EXTENSION
+   ===================================*/
+@theme {
+  --font-sans: 'Work Sans', 'Inter', sans-serif;
+
+  /* Font Weights */
+  --font-weight-bold: var(--font-weight-medium);
+  --font-weight-black: 700;
+  --text-xs: var(--text-sm);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --spacing-45: 45px;
+
+  /* Z-Index Scale */
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-45: 45;
+  --z-50: 50;
+  --z-55: 55;
+  --z-56: 56;
+  --z-60: 60;
+  --z-70: 70;
+  --z-80: 80;
+  --z-90: 90;
+  --z-100: 100;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Knight Online Theme Colors - Tailwind Registration */
+
+  /* Main Backgrounds */
+  --color-ko-main: #161012;
+  --color-ko-wrapper: #221f21b8;
+  --color-ko-content-area: #221f21b8;
+
+  /* Component Backgrounds */
+  --color-ko-card: #262122;
+  --color-ko-card-hover: #2b2627;
+  --color-ko-card-secondary: #292627;
+  --color-ko-overlay: rgba(38, 33, 34, 0.95);
+  --color-ko-dark-overlay: rgba(34, 31, 33, 0.5);
+  --color-ko-darker-overlay: rgba(22, 16, 18, 0.5);
+
+  /* Navigation Backgrounds */
+  --color-ko-nav: #181517a6;
+  --color-ko-nav-card: rgb(38, 33, 34, 0.93);
+  --color-ko-nav-hover: rgba(255, 255, 255, 0.06);
+  --color-ko-nav-scrolled: rgb(38, 33, 34, 0.95);
+
+  /* Footer Backgrounds */
+  --color-ko-footer: #181517a6;
+  --color-ko-footer-card: rgb(38, 33, 34, 0.93);
+
+  /* Input Backgrounds */
+  --color-ko-input: rgba(38, 33, 34, 0.8);
+  --color-ko-input-focus: rgba(42, 37, 39, 0.9);
+
+  /* Text Colors */
+  --color-ko-text-primary: #cfc4b7;
+  --color-ko-text-secondary: #dcd4c8;
+  --color-ko-text-accent: #f9d291;
+  --color-ko-text-muted: #b5a890;
+  --color-ko-text-darker: #9d9387;
+  --color-ko-text-light: #8e826e;
+  --color-ko-text-placeholder: #756c65;
+  --color-ko-text-dark: #221f21;
+
+  /* Brand Colors */
+  --color-ko-brand-primary: #ffba00;
+  --color-ko-brand-secondary: #ff9e00;
+  --color-ko-accent-orange: #ff9700;
+
+  /* Game Colors */
+  --color-ko-karus: #e74c3c;
+  --color-ko-elmorad: #3498db;
+  --color-ko-accent-green: #02e56f;
+  --color-ko-online: #02e56f;
+  --color-ko-offline: #e74c3c;
+
+  /* Role Colors */
+  --color-ko-gamemaster: #02e56f;
+  --color-ko-moderator: #ffba00;
+  --color-ko-helper: #978a75;
+  --color-ko-event: #e67e22;
+
+  /* Border Colors */
+  --color-ko-border-primary: rgba(255, 255, 255, 0.06);
+  --color-ko-border-secondary: rgba(255, 255, 255, 0.1);
+  --color-ko-border-accent: rgba(255, 186, 0, 0.3);
+  --color-ko-border-card: #756c65;
+  --color-ko-border-input: rgba(255, 255, 255, 0.08);
+
+  /* Knight Online Game Theme Colors */
+  --color-ko-category-update: #02e56f;
+  --color-ko-category-event: #ffba00;
+  --color-ko-category-content: #e67e22;
+
+  /* Ranking Colors */
+  --color-ko-gold: #ffd700;
+  --color-ko-silver: #c0c0c0;
+  --color-ko-bronze: #cd7f32;
+
+  /* Card and Component Colors */
+  --color-ko-card-bg: #262122;
+  --color-ko-card-border: #756c65;
+  --color-ko-widget-bg: #1a1a1a;
+  --color-ko-widget-header: #222;
+
+  /* Text Colors for Cards */
+  --color-ko-text-card-title: #dcd4c8;
+  --color-ko-text-card-meta: #978a75;
+  --color-ko-text-card-excerpt: #9d9387;
+
+  /* Button Colors */
+  --color-ko-btn-primary: #ffba00;
+  --color-ko-btn-primary-hover: #ff9e00;
+  --color-ko-btn-secondary: #978a75;
+  --color-ko-btn-secondary-hover: #8e826e;
+
+  /* Status Colors */
+  --color-ko-status-online: #02e56f;
+  --color-ko-status-offline: #e74c3c;
+
+  /* Badge Colors */
+  --color-ko-badge-nation-karus: #e74c3c;
+  --color-ko-badge-nation-elmorad: #3498db;
+  --color-ko-badge-level: #ffba00;
+  --color-ko-badge-members: #978a75;
+
+  /* Icon Colors */
+  --color-ko-icon-warrior: #e74c3c;
+  --color-ko-icon-rogue: #02e56f;
+  --color-ko-icon-mage: #3498db;
+  --color-ko-icon-priest: #ffba00;
+  --color-ko-icon-default: #978a75;
+
+  /* Theme Colors - Packages Page */
+  --color-theme-card: #262122;
+  --color-theme-card-bg: #262122;
+  --color-theme-card-hover: #2b2627;
+  --color-theme-widget-bg: #1a1a1a;
+  --color-theme-border-primary: #ffffff;
+  --color-theme-brand-primary: #ffba00;
+  --color-theme-brand-secondary: #ff9e00;
+  --color-theme-text-card-title: #dcd4c8;
+  --color-theme-text-card-meta: #978a75;
+  --color-theme-main: #161012;
+}
+
+/* ===================================
+   CSS CUSTOM PROPERTIES (ROOT)
+   ===================================*/
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: rgba(255, 255, 255, 0.06);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.87 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.87 0 0);
+
+  /* Font Families */
+  --font-primary: var(--font-work-sans), var(--font-inter), sans-serif;
+  --font-secondary: var(--font-inter), sans-serif;
+
+  /* Main Backgrounds */
+  --bg-main: #161012;
+  /* --bg-main-image is set in cdn-assets.css */
+  --bg-wrapper: #221f21b8;
+  --bg-content-area: #221f21b8;
+
+  /* Component Backgrounds */
+  --bg-card: #262122;
+  --bg-card-hover: #2b2627;
+  --bg-card-secondary: #292627;
+  --bg-overlay: rgba(38, 33, 34, 0.95);
+  --bg-dark-overlay: rgba(34, 31, 33, 0.5);
+  --bg-darker-overlay: rgba(22, 16, 18, 0.5);
+
+  /* Navigation Backgrounds */
+  --bg-nav: #181517a6;
+  --bg-nav-card: rgb(38, 33, 34, 0.93);
+  --bg-nav-hover: rgba(255, 255, 255, 0.06);
+  --bg-nav-scrolled: rgb(38, 33, 34, 0.95);
+
+  /* Footer Backgrounds */
+  --bg-footer: #181517a6;
+  --bg-footer-card: rgb(38, 33, 34, 0.93);
+
+  /* Input Backgrounds */
+  --bg-input: rgba(38, 33, 34, 0.8);
+  --bg-input-focus: rgba(42, 37, 39, 0.9);
+
+  /* Text Colors */
+  --text-primary: #cfc4b7;
+  --text-secondary: #dcd4c8;
+  --text-accent: #f9d291;
+  --text-muted: #978a75;
+  --text-darker: #9d9387;
+  --text-light: #8e826e;
+  --text-placeholder: #756c65;
+  --text-dark: #221f21;
+
+  /* Brand Colors */
+  --color-brand-primary: #ffba00;
+  --color-brand-secondary: #ff9e00;
+  --color-accent-orange: #ff9700;
+
+  /* Game Colors */
+  --color-karus: #e74c3c;
+  --color-elmorad: #3498db;
+  --color-accent-green: #02e56f;
+  --color-online: #02e56f;
+  --color-offline: #e74c3c;
+
+  /* Role Colors */
+  --color-gamemaster: #02e56f;
+  --color-moderator: #ffba00;
+  --color-helper: #978a75;
+  --color-event: #e67e22;
+
+  /* Border Colors */
+  --border-primary: rgba(255, 255, 255, 0.06);
+  --border-secondary: rgba(255, 255, 255, 0.1);
+  --border-accent: rgba(255, 186, 0, 0.3);
+  --border-card: #756c65;
+  --border-input: rgba(255, 255, 255, 0.08);
+
+  /* Gradients */
+  --gradient-border-gold: linear-gradient(90deg, transparent 0%, rgba(255, 186, 0, 0.4) 50%, transparent 100%);
+  --gradient-button-primary: linear-gradient(135deg, #ffba00, #ff9e00);
+  --gradient-hero: linear-gradient(to top, rgba(34, 31, 33, 0.95) 0%, rgba(34, 31, 33, 0.9) 30%, rgba(34, 31, 33, 0.8) 60%, rgba(34, 31, 33, 0.3) 70%, rgba(34, 31, 33, 0) 100%);
+
+  /* Shadows */
+  --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-large: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-glow-small: 0 0 10px rgba(255, 186, 0, 0.4);
+  --shadow-button: 0 4px 15px rgba(255, 186, 0, 0.3);
+  --shadow-button-hover: 0 6px 20px rgba(255, 186, 0, 0.4);
+
+  /* Blur Effects */
+  --blur-light: blur(10px);
+  --blur-medium: blur(15px);
+  --blur-heavy: blur(20px);
+
+  /* Border Radius */
+  --radius-small: 2px;
+  --radius-medium: 4px;
+  --radius-large: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 12px;
+  --radius-round: 50%;
+  --radius-pill: 20px;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 40px;
+
+  /* Sizes */
+  --size-icon-md: 20px;
+  --size-icon-lg: 24px;
+  --size-button-xl: 50px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.6s ease;
+
+  /* Z-Index */
+  --z-dropdown: 1003;
+  --z-overlay: 1001;
+  --z-modal: 1002;
+  --z-navigation: 1000;
+  --z-loading: 9999;
+
+  /* Content Widths */
+  --width-content: calc(100% - 60px);
+  --width-content-mobile: calc(100% - 40px);
+  --width-wrapper-max: 1300px;
+  --width-content-max: 1440px;
+
+  /* Breakpoints */
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1100px;
+  --breakpoint-2xl: 1300px;
+
+  /* Animation Durations */
+  --duration-loading: 1s;
+  --duration-pulse: 2s;
+  --duration-float: 4s;
+  --duration-glow: 3s;
+
+  /* Knight Online Game Theme Colors */
+  --ko-category-update: #02e56f;
+  --ko-category-event: #ffba00;
+  --ko-category-content: #e67e22;
+}
+
+/* ===================================
+   DARK MODE
+   ===================================*/
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.985 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+/* ===================================
+   BASE LAYER STYLES
+   ===================================*/
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  /* Fix Radix Select scroll lock layout shift */
+  html body[data-scroll-locked] {
+    overflow: visible !important;
+    margin-right: 0 !important;
+  }
+
+  body {
+    @apply text-foreground static text-sm;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    position: relative;
+    overflow-x: hidden;
+    margin-bottom: 0 !important;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-main-image) var(--bg-main) top center / cover no-repeat;
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+/* ===================================
+   CONTAINER
+   ===================================*/
+.container {
+  margin-inline: auto;
+  width: 100%;
+
+  @media (min-width: 640px) {
+    max-width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 100%;
+  }
+
+  @media (min-width: 1280px) {
+    max-width: 100%;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 1440px;
+  }
+}
+
+/* ===================================
+   FORM ELEMENTS
+   ===================================*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* ===================================
+   UTILITY CLASSES
+   ===================================*/
+svg.icon {
+  @apply stroke-[1.5]
+}
+
+button {
+  @apply appearance-none focus:outline-0 focus:ring-0 focus:ring-offset-0 hover:outline-0 hover:ring-0 hover:ring-offset-0;
+}
+
+/* Touch Target - Expands clickable area via ::before pseudo-element */
+.touch-target {
+  position: relative;
+}
+
+.touch-target::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 44px;
+  min-height: 44px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hide default video play button overlay */
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+video::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+video::-webkit-media-controls {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+video::--moz-media-controls {
+  display: none !important;
+}
+
+/* ===================================
+   MOBILE SAFE AREA SUPPORT
+   iOS Home Indicator & Notch
+   ===================================*/
+
+/* Safe area inset bottom (iOS Home Indicator) */
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* ===================================
+   RADIX UI SELECT FIX
+   ===================================*/
+
+/* ===================================
+   GAME FEED ANIMATIONS
+   ===================================*/
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* Thin Scrollbar */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.3);
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.5);
+}

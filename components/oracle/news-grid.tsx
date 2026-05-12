@@ -86,32 +86,38 @@ export function NewsGrid() {
 
       {/* Grid - 1 big left, 3 small right */}
       <div className="p-4 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4">
-        {/* Big featured post - Left */}
+        {/* Big featured post - Left - Image as background with overlay */}
         {featuredNews && (
-          <article className="rounded-xl overflow-hidden group flex flex-col bg-ink-800/50 border border-line h-full">
-            <div className="relative aspect-[16/10] placeholder-img flex items-center justify-center">
-              <span className="font-mono text-xs text-cream-dim/70 px-3 py-1 rounded bg-ink-900/70 border border-line">
-                [ clan war artwork ]
-              </span>
-              <span className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded ${featuredNews.tagColor} text-white tracking-wider`}>
+          <article className="rounded-xl overflow-hidden group cursor-pointer border border-line hover:border-gold-500/30 transition-all duration-300 h-full">
+            <div className="relative aspect-[16/11] overflow-hidden">
+              {/* Background Image with zoom effect */}
+              <div className="absolute inset-0 placeholder-img transition-transform duration-500 group-hover:scale-105" />
+              
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/60 to-transparent" />
+              
+              {/* Tag Badge */}
+              <span className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full border ${featuredNews.tagColor}/20 bg-${featuredNews.tagColor.replace('bg-', '')}/20 text-white tracking-wider backdrop-blur-sm`}>
                 {featuredNews.tag}
               </span>
-            </div>
-            <div className="p-4 flex-1 flex flex-col">
-              <h4 className="font-display text-lg font-bold text-cream group-hover:text-gold-300 transition leading-snug">
-                {featuredNews.title}
-              </h4>
-              <p className="text-sm text-cream-dim mt-2 leading-relaxed line-clamp-3">{featuredNews.description}</p>
-              <div className="flex items-center gap-4 mt-auto pt-3 text-xs text-cream-dim">
-                <span className="flex items-center gap-1.5">
-                  <IconCalendar className="w-3.5 h-3.5" /> {new Date(featuredNews.date).toLocaleDateString("tr-TR")}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <IconUser className="w-3.5 h-3.5" /> <span className="text-gold-400">{featuredNews.author}</span>
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <IconEye className="w-3.5 h-3.5" /> {featuredNews.views}
-                </span>
+              
+              {/* Content Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h4 className="font-display text-lg font-bold text-cream group-hover:text-gold-300 transition-colors leading-snug">
+                  {featuredNews.title}
+                </h4>
+                <p className="text-sm text-cream-dim/90 mt-2 leading-relaxed line-clamp-2">{featuredNews.description}</p>
+                <div className="flex items-center gap-4 mt-3 text-xs text-cream-dim/80">
+                  <span className="flex items-center gap-1.5">
+                    <IconCalendar className="w-3.5 h-3.5" /> {new Date(featuredNews.date).toLocaleDateString("tr-TR")}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <IconUser className="w-3.5 h-3.5" /> <span className="text-gold-400">{featuredNews.author}</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <IconEye className="w-3.5 h-3.5" /> {featuredNews.views}
+                  </span>
+                </div>
               </div>
             </div>
           </article>
@@ -120,25 +126,30 @@ export function NewsGrid() {
         {/* Right column: 3 stacked posts */}
         <div className="flex flex-col gap-3">
           {sideNews.map((news) => (
-            <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line flex-1 min-h-[88px]">
-              <div className="grid grid-cols-[88px_1fr] h-full">
-                <div className="placeholder-img relative flex items-center justify-center aspect-square">
-                  <span className="font-mono text-[10px] text-cream-dim/50 text-center px-1">img</span>
+            <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line hover:border-gold-500/30 transition-all duration-300 cursor-pointer flex-1">
+              <div className="flex items-center gap-3 p-2.5 h-full">
+                {/* Square image with zoom effect */}
+                <div className="w-[72px] h-[72px] shrink-0 rounded-lg overflow-hidden relative">
+                  <div className="absolute inset-0 placeholder-img transition-transform duration-500 group-hover:scale-110" />
                 </div>
-                <div className="p-3 pr-4 relative flex flex-col justify-center">
+                {/* Content */}
+                <div className="flex-1 min-w-0 py-0.5">
                   <div className="flex items-start justify-between gap-2">
-                    <h4 className="font-semibold text-sm text-cream group-hover:text-gold-300 leading-snug line-clamp-2 pr-1 flex-1">
+                    <h4 className="font-semibold text-sm text-cream group-hover:text-gold-300 leading-snug line-clamp-2 flex-1 transition-colors">
                       {news.title}
                     </h4>
                     <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded ${news.tagColor} text-white tracking-wider shrink-0`}
+                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${news.tagColor}/20 ${news.tagColor} text-white tracking-wider shrink-0`}
                     >
                       {news.tag}
                     </span>
                   </div>
-                  <div className="flex items-center gap-3 mt-2 text-[11px] text-cream-dim">
+                  <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-2 text-[11px] text-cream-dim">
                     <span className="flex items-center gap-1">
                       <IconCalendar className="w-3 h-3" /> {new Date(news.date).toLocaleDateString("tr-TR")}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <IconUser className="w-3 h-3" /> <span className="text-gold-400">{news.author}</span>
                     </span>
                     <span className="flex items-center gap-1">
                       <IconEye className="w-3 h-3" /> {news.views}
