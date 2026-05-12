@@ -10,10 +10,7 @@ import {
   IconX,
   IconCheck,
   IconActivity,
-  IconPlugConnected,
-  IconPlugConnectedX,
-  IconDeviceGamepad2,
-  IconLogin,
+  IconLink,
 } from "@tabler/icons-react"
 
 interface ServerData {
