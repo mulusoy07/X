@@ -241,95 +241,47 @@ export function Header({ onOpenServerModal }: HeaderProps) {
   return (
     <>
       <header className="sticky top-0 z-50 bg-ink-900/95 backdrop-blur-xl border-b border-gold-500/10">
-        {/* Top Bar */}
-        <div className="hidden lg:block border-b border-ink-700/50 bg-ink-950/50">
-          <div className="max-w-[1400px] mx-auto px-6 h-9 flex items-center justify-between">
-            {/* Server Status */}
-            <div className="dropdown-container relative">
-              <button
-                onClick={() => setServerDropdownOpen(!serverDropdownOpen)}
-                className="flex items-center gap-2 text-xs text-cream-dim hover:text-cream transition-colors group"
-              >
-                <span className={`w-2 h-2 rounded-full ${getStatusBg(currentServer.status)} animate-pulse`} />
-                <span className="font-medium text-cream">{currentServer.name}</span>
-                <span className="text-cream-dim/40">|</span>
-                <span className={getStatusColor(currentServer.status)}>
-                  {currentServer.status === "online" ? `${currentServer.players} Oyuncu` : "Bakimda"}
-                </span>
-                <IconChevronDown className="w-3 h-3 text-cream-dim group-hover:text-cream transition-colors" />
-              </button>
-
-              {serverDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-ink-800 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden">
-                  <div className="p-3 border-b border-ink-700 bg-gradient-to-r from-gold-500/5 to-transparent">
-                    <span className="text-xs font-bold text-gold-400 uppercase tracking-wider flex items-center gap-2">
-                      <IconServer className="w-3.5 h-3.5" />
-                      Sunucu Sec
-                    </span>
-                  </div>
-                  <div className="p-2">
-                    {servers.map((server) => (
-                      <button
-                        key={server.id}
-                        onClick={() => {
-                          setCurrentServer(server)
-                          setServerDropdownOpen(false)
-                        }}
-                        className={`w-full px-3 py-2.5 rounded-lg flex items-center justify-between hover:bg-ink-700/50 transition-all ${
-                          currentServer.id === server.id ? "bg-gold-500/10 ring-1 ring-gold-500/30" : ""
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded-lg ${currentServer.id === server.id ? "bg-gold-500/20" : "bg-ink-700/50"} flex items-center justify-center`}>
-                            <IconServer className={`w-4 h-4 ${currentServer.id === server.id ? "text-gold-400" : "text-cream-dim"}`} />
-                          </div>
-                          <div className="text-left">
-                            <div className="text-sm font-medium text-cream">{server.name}</div>
-                            <div className={`text-xs ${getStatusColor(server.status)}`}>
-                              {server.status === "online" ? "Cevrimici" : "Bakimda"}
-                            </div>
-                          </div>
-                        </div>
-                        <span className="text-xs text-cream-dim bg-ink-700/50 px-2 py-1 rounded">
-                          {server.status === "online" ? `${server.players}` : "-"}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                  <button
-                    onClick={() => {
-                      setServerDropdownOpen(false)
-                      onOpenServerModal?.()
-                    }}
-                    className="w-full px-4 py-3 text-xs text-gold-400 hover:bg-gold-500/10 border-t border-ink-700 flex items-center gap-2 justify-center font-medium transition-colors"
-                  >
-                    <IconTrendingUp className="w-3.5 h-3.5" />
-                    Detayli Sunucu Durumu
-                  </button>
+        {/* Top Bar - Unified Design */}
+        <div className="hidden lg:block border-b border-gold-500/10 bg-ink-950/80">
+          <div className="max-w-[1400px] mx-auto px-6 h-10 flex items-center justify-between">
+            {/* Left Side - Server Status Display */}
+            <div className="flex items-center h-7 bg-ink-800/60 rounded-lg border border-line/50 px-3 gap-3">
+              <div className="flex items-center gap-2">
+                <div className="relative">
+                  <IconServer className="w-4 h-4 text-gold-400" />
+                  <span className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${getStatusBg(currentServer.status)} ring-1 ring-ink-800`} />
                 </div>
-              )}
+                <span className="font-semibold text-xs text-cream">{currentServer.name}</span>
+              </div>
+              <div className="w-px h-4 bg-line/50" />
+              <span className={`text-xs font-medium ${getStatusColor(currentServer.status)}`}>
+                {currentServer.status === "online" ? "Cevrimici" : "Bakimda"}
+              </span>
             </div>
 
-            {/* Right Actions */}
-            <div className="flex items-center gap-4">
+            {/* Right Actions - Unified Bar */}
+            <div className="flex items-center h-7 bg-ink-800/60 rounded-lg border border-line/50">
               {/* Search */}
               <button 
                 onClick={() => setSearchOpen(true)}
-                className="text-cream-dim hover:text-cream transition-colors flex items-center gap-2"
+                className="flex items-center gap-2 px-4 h-full hover:bg-ink-700/50 transition-all group rounded-l-lg"
               >
-                <IconSearch className="w-4 h-4" />
-                <span className="text-xs hidden xl:inline">Ara</span>
-                <kbd className="hidden xl:inline text-[10px] px-1.5 py-0.5 bg-ink-700 rounded border border-line">⌘K</kbd>
+                <IconSearch className="w-4 h-4 text-cream-dim group-hover:text-gold-400 transition-colors" />
+                <span className="text-xs text-cream-dim group-hover:text-cream transition-colors w-40">Arama yap...</span>
+                <kbd className="text-[10px] px-1.5 py-0.5 bg-ink-900/80 rounded text-cream-dim/60">⌘K</kbd>
               </button>
+
+              {/* Divider */}
+              <div className="w-px h-4 bg-line/50" />
 
               {/* Notifications */}
               <div className="dropdown-container relative">
                 <button 
                   onClick={() => setNotificationsOpen(!notificationsOpen)}
-                  className="text-cream-dim hover:text-cream transition-colors relative"
+                  className="relative w-10 h-full flex items-center justify-center hover:bg-ink-700/50 transition-all group"
                 >
-                  <IconBell className="w-4 h-4" />
-                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-rose-500 rounded-full" />
+                  <IconBell className="w-4 h-4 text-cream-dim group-hover:text-gold-400 transition-colors" />
+                  <span className="absolute top-1 right-2 w-1.5 h-1.5 bg-rose-500 rounded-full" />
                 </button>
                 <NotificationsDropdown 
                   isOpen={notificationsOpen} 
@@ -337,19 +289,21 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                 />
               </div>
 
+              {/* Divider */}
+              <div className="w-px h-4 bg-line/50" />
+
               {/* Language */}
               <div className="dropdown-container relative">
                 <button
                   onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                  className="flex items-center gap-2 text-xs text-cream-dim hover:text-cream transition-colors"
+                  className="flex items-center gap-2 px-4 h-full hover:bg-ink-700/50 transition-all group rounded-r-lg min-w-[90px]"
                 >
-                  <Image src={currentLang.flag} alt={currentLang.label} width={18} height={13} className="rounded-sm object-cover" />
-                  <span className="font-medium">{currentLang.code.toUpperCase()}</span>
-                  <IconChevronDown className="w-3 h-3" />
+                  <Image src={currentLang.flag} alt={currentLang.label} width={18} height={12} className="rounded-sm object-cover" />
+                  <span className="text-xs text-cream-dim group-hover:text-cream transition-colors">{currentLang.label}</span>
                 </button>
 
                 {langDropdownOpen && (
-                  <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-[60]">
+                  <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-[60]">
                     <div className="p-1.5">
                       {languages.map((lang) => (
                         <button
@@ -543,7 +497,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
               ) : (
                 <button
                   onClick={() => setAuthModalOpen(true)}
-                  className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-sm hover:from-gold-400 hover:to-gold-500 transition-all shadow-lg shadow-gold-500/25"
+                  className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-sm hover:from-gold-400 hover:to-gold-500 transition-all"
                 >
                   <IconLogin className="w-4 h-4" />
                   Giris Yap / Kayit Ol

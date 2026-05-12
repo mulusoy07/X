@@ -131,11 +131,11 @@ export function Hero() {
       </div>
 
       {/* Slides - Fixed height container */}
-      <div className="relative mx-auto max-w-[1500px] px-6 pt-24 pb-28 min-h-[480px] md:min-h-[520px] lg:min-h-[560px]">
+      <div className="relative mx-auto max-w-[1500px] px-6 pt-16 pb-20 h-[420px] md:h-[460px] lg:h-[500px]">
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`text-center transition-all duration-500 ${
+            className={`text-center transition-all duration-500 flex flex-col items-center justify-center h-full ${
               index === currentSlide
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8 absolute inset-0 pointer-events-none"
@@ -153,7 +153,7 @@ export function Hero() {
             </div>
 
             <h1 
-              className="font-display text-6xl md:text-7xl lg:text-8xl font-extrabold mt-8 text-gold-400 drop-shadow-[0_4px_24px_rgba(245,184,54,0.35)]"
+              className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold mt-6 text-gold-400 drop-shadow-[0_4px_24px_rgba(245,184,54,0.35)]"
               style={{
                 transform: `translateX(${index === currentSlide ? mousePosition.x * 0.3 : 0}px) translateY(${index === currentSlide ? mousePosition.y * 0.3 : 20}px)`,
                 transition: index === currentSlide ? "transform 0.3s ease-out" : "transform 0.5s ease-out, opacity 0.5s ease-out",
@@ -167,7 +167,7 @@ export function Hero() {
             <div className="mx-auto mt-4 divider-gold" />
 
             <p 
-              className="mx-auto max-w-2xl mt-8 text-cream-dim text-lg leading-relaxed"
+              className="mx-auto max-w-2xl mt-6 text-cream-dim text-base md:text-lg leading-relaxed px-4"
               style={{
                 transform: `translateY(${index === currentSlide ? 0 : 20}px)`,
                 transition: "transform 0.5s ease-out 0.2s, opacity 0.5s ease-out 0.2s",
@@ -177,7 +177,7 @@ export function Hero() {
             </p>
 
             <button 
-              className="gold-btn mt-10 inline-flex items-center gap-2 px-8 py-4 rounded-md text-lg font-bold hover:scale-105 transition-transform"
+              className="gold-btn mt-8 inline-flex items-center gap-2 px-8 py-4 rounded-md text-lg font-bold hover:scale-105 transition-transform"
               style={{
                 transform: `translateY(${index === currentSlide ? 0 : 20}px)`,
                 transition: "transform 0.5s ease-out 0.3s",
@@ -189,18 +189,17 @@ export function Hero() {
           </div>
         ))}
 
-        {/* Slide Navigation */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4">
-          {/* Prev Button */}
+        {/* Slide Navigation - Arrow Dot Dot Arrow */}
+        <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-2">
+          {/* Prev Arrow */}
           <button
             onClick={prevSlide}
             className="w-10 h-10 rounded-full bg-ink-800/80 border border-gold-500/30 flex items-center justify-center text-cream-dim hover:text-gold-400 hover:border-gold-500 transition-all hover:scale-110"
           >
             <IconChevronLeft className="w-5 h-5" />
           </button>
-
           {/* Dots */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 px-2">
             {slides.map((_, index) => (
               <button
                 key={index}
@@ -213,21 +212,13 @@ export function Hero() {
               />
             ))}
           </div>
-
-          {/* Next Button */}
+          {/* Next Arrow */}
           <button
             onClick={nextSlide}
             className="w-10 h-10 rounded-full bg-ink-800/80 border border-gold-500/30 flex items-center justify-center text-cream-dim hover:text-gold-400 hover:border-gold-500 transition-all hover:scale-110"
           >
             <IconChevronRight className="w-5 h-5" />
           </button>
-        </div>
-
-        {/* Slide Counter */}
-        <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-2 text-sm font-mono">
-          <span className="text-gold-400 font-bold">{String(currentSlide + 1).padStart(2, '0')}</span>
-          <span className="text-cream-dim/40">/</span>
-          <span className="text-cream-dim">{String(slides.length).padStart(2, '0')}</span>
         </div>
       </div>
 

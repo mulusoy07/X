@@ -10,6 +10,7 @@ import {
   IconX,
   IconCheck,
   IconWifi,
+  IconActivity,
 } from "@tabler/icons-react"
 
 interface ServerData {
@@ -136,28 +137,68 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
           </div>
         </div>
 
-        {/* Status Grid */}
+        {/* Status Grid - Modern Animated Design */}
         <div className="p-4 flex-1 flex flex-col">
           <div className="grid grid-cols-2 gap-3">
-            {/* Game Server */}
-            <div className={`rounded-xl border p-3 ${gameServerStatus ? "border-emerald-500/40 bg-emerald-500/5" : "border-rose-500/40 bg-rose-500/5"}`}>
-              <div className="flex items-center gap-2 mb-2">
-                <IconWifi className={`w-4 h-4 ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`} />
-                <span className="text-xs text-cream-dim">Oyun Sunucusu</span>
-              </div>
-              <div className={`text-sm font-bold ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`}>
-                {gameServerStatus ? "Cevrimici" : "Cevrimdisi"}
+            {/* Game Server Card */}
+            <div className={`relative overflow-hidden rounded-xl p-3 border transition-all duration-300 ${
+              gameServerStatus 
+                ? "bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-transparent border-emerald-500/30" 
+                : "bg-gradient-to-br from-rose-500/10 via-rose-500/5 to-transparent border-rose-500/30"
+            }`}>
+              {/* Animated glow effect */}
+              {gameServerStatus && (
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 animate-pulse" />
+              )}
+              <div className="relative flex items-center gap-3">
+                <div className={`relative w-10 h-10 rounded-lg flex items-center justify-center ${
+                  gameServerStatus ? "bg-emerald-500/20" : "bg-rose-500/20"
+                }`}>
+                  <IconWifi className={`w-5 h-5 ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`} />
+                  {gameServerStatus && (
+                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-ink-800">
+                      <span className="absolute inset-0 bg-emerald-400 rounded-full animate-ping opacity-75" />
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <div className="text-[10px] text-cream-dim uppercase tracking-widest font-medium">Oyun Sunucusu</div>
+                  <div className={`text-sm font-bold flex items-center gap-1.5 ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`}>
+                    <span className={`w-1.5 h-1.5 rounded-full ${gameServerStatus ? "bg-emerald-400" : "bg-rose-400"}`} />
+                    {gameServerStatus ? "Cevrimici" : "Kapali"}
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Login Server */}
-            <div className={`rounded-xl border p-3 ${loginServerStatus ? "border-emerald-500/40 bg-emerald-500/5" : "border-amber-500/40 bg-amber-500/5"}`}>
-              <div className="flex items-center gap-2 mb-2">
-                <IconServer className={`w-4 h-4 ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`} />
-                <span className="text-xs text-cream-dim">Giris Sunucusu</span>
-              </div>
-              <div className={`text-sm font-bold ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`}>
-                {loginServerStatus ? "Cevrimici" : "Bakimda"}
+            {/* Login Server Card */}
+            <div className={`relative overflow-hidden rounded-xl p-3 border transition-all duration-300 ${
+              loginServerStatus 
+                ? "bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-transparent border-emerald-500/30" 
+                : "bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent border-amber-500/30"
+            }`}>
+              {/* Animated glow effect */}
+              {loginServerStatus && (
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 animate-pulse" />
+              )}
+              <div className="relative flex items-center gap-3">
+                <div className={`relative w-10 h-10 rounded-lg flex items-center justify-center ${
+                  loginServerStatus ? "bg-emerald-500/20" : "bg-amber-500/20"
+                }`}>
+                  <IconServer className={`w-5 h-5 ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`} />
+                  {loginServerStatus && (
+                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-ink-800">
+                      <span className="absolute inset-0 bg-emerald-400 rounded-full animate-ping opacity-75" />
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <div className="text-[10px] text-cream-dim uppercase tracking-widest font-medium">Giris Sunucusu</div>
+                  <div className={`text-sm font-bold flex items-center gap-1.5 ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`}>
+                    <span className={`w-1.5 h-1.5 rounded-full ${loginServerStatus ? "bg-emerald-400" : "bg-amber-400"}`} />
+                    {loginServerStatus ? "Cevrimici" : "Bakimda"}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -187,10 +228,12 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
           </div>
 
           {/* Download Button */}
-          <button className="gold-btn w-full h-12 rounded-xl flex items-center justify-center gap-2 font-bold mt-auto pt-4">
-            <IconDownload className="w-5 h-5" />
-            Oyunu Indir
-          </button>
+          <div className="mt-auto pt-4">
+            <button className="gold-btn w-full h-12 rounded-xl flex items-center justify-center gap-2 font-bold">
+              <IconDownload className="w-5 h-5" />
+              Oyunu Indir
+            </button>
+          </div>
         </div>
       </div>
 
@@ -252,12 +295,14 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
                         />
                       </div>
                     </div>
-                    <div className="text-right shrink-0">
-                      <div className="text-sm font-bold text-cream">
-                        {server.online.toLocaleString("tr-TR")}
-                        <span className="text-muted font-normal">/{server.cap.toLocaleString("tr-TR")}</span>
-                      </div>
-                      {server.ping > 0 && <div className="text-xs text-emerald-400 mt-0.5">{server.ping} ms</div>}
+                    <div className="shrink-0">
+                      {server.ping > 0 && (
+                        <div className="flex items-center gap-1.5 text-emerald-400">
+                          <IconActivity className="w-4 h-4" />
+                          <span className="text-sm font-bold">{server.ping}</span>
+                          <span className="text-[10px] text-cream-dim">ms</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )
