@@ -88,19 +88,19 @@ export function NewsGrid() {
       <div className="p-4 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-4">
         {/* Big featured post - Left - Image as background with overlay */}
         {featuredNews && (
-          <article className="rounded-xl overflow-hidden group cursor-pointer border border-line hover:border-gold-500/30 transition-all duration-300 h-full">
-            <div className="relative aspect-[16/11] overflow-hidden">
+          <article className="rounded-xl overflow-hidden group cursor-pointer border border-line hover:border-gold-500/30 transition-all duration-300 h-full flex flex-col">
+            <div className="relative aspect-[16/11] min-h-[320px] lg:aspect-auto lg:min-h-0 lg:h-full flex-1 overflow-hidden">
               {/* Background Image with zoom effect */}
               <div className="absolute inset-0 placeholder-img transition-transform duration-500 group-hover:scale-105" />
-              
+
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/60 to-transparent" />
-              
+
               {/* Tag Badge */}
               <span className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full border ${featuredNews.tagColor}/20 bg-${featuredNews.tagColor.replace('bg-', '')}/20 text-white tracking-wider backdrop-blur-sm`}>
                 {featuredNews.tag}
               </span>
-              
+
               {/* Content Overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <h4 className="font-display text-lg font-bold text-cream group-hover:text-gold-300 transition-colors leading-snug">

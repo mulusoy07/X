@@ -47,15 +47,17 @@ export default function Home() {
               <NewsGrid />
             </section>
 
-            {/* Players & Clans */}
-            <section>
-              <PlayersClansSection />
-            </section>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Players & Clans */}
+              <section>
+                <PlayersClansSection />
+              </section>
 
-            {/* Staff & Kings */}
-            <section>
-              <StaffKingsSection />
-            </section>
+              {/* Staff & Kings */}
+              <section>
+                <StaffKingsSection />
+              </section>
+            </div>
           </div>
 
           {/* Right Column - 1/3 width */}
