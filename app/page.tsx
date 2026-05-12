@@ -68,33 +68,33 @@ export default function Home() {
               <ServerStatus ref={serverStatusRef} />
             </section>
 
-            {/* Variant 1: Terminal Style */}
+            {/* Variant 1: Compact Horizontal Bar */}
             <section>
-              <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 px-1">Varyant 1: Terminal</div>
+              <div className="text-xs font-bold text-gold-400/70 uppercase tracking-wider mb-2 px-1">Varyant 1: Compact Bar</div>
               <ServerStatusV1 />
             </section>
 
-            {/* Variant 2: Glassmorphism */}
+            {/* Variant 2: 4 Card Grid */}
             <section>
-              <div className="text-xs font-bold text-violet-400 uppercase tracking-wider mb-2 px-1">Varyant 2: Glassmorphism</div>
+              <div className="text-xs font-bold text-gold-400/70 uppercase tracking-wider mb-2 px-1">Varyant 2: Card Grid</div>
               <ServerStatusV2 />
             </section>
 
-            {/* Variant 3: Horizontal Split */}
+            {/* Variant 3: Left-Right Split */}
             <section>
-              <div className="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2 px-1">Varyant 3: Horizontal</div>
+              <div className="text-xs font-bold text-gold-400/70 uppercase tracking-wider mb-2 px-1">Varyant 3: Split Panel</div>
               <ServerStatusV3 />
             </section>
 
-            {/* Variant 4: Minimal Dashboard */}
+            {/* Variant 4: Big Stats */}
             <section>
-              <div className="text-xs font-bold text-cream/60 uppercase tracking-wider mb-2 px-1">Varyant 4: Minimal</div>
+              <div className="text-xs font-bold text-gold-400/70 uppercase tracking-wider mb-2 px-1">Varyant 4: Big Stats</div>
               <ServerStatusV4 />
             </section>
 
-            {/* Variant 5: Gaming HUD */}
+            {/* Variant 5: Stacked Rows */}
             <section>
-              <div className="text-xs font-bold text-rose-400 uppercase tracking-wider mb-2 px-1">Varyant 5: Gaming HUD</div>
+              <div className="text-xs font-bold text-gold-400/70 uppercase tracking-wider mb-2 px-1">Varyant 5: Row List</div>
               <ServerStatusV5 />
             </section>
 

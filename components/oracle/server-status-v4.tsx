@@ -4,17 +4,18 @@ import { useState } from "react"
 import {
   IconServer,
   IconChevronDown,
+  IconCircleCheck,
   IconDownload,
-  IconCircleDotted,
-  IconCircleFilled,
-  IconRadar,
-  IconUsers,
+  IconActivity,
+  IconPlugConnected,
+  IconPlugConnectedX,
 } from "@tabler/icons-react"
 
-// Variant 4: Minimal Dashboard - Clean, whitespace-focused with large numbers and thin lines
+// Variant 4: Big Stats - Buyuk rakamlar, merkezi odak
 interface ServerData {
   id: string
   name: string
+  desc: string
   status: "online" | "maintenance" | "offline"
   online: number
   cap: number
@@ -22,9 +23,9 @@ interface ServerData {
 }
 
 const servers: ServerData[] = [
-  { id: "s1", name: "Oracle", status: "online", online: 1842, cap: 3000, ping: 32 },
-  { id: "s2", name: "Karus", status: "online", online: 2310, cap: 3000, ping: 45 },
-  { id: "s3", name: "Aegis", status: "maintenance", online: 0, cap: 3000, ping: 0 },
+  { id: "s1", name: "Server 1 — Oracle", desc: "Klasik PvP · v2100 · 64-bit", status: "online", online: 1842, cap: 3000, ping: 32 },
+  { id: "s2", name: "Server 2 — Karus", desc: "Yuksek populasyon · Dusuk drop", status: "online", online: 2310, cap: 3000, ping: 45 },
+  { id: "s3", name: "Server 3 — Aegis", desc: "Yeni baslangic sunucusu · 2x XP", status: "maintenance", online: 0, cap: 3000, ping: 0 },
 ]
 
 export function ServerStatusV4() {
@@ -32,25 +33,28 @@ export function ServerStatusV4() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const activeServer = servers.find((s) => s.id === selectedServer) || servers[0]
-  const gameServerStatus = activeServer.status === "online"
-  const loginServerStatus = activeServer.status !== "offline"
   const capacityPercent = Math.round((activeServer.online / activeServer.cap) * 100)
+  const isOnline = activeServer.status === "online"
 
   return (
-    <div className="rounded-2xl bg-cream/[0.02] border border-cream/10 overflow-hidden">
+    <div className="card rounded-xl overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-5 border-b border-cream/10">
+      <div className="px-5 py-4 border-b border-line flex items-center justify-between">
         <div className="relative">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2 text-left"
           >
-            <span className="text-2xl font-light text-cream tracking-tight">{activeServer.name}</span>
-            <IconChevronDown className={`w-4 h-4 text-cream/30 group-hover:text-cream/60 transition-all ${dropdownOpen ? "rotate-180" : ""}`} />
+            <IconServer className="w-5 h-5 text-gold-400" />
+            <div>
+              <span className="text-base font-bold text-cream">{activeServer.name.split(" — ")[1]}</span>
+              <span className="text-xs text-cream-dim ml-2">{activeServer.desc}</span>
+            </div>
+            <IconChevronDown className={`w-4 h-4 text-cream-dim transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
           </button>
 
           {dropdownOpen && (
-            <div className="absolute top-full left-0 mt-3 bg-ink-800 border border-cream/10 rounded-xl overflow-hidden z-20 min-w-[160px] shadow-xl">
+            <div className="absolute top-full left-0 mt-2 w-64 bg-ink-800 border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-20">
               {servers.filter(s => s.status !== "offline").map((server) => (
                 <button
                   key={server.id}
@@ -58,81 +62,68 @@ export function ServerStatusV4() {
                     setSelectedServer(server.id)
                     setDropdownOpen(false)
                   }}
-                  className={`w-full px-4 py-2.5 text-left hover:bg-cream/5 transition-all ${
-                    selectedServer === server.id ? "text-cream" : "text-cream/50"
+                  className={`w-full px-4 py-3 flex items-center justify-between hover:bg-ink-700/50 transition-all ${
+                    selectedServer === server.id ? "bg-gold-500/10" : ""
                   }`}
                 >
-                  {server.name}
+                  <span className="text-sm text-cream">{server.name}</span>
+                  {selectedServer === server.id && <IconCircleCheck className="w-4 h-4 text-gold-400" />}
                 </button>
               ))}
             </div>
           )}
         </div>
-      </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-2 divide-x divide-cream/10">
-        {/* Players */}
-        <div className="p-6">
-          <div className="flex items-center gap-2 mb-3">
-            <IconUsers className="w-4 h-4 text-cream/30" />
-            <span className="text-xs uppercase tracking-widest text-cream/30">Oyuncu</span>
-          </div>
-          <div className="text-4xl font-extralight text-cream tabular-nums">
-            {activeServer.online.toLocaleString()}
-          </div>
-          <div className="text-xs text-cream/30 mt-1">/ {activeServer.cap.toLocaleString()}</div>
-        </div>
-
-        {/* Ping */}
-        <div className="p-6">
-          <div className="flex items-center gap-2 mb-3">
-            <IconRadar className="w-4 h-4 text-cream/30" />
-            <span className="text-xs uppercase tracking-widest text-cream/30">Gecikme</span>
-          </div>
-          <div className="text-4xl font-extralight text-cream tabular-nums">
-            {activeServer.ping > 0 ? activeServer.ping : "--"}
-          </div>
-          <div className="text-xs text-cream/30 mt-1">milisaniye</div>
-        </div>
-      </div>
-
-      {/* Status Line */}
-      <div className="px-6 py-4 border-t border-cream/10 flex items-center gap-6">
-        <div className="flex items-center gap-2">
-          {loginServerStatus ? (
-            <IconCircleFilled className="w-2 h-2 text-emerald-400" />
-          ) : (
-            <IconCircleDotted className="w-3 h-3 text-cream/30" />
-          )}
-          <span className={`text-xs ${loginServerStatus ? "text-cream/70" : "text-cream/30"}`}>Login</span>
-        </div>
-        <div className="flex items-center gap-2">
-          {gameServerStatus ? (
-            <IconCircleFilled className="w-2 h-2 text-emerald-400" />
-          ) : (
-            <IconCircleDotted className="w-3 h-3 text-cream/30" />
-          )}
-          <span className={`text-xs ${gameServerStatus ? "text-cream/70" : "text-cream/30"}`}>Game</span>
-        </div>
-        <div className="flex-1" />
-        <span className="text-xs text-cream/30">{capacityPercent}% dolu</span>
-      </div>
-
-      {/* Thin Progress */}
-      <div className="h-1 bg-cream/5">
-        <div
-          className="h-full bg-cream/20 transition-all"
-          style={{ width: `${capacityPercent}%` }}
-        />
-      </div>
-
-      {/* Download */}
-      <div className="p-6">
-        <button className="w-full py-4 rounded-xl border border-cream/20 text-cream/80 font-medium flex items-center justify-center gap-3 hover:bg-cream/5 hover:border-cream/30 transition-all">
-          <IconDownload className="w-5 h-5" />
-          <span>Oyunu Indir</span>
+        <button className="gold-btn px-4 py-2 rounded-lg flex items-center gap-2 font-bold text-sm">
+          <IconDownload className="w-4 h-4" />
+          Indir
         </button>
+      </div>
+
+      {/* Big Stats */}
+      <div className="p-5">
+        <div className="grid grid-cols-3 gap-4">
+          {/* Status - Combined */}
+          <div className="flex flex-col items-center justify-center p-4 rounded-xl bg-ink-800/30 border border-line">
+            <div className="flex items-center gap-3 mb-2">
+              {isOnline ? (
+                <IconPlugConnected className="w-8 h-8 text-emerald-400" />
+              ) : (
+                <IconPlugConnectedX className="w-8 h-8 text-rose-400" />
+              )}
+            </div>
+            <div className={`text-2xl font-black ${isOnline ? "text-emerald-400" : "text-rose-400"}`}>
+              {isOnline ? "ONLINE" : "OFFLINE"}
+            </div>
+            <div className="text-xs text-cream-dim mt-1">Login & Game</div>
+          </div>
+
+          {/* Ping - Big Number */}
+          <div className="flex flex-col items-center justify-center p-4 rounded-xl bg-ink-800/30 border border-line">
+            <IconActivity className="w-6 h-6 text-gold-400 mb-2" />
+            <div className="text-4xl font-black bg-gradient-to-r from-gold-400 to-gold-500 bg-clip-text text-transparent">
+              {activeServer.ping > 0 ? activeServer.ping : "—"}
+            </div>
+            <div className="text-xs text-cream-dim mt-1">MS Ping</div>
+          </div>
+
+          {/* Capacity - Big Number */}
+          <div className="flex flex-col items-center justify-center p-4 rounded-xl bg-ink-800/30 border border-line">
+            <div className="text-4xl font-black bg-gradient-to-r from-gold-400 to-gold-500 bg-clip-text text-transparent">
+              {capacityPercent}%
+            </div>
+            <div className="text-xs text-cream-dim mt-1 mb-2">Doluluk</div>
+            <div className="w-full h-2 rounded-full bg-ink-900 overflow-hidden">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-gold-500 to-gold-400"
+                style={{ width: `${capacityPercent}%` }}
+              />
+            </div>
+            <div className="text-[10px] text-cream-dim/60 mt-1">
+              {activeServer.online.toLocaleString()} / {activeServer.cap.toLocaleString()}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
