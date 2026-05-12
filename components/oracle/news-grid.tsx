@@ -123,7 +123,7 @@ export function NewsGrid() {
             <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line hover:border-gold-500/30 transition-all duration-200 cursor-pointer">
               <div className="flex items-center gap-3 p-2.5">
                 {/* Square image - fixed aspect ratio */}
-                <div className="w-24 h-24 shrink-0 rounded-lg overflow-hidden relative">
+                <div className="w-26 h-26 shrink-0 rounded-lg overflow-hidden relative">
                   <div className="absolute inset-0 placeholder-img flex items-center justify-center">
                     <span className="font-mono text-[8px] text-cream-dim/40">img</span>
                   </div>
