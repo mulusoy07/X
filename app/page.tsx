@@ -10,8 +10,8 @@ import { FeaturedNews } from "@/components/oracle/featured-news"
 import { NewsGrid } from "@/components/oracle/news-grid"
 import { ServerStatus, type ServerStatusHandle } from "@/components/oracle/server-status"
 import { ForumTopics } from "@/components/oracle/forum-topics"
-import { PlayersClansSection } from "@/components/oracle/players-clans-section"
 import { StaffKingsSection } from "@/components/oracle/staff-kings-section"
+import { RankingsSection } from "@/components/oracle/rankings-section"
 import { EventsSection } from "@/components/oracle/events-section"
 import { Footer } from "@/components/oracle/footer"
 
@@ -26,7 +26,7 @@ export default function Home() {
     <div className="min-h-screen pb-16 lg:pb-0">
       <Header onOpenServerModal={handleServerClick} />
       <Hero />
-      
+
       {/* Floating Panels */}
       <GameFeed defaultOpen={false} />
       <QuickActions onServerClick={handleServerClick} />
@@ -47,25 +47,21 @@ export default function Home() {
               <NewsGrid />
             </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Players & Clans */}
-              <section>
-                <PlayersClansSection />
-              </section>
-
-              {/* Staff & Kings */}
-              <section>
-                <StaffKingsSection />
-              </section>
-            </div>
+            {/* En Iyiler & Yonetim - Side by Side */}
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <RankingsSection />
+              <StaffKingsSection />
+            </section>
           </div>
 
           {/* Right Column - 1/3 width */}
           <div className="lg:col-span-1 flex flex-col gap-6">
-            {/* Server Status */}
+            {/* Server Status - Original */}
             <section>
+              <div className="text-xs font-bold text-gold-400 uppercase tracking-wider mb-2 px-1">Mevcut Tasarim</div>
               <ServerStatus ref={serverStatusRef} />
             </section>
+
 
             {/* Events */}
             <section>

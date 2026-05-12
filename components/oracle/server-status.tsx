@@ -10,6 +10,9 @@ import {
   IconX,
   IconCheck,
   IconActivity,
+  IconLogin,
+  IconPlugConnected,
+  IconDeviceGamepad2,
 } from "@tabler/icons-react"
 
 interface ServerData {
@@ -118,9 +121,8 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
                       setSelectedServer(server.id)
                       setDropdownOpen(false)
                     }}
-                    className={`w-full px-4 py-3 flex items-center justify-between hover:bg-ink-700/50 transition-all ${
-                      selectedServer === server.id ? "bg-gold-500/10" : ""
-                    }`}
+                    className={`w-full px-4 py-3 flex items-center justify-between hover:bg-ink-700/50 transition-all ${selectedServer === server.id ? "bg-gold-500/10" : ""
+                      }`}
                   >
                     <div className="flex items-center gap-3">
                       <IconServer className={`w-4 h-4 ${selectedServer === server.id ? "text-gold-400" : "text-cream-dim"}`} />
@@ -136,37 +138,55 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
           </div>
         </div>
 
-        {/* Status Grid - Clean Professional Design */}
+        {/* Status Grid - New Compact Design */}
         <div className="p-4 flex-1 flex flex-col">
-          <div className="space-y-2">
-            {/* Game Server Status */}
-            <div className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-ink-800/50 border border-line">
-              <div className="flex items-center gap-3">
-                <div className={`w-2 h-2 rounded-full ${gameServerStatus ? "bg-emerald-400 shadow-[0_0_8px_2px_rgba(74,222,128,0.4)]" : "bg-rose-400"}`} />
-                <span className="text-sm text-cream font-medium">Oyun Sunucusu</span>
+          <div className="grid grid-cols-2 gap-3">
+            {/* Login Server */}
+            <div className="p-3 rounded-xl bg-ink-800/50 border border-line">
+              <div className="flex items-center gap-2 mb-2">
+                <IconLogin className="w-4 h-4 text-cream-dim" />
+                <span className="text-xs text-cream-dim font-medium">Login</span>
               </div>
-              <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${
-                gameServerStatus 
-                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" 
-                  : "bg-rose-500/10 text-rose-400 border-rose-500/30"
-              }`}>
-                {gameServerStatus ? "Cevrimici" : "Kapali"}
-              </span>
+              <div className="flex items-center gap-2">
+                {loginServerStatus ? (
+                  <IconPlugConnected className="w-5 h-5 text-emerald-400" />
+                ) : (
+                  <IconPlugConnectedX className="w-5 h-5 text-amber-400" />
+                )}
+                <span className={`text-sm font-bold ${loginServerStatus ? "text-emerald-400" : "text-amber-400"}`}>
+                  {loginServerStatus ? "Online" : "Offline"}
+                </span>
+              </div>
+              {loginServerStatus && activeServer.ping > 0 && (
+                <div className="flex items-center gap-1.5 mt-2 text-emerald-400">
+                  <IconActivity className="w-3.5 h-3.5" />
+                  <span className="text-xs font-bold">{activeServer.ping} ms</span>
+                </div>
+              )}
             </div>
 
-            {/* Login Server Status */}
-            <div className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-ink-800/50 border border-line">
-              <div className="flex items-center gap-3">
-                <div className={`w-2 h-2 rounded-full ${loginServerStatus ? "bg-emerald-400 shadow-[0_0_8px_2px_rgba(74,222,128,0.4)]" : "bg-amber-400"}`} />
-                <span className="text-sm text-cream font-medium">Giris Sunucusu</span>
+            {/* Game Server */}
+            <div className="p-3 rounded-xl bg-ink-800/50 border border-line">
+              <div className="flex items-center gap-2 mb-2">
+                <IconDeviceGamepad2 className="w-4 h-4 text-cream-dim" />
+                <span className="text-xs text-cream-dim font-medium">Game</span>
               </div>
-              <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${
-                loginServerStatus 
-                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" 
-                  : "bg-amber-500/10 text-amber-400 border-amber-500/30"
-              }`}>
-                {loginServerStatus ? "Cevrimici" : "Bakimda"}
-              </span>
+              <div className="flex items-center gap-2">
+                {gameServerStatus ? (
+                  <IconPlugConnected className="w-5 h-5 text-emerald-400" />
+                ) : (
+                  <IconPlugConnectedX className="w-5 h-5 text-rose-400" />
+                )}
+                <span className={`text-sm font-bold ${gameServerStatus ? "text-emerald-400" : "text-rose-400"}`}>
+                  {gameServerStatus ? "Online" : "Offline"}
+                </span>
+              </div>
+              {gameServerStatus && activeServer.ping > 0 && (
+                <div className="flex items-center gap-1.5 mt-2 text-emerald-400">
+                  <IconActivity className="w-3.5 h-3.5" />
+                  <span className="text-xs font-bold">{activeServer.ping} ms</span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -180,11 +200,10 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
             </div>
             <div className="h-2 rounded-full bg-ink-900 overflow-hidden">
               <div
-                className={`h-full rounded-full transition-all duration-500 ${
-                  capacityPercent > 80 ? "bg-gradient-to-r from-rose-500 to-rose-400" :
+                className={`h-full rounded-full transition-all duration-500 ${capacityPercent > 80 ? "bg-gradient-to-r from-rose-500 to-rose-400" :
                   capacityPercent > 50 ? "bg-gradient-to-r from-amber-500 to-amber-400" :
-                  "bg-gradient-to-r from-gold-500 to-gold-400"
-                }`}
+                    "bg-gradient-to-r from-gold-500 to-gold-400"
+                  }`}
                 style={{ width: `${capacityPercent}%` }}
               />
             </div>
@@ -240,11 +259,10 @@ export const ServerStatus = forwardRef<ServerStatusHandle>(function ServerStatus
                   <div
                     key={server.id}
                     onClick={() => setTempSelectedServer(server.id)}
-                    className={`grid grid-cols-[56px_1fr_auto] gap-3.5 p-3.5 border rounded-xl cursor-pointer transition-all items-center ${
-                      isSelected
-                        ? "border-gold-400 bg-gold-500/[0.06] shadow-[0_0_0_1px_rgba(245,184,54,0.2)_inset]"
-                        : "border-line bg-white/[0.01] hover:border-gold-500 hover:bg-gold-500/[0.04]"
-                    }`}
+                    className={`grid grid-cols-[56px_1fr_auto] gap-3.5 p-3.5 border rounded-xl cursor-pointer transition-all items-center ${isSelected
+                      ? "border-gold-400 bg-gold-500/[0.06] shadow-[0_0_0_1px_rgba(245,184,54,0.2)_inset]"
+                      : "border-line bg-white/[0.01] hover:border-gold-500 hover:bg-gold-500/[0.04]"
+                      }`}
                   >
                     <div className="w-14 h-14 rounded-[10px] bg-gradient-to-br from-gold-500/20 to-violet-500/20 border border-line flex items-center justify-center text-gold-400">
                       <IconServer className="w-6 h-6" />
