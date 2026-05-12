@@ -9,6 +9,7 @@ import { ScrollProgress } from "@/components/oracle/scroll-progress"
 import { FeaturedNews } from "@/components/oracle/featured-news"
 import { NewsGrid } from "@/components/oracle/news-grid"
 import { ServerStatus, type ServerStatusHandle } from "@/components/oracle/server-status"
+import { ServerStatus2 } from "@/components/oracle/server-status2"
 import { ForumTopics } from "@/components/oracle/forum-topics"
 import { StaffKingsSection } from "@/components/oracle/staff-kings-section"
 import { RankingsSection } from "@/components/oracle/rankings-section"
@@ -56,10 +57,9 @@ export default function Home() {
 
           {/* Right Column - 1/3 width */}
           <div className="lg:col-span-1 flex flex-col gap-6">
-            {/* Server Status - Original */}
+            {/* Server Status 2 - Preview */}
             <section>
-              <div className="text-xs font-bold text-gold-400 uppercase tracking-wider mb-2 px-1">Mevcut Tasarim</div>
-              <ServerStatus ref={serverStatusRef} />
+              <ServerStatus2 />
             </section>
 
 

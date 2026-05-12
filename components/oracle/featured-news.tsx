@@ -34,14 +34,20 @@ export function FeaturedNews() {
           cikiyor. Bu bir geri donus degil — kehanetin tamamlanisidir.
         </p>
         <div className="flex flex-wrap items-center gap-3 mt-6">
-          <button className="gold-btn rounded-lg px-5 h-11 flex items-center gap-2 text-sm font-bold">
-            <IconDownload className="w-4 h-4" />
-            Oyunu Indir
+          <button className="group relative h-11 overflow-hidden rounded-xl bg-gradient-to-b from-gold-400 to-gold-500 px-5 text-sm font-bold text-ink-950 shadow-[0_4px_0_0_#8a5a0a,0_6px_12px_-2px_rgba(0,0,0,0.4)] transition-all duration-100 hover:brightness-110 active:translate-y-1 active:shadow-[0_0_0_0_#8a5a0a,0_2px_4px_-1px_rgba(0,0,0,0.3)]">
+            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+            <span className="relative flex items-center gap-2">
+              <IconDownload className="w-4 h-4" />
+              Oyunu Indir
+            </span>
           </button>
           <span className="text-cream-dim/50 text-sm">veya</span>
-          <button className="outline-btn rounded-lg px-5 h-11 flex items-center gap-2 text-sm font-semibold text-cream hover:text-gold-300">
-            <IconUserPlus className="w-4 h-4" />
-            Hesap Olustur
+          <button className="group relative h-11 overflow-hidden rounded-xl border border-line bg-gradient-to-b from-white/[0.06] to-white/[0.02] px-5 text-sm font-semibold text-cream shadow-[0_4px_0_0_rgba(120,129,146,0.22),0_6px_12px_-2px_rgba(0,0,0,0.35)] transition-all duration-100 hover:border-gold-500/40 hover:text-gold-300 active:translate-y-1 active:shadow-[0_0_0_0_rgba(120,129,146,0.22),0_2px_4px_-1px_rgba(0,0,0,0.28)]">
+            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+            <span className="relative flex items-center gap-2">
+              <IconUserPlus className="w-4 h-4" />
+              Hesap Olustur
+            </span>
           </button>
         </div>
       </div>
