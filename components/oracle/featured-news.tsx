@@ -18,7 +18,7 @@ export function FeaturedNews() {
       </div>
 
       {/* Content - Full Width Overlay */}
-      <div className="relative h-full p-6 md:p-8 flex flex-col justify-center max-w-2xl">
+      <div className="relative h-full w-full max-w-none p-6 md:p-8 lg:pr-12 flex flex-col justify-center">
         <div className="text-[11px] tracking-[0.25em] text-gold-400 font-bold uppercase flex items-center gap-2">
           <IconCalendar className="w-3.5 h-3.5" />
           Bir Cagin Baslangici
@@ -28,7 +28,7 @@ export function FeaturedNews() {
           <br />
           <span className="text-cream">Yeniden Dogus</span>
         </h2>
-        <p className="text-cream-dim text-sm md:text-base leading-relaxed mt-5 max-w-xl">
+        <p className="mt-5 max-w-none text-sm leading-relaxed text-cream-dim md:text-base lg:max-w-[72%]">
           OracleGamer, v1800 ile yolculuguna basladi ve v2100 ile yillar boyunca binlerce oyuncuya ev sahipligi
           yapti. Simdi ise edindigi tum tecrübeyi arkasina alarak, kendi 64-bit client altyapisiyla yeniden sahneye
           cikiyor. Bu bir geri donus degil — kehanetin tamamlanisidir.
