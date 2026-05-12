@@ -6,8 +6,8 @@ import {
   IconChevronRight,
   IconCircleCheck,
   IconDownload,
-  IconSignal,
-  IconSignalOff,
+  IconWifi,
+  IconWifiOff,
   IconPlayerPlay,
   IconLock,
 } from "@tabler/icons-react"
@@ -102,7 +102,7 @@ export function ServerStatusV3() {
               {loginServerStatus ? (
                 <IconLock className="w-5 h-5 text-emerald-400" />
               ) : (
-                <IconSignalOff className="w-5 h-5 text-rose-400" />
+                <IconWifiOff className="w-5 h-5 text-rose-400" />
               )}
               <div>
                 <div className="text-xs text-cream-dim">Login Server</div>
@@ -122,7 +122,7 @@ export function ServerStatusV3() {
               {gameServerStatus ? (
                 <IconPlayerPlay className="w-5 h-5 text-emerald-400" />
               ) : (
-                <IconSignalOff className="w-5 h-5 text-rose-400" />
+                <IconWifiOff className="w-5 h-5 text-rose-400" />
               )}
               <div>
                 <div className="text-xs text-cream-dim">Game Server</div>
