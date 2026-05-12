@@ -10,7 +10,8 @@ import { FeaturedNews } from "@/components/oracle/featured-news"
 import { NewsGrid } from "@/components/oracle/news-grid"
 import { ServerStatus, type ServerStatusHandle } from "@/components/oracle/server-status"
 import { ForumTopics } from "@/components/oracle/forum-topics"
-import { RankingsSection } from "@/components/oracle/rankings-section"
+import { PlayersClansSection } from "@/components/oracle/players-clans-section"
+import { StaffKingsSection } from "@/components/oracle/staff-kings-section"
 import { EventsSection } from "@/components/oracle/events-section"
 import { Footer } from "@/components/oracle/footer"
 
@@ -46,9 +47,14 @@ export default function Home() {
               <NewsGrid />
             </section>
 
-            {/* Rankings */}
+            {/* Players & Clans */}
             <section>
-              <RankingsSection />
+              <PlayersClansSection />
+            </section>
+
+            {/* Staff & Kings */}
+            <section>
+              <StaffKingsSection />
             </section>
           </div>
 
