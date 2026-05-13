@@ -66,6 +66,9 @@ export function NewsGrid() {
   const featuredNews = newsItems.find((item) => item.featured)
   const sideNews = newsItems.filter((item) => !item.featured)
 
+  const topSideNews = sideNews[0]
+  const bottomSideNews = sideNews.slice(1)
+
   return (
     <div className="card rounded-xl overflow-hidden">
       {/* Section Header */}
@@ -123,42 +126,60 @@ export function NewsGrid() {
           </article>
         )}
 
-        {/* Right column: 3 stacked posts */}
-        <div className="flex flex-col gap-3">
-          {sideNews.map((news) => (
-            <article key={news.id} className="rounded-xl overflow-hidden group bg-ink-800/50 border border-line hover:border-gold-500/30 transition-all duration-300 cursor-pointer flex-1">
-              <div className="flex items-center gap-3 p-2.5 h-full">
-                {/* Square image with zoom effect */}
-                <div className="w-[72px] h-[72px] shrink-0 rounded-lg overflow-hidden relative">
-                  <div className="absolute inset-0 placeholder-img transition-transform duration-500 group-hover:scale-110" />
-                </div>
-                {/* Content */}
-                <div className="flex-1 min-w-0 py-0.5">
-                  <div className="flex items-start justify-between gap-2">
-                    <h4 className="font-semibold text-sm text-cream group-hover:text-gold-300 leading-snug line-clamp-2 flex-1 transition-colors">
-                      {news.title}
-                    </h4>
-                    <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${news.tagColor}/20 ${news.tagColor} text-white tracking-wider shrink-0`}
-                    >
-                      {news.tag}
-                    </span>
-                  </div>
-                  <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-2 text-[11px] text-cream-dim">
-                    <span className="flex items-center gap-1">
-                      <IconCalendar className="w-3 h-3" /> {new Date(news.date).toLocaleDateString("tr-TR")}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <IconUser className="w-3 h-3" /> <span className="text-gold-400">{news.author}</span>
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <IconEye className="w-3 h-3" /> {news.views}
-                    </span>
-                  </div>
+        {/* Right column: Editorial composition (1 horizontal + 2 small) - all image-overlay */}
+        <div className="flex flex-col gap-3 h-full">
+          {/* Top: Horizontal medium card */}
+          {topSideNews && (
+            <article className="relative rounded-xl overflow-hidden group cursor-pointer border border-line hover:border-gold-500/30 transition-all duration-300 flex-1 min-h-[140px]">
+              <div className="absolute inset-0 placeholder-img transition-transform duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/60 to-transparent" />
+              <span className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full border ${topSideNews.tagColor}/20 ${topSideNews.tagColor} text-white tracking-wider backdrop-blur-sm`}>
+                {topSideNews.tag}
+              </span>
+              <div className="absolute bottom-0 left-0 right-0 p-3">
+                <h4 className="font-semibold text-sm text-cream group-hover:text-gold-300 transition-colors leading-snug line-clamp-2">
+                  {topSideNews.title}
+                </h4>
+                <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-2 text-[11px] text-cream-dim/80">
+                  <span className="flex items-center gap-1">
+                    <IconCalendar className="w-3 h-3" /> {new Date(topSideNews.date).toLocaleDateString("tr-TR")}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <IconUser className="w-3 h-3" /> <span className="text-gold-400">{topSideNews.author}</span>
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <IconEye className="w-3 h-3" /> {topSideNews.views}
+                  </span>
                 </div>
               </div>
             </article>
-          ))}
+          )}
+
+          {/* Bottom: 2 small cards side by side */}
+          <div className="grid grid-cols-2 gap-3 flex-1">
+            {bottomSideNews.map((news) => (
+              <article key={news.id} className="relative rounded-xl overflow-hidden group cursor-pointer border border-line hover:border-gold-500/30 transition-all duration-300 min-h-[140px]">
+                <div className="absolute inset-0 placeholder-img transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/60 to-transparent" />
+                <span className={`absolute top-2 right-2 text-[9px] font-bold px-1.5 py-0.5 rounded-full border ${news.tagColor}/20 ${news.tagColor} text-white tracking-wider backdrop-blur-sm`}>
+                  {news.tag}
+                </span>
+                <div className="absolute bottom-0 left-0 right-0 p-3">
+                  <h4 className="font-semibold text-xs text-cream group-hover:text-gold-300 transition-colors leading-snug line-clamp-2">
+                    {news.title}
+                  </h4>
+                  <div className="flex items-center flex-wrap gap-x-2 gap-y-1 mt-2 text-[10px] text-cream-dim/80">
+                    <span className="flex items-center gap-1">
+                      <IconCalendar className="w-2.5 h-2.5" /> {new Date(news.date).toLocaleDateString("tr-TR")}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <IconEye className="w-2.5 h-2.5" /> {news.views}
+                    </span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </div>
