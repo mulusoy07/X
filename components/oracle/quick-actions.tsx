@@ -9,7 +9,9 @@ import {
   IconBrandFacebook,
   IconBrandInstagram,
   IconMessage,
+  IconTemplate,
 } from "@tabler/icons-react"
+import Link from "next/link"
 
 interface QuickActionsProps {
   onServerClick?: () => void
@@ -21,6 +23,7 @@ const actions = [
   { id: "support", icon: IconHeadset, label: "Destek", color: "hover:border-sky-500/50 hover:text-sky-400" },
   { id: "message", icon: IconMessage, label: "Mesajlar", color: "hover:border-amber-500/50 hover:text-amber-400" },
   { id: "download", icon: IconDownload, label: "İndir", color: "hover:border-gold-500/50 hover:text-gold-400" },
+  { id: "templates", icon: IconTemplate, label: "Şablonlar", color: "hover:border-rose-500/50 hover:text-rose-400", href: "/templates" },
 ]
 
 export function QuickActions({ onServerClick }: QuickActionsProps) {
@@ -36,17 +39,28 @@ export function QuickActions({ onServerClick }: QuickActionsProps) {
     <aside className="hidden lg:flex fixed right-3 top-1/2 -translate-y-1/2 z-30 flex-col gap-1.5 p-1.5 rounded-2xl bg-ink-900/90 border border-line backdrop-blur-sm">
       {actions.map((action) => (
         <div key={action.id} className="relative group">
-          <button
-            onClick={() => handleClick(action.id)}
-            onMouseEnter={() => setHoveredAction(action.id)}
-            onMouseLeave={() => setHoveredAction(null)}
-            className={`relative w-10 h-10 rounded-xl bg-ink-800/80 border border-transparent text-cream-dim flex items-center justify-center transition-all duration-200 ${action.color}`}
-          >
-            <action.icon className="w-5 h-5" />
-            {action.hasIndicator && (
-              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-emerald-400 dot-pulse" />
-            )}
-          </button>
+          {action.href ? (
+            <Link
+              href={action.href}
+              onMouseEnter={() => setHoveredAction(action.id)}
+              onMouseLeave={() => setHoveredAction(null)}
+              className={`relative w-10 h-10 rounded-xl bg-ink-800/80 border border-transparent text-cream-dim flex items-center justify-center transition-all duration-200 ${action.color}`}
+            >
+              <action.icon className="w-5 h-5" />
+            </Link>
+          ) : (
+            <button
+              onClick={() => handleClick(action.id)}
+              onMouseEnter={() => setHoveredAction(action.id)}
+              onMouseLeave={() => setHoveredAction(null)}
+              className={`relative w-10 h-10 rounded-xl bg-ink-800/80 border border-transparent text-cream-dim flex items-center justify-center transition-all duration-200 ${action.color}`}
+            >
+              <action.icon className="w-5 h-5" />
+              {action.hasIndicator && (
+                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-emerald-400 dot-pulse" />
+              )}
+            </button>
+          )}
           
           {/* Tooltip */}
           <div

@@ -6,6 +6,7 @@ import {
   IconChevronDown,
   IconDownload,
   IconBolt,
+  IconArrowRight,
 } from "@tabler/icons-react"
 
 interface ServerData {
@@ -127,9 +128,16 @@ function CapBar({ pct }: { pct: number; variant?: "segmented" }) {
 
 function DownloadBtn(_: { shape?: "default" }) {
   return (
-    <button className="w-full h-11 rounded-xl bg-gradient-to-b from-gold-400 to-gold-500 text-ink-950 font-bold text-sm flex items-center justify-center gap-2 hover:brightness-110 transition">
-      <IconDownload className="h-4 w-4" />
-      Oyunu Indir
+    <button className="group relative w-full h-11 rounded-xl bg-gradient-to-b from-gold-400 to-gold-500 text-ink-950 font-bold text-sm overflow-hidden hover:brightness-110 transition">
+      {/* Shimmer sweep effect */}
+      <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+      {/* Content with slide effect */}
+      <span className="relative flex items-center justify-center gap-2 transition-transform duration-300 group-hover:-translate-x-2">
+        <IconDownload className="h-4 w-4" />
+        Oyunu Indir
+      </span>
+      {/* Arrow reveal on hover */}
+      <IconArrowRight className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
     </button>
   )
 }
