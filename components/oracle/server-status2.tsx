@@ -10,6 +10,7 @@ import {
   IconX,
   IconCheck,
   IconWifi,
+  IconArrowRight,
 } from "@tabler/icons-react"
 
 interface ServerData {
@@ -220,11 +221,10 @@ export const ServerStatus2 = forwardRef<ServerStatus2Handle>(function ServerStat
                         setSelectedServer(server.id)
                         setDropdownOpen(false)
                       }}
-                      className={`w-full overflow-hidden rounded-xl border text-left transition-colors ${
-                        isActive
+                      className={`w-full overflow-hidden rounded-xl border text-left transition-colors ${isActive
                           ? "border-gold-400/60 bg-gold-500/[0.06]"
                           : "border-line bg-white/[0.02] hover:border-gold-500/30"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-stretch gap-0">
                         <div className="flex min-w-0 flex-1 items-center gap-3 py-2.5 pl-3 pr-4">
@@ -297,9 +297,13 @@ export const ServerStatus2 = forwardRef<ServerStatus2Handle>(function ServerStat
           })()}
         </div>
 
-        <button className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-gold-400 to-gold-500 text-sm font-bold text-ink-950 transition hover:brightness-110">
-          <IconDownload className="h-4 w-4" />
-          Oyunu Indir
+        <button className="group relative w-full h-11 rounded-xl bg-gradient-to-b from-gold-400 to-gold-500 text-ink-950 font-bold text-sm overflow-hidden hover:brightness-110 transition">
+          <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+          <span className="relative flex items-center justify-center gap-2 transition-transform duration-300 group-hover:-translate-x-2">
+            <IconDownload className="h-4 w-4" />
+            Oyunu Indir
+          </span>
+          <IconArrowRight className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
         </button>
       </div>
 
@@ -335,11 +339,10 @@ export const ServerStatus2 = forwardRef<ServerStatus2Handle>(function ServerStat
                   <button
                     key={server.id}
                     onClick={() => setTempSelectedServer(server.id)}
-                    className={`grid w-full grid-cols-[40px_1fr_auto] items-center gap-3 rounded-xl border p-3 text-left transition-all ${
-                      isSelected
+                    className={`grid w-full grid-cols-[40px_1fr_auto] items-center gap-3 rounded-xl border p-3 text-left transition-all ${isSelected
                         ? "border-gold-400 bg-gold-500/[0.06]"
                         : "border-line bg-white/[0.01] hover:border-gold-500/40"
-                    }`}
+                      }`}
                   >
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-gold-500/20 bg-gold-500/10">
                       <span className="text-[10px] font-black text-gold-300">{server.xp.toUpperCase()}</span>

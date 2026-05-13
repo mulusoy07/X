@@ -15,6 +15,8 @@ interface Staff {
   name: string
   role: string
   isOnline: boolean
+  nation: "karus" | "human"
+  playerClass: string
 }
 
 interface King {
@@ -26,11 +28,11 @@ interface King {
 }
 
 const staff: Staff[] = [
-  { rank: 1, name: "OracleGM", role: "Oyun Yoneticisi", isOnline: true },
-  { rank: 2, name: "OracleMod", role: "Moderator", isOnline: true },
-  { rank: 3, name: "OracleGM2", role: "Oyun Yoneticisi", isOnline: false },
-  { rank: 4, name: "SupportLead", role: "Destek Lideri", isOnline: true },
-  { rank: 5, name: "EventMaster", role: "Etkinlik Sorumlusu", isOnline: false },
+  { rank: 1, name: "OracleGM", role: "Oyun Yoneticisi", isOnline: true, nation: "karus", playerClass: "warrior" },
+  { rank: 2, name: "OracleMod", role: "Moderator", isOnline: true, nation: "human", playerClass: "rogue" },
+  { rank: 3, name: "OracleGM2", role: "Oyun Yoneticisi", isOnline: false, nation: "karus", playerClass: "mage" },
+  { rank: 4, name: "SupportLead", role: "Destek Lideri", isOnline: true, nation: "human", playerClass: "priest" },
+  { rank: 5, name: "EventMaster", role: "Etkinlik Sorumlusu", isOnline: false, nation: "karus", playerClass: "warrior" },
 ]
 
 const kings: King[] = [
@@ -104,17 +106,32 @@ export function StaffKingsSection() {
                     </div>
                   </div>
                   <div className="flex-1 flex items-center px-3 gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                      <IconShield className="w-4 h-4 text-emerald-400" />
+                    <div className="flex gap-1 shrink-0">
+                      <div className="w-8 h-8 rounded overflow-hidden bg-ink-700/50 p-0.5">
+                        <div className={`nation-icon nation-${member.nation}`} style={{ width: 28, height: 28 }} />
+                      </div>
+                      <div className="w-8 h-8 rounded overflow-hidden bg-ink-700/50 p-0.5">
+                        <div className={`class-icon class-${member.playerClass}`} style={{ width: 28, height: 28 }} />
+                      </div>
                     </div>
                     <div className="min-w-0 flex-1">
                       <span className="font-bold text-cream text-sm truncate block">{member.name}</span>
-                      <span className="text-[11px] text-cream-dim">{member.role}</span>
+                      <div className="flex items-center gap-1.5">
+                        <IconShield className="w-3 h-3 text-cream-dim/60" />
+                        <span className="text-[11px] text-cream-dim">{member.role}</span>
+                      </div>
                     </div>
-                    <div className="text-center min-w-[5rem] shrink-0">
-                      <div className="text-[10px] text-cream-dim uppercase tracking-wider font-medium">Durum</div>
-                      <div className={`text-sm font-bold ${member.isOnline ? "text-emerald-400" : "text-cream-dim"}`}>
-                        {member.isOnline ? "Cevrimici" : "Cevrimdisi"}
+                    <div className="text-right min-w-[5rem] shrink-0">
+                      <div className="flex items-end gap-0.5 h-5 justify-end">
+                        {[3, 5, 7, 9].map((h, i) => (
+                          <span
+                            key={i}
+                            className={`w-1 rounded-sm transition-all ${
+                              member.isOnline ? "bg-emerald-400" : "bg-ink-700"
+                            } ${member.isOnline ? "animate-pulse" : ""}`}
+                            style={{ height: `${h * 2}px`, animationDelay: `${i * 120}ms` }}
+                          />
+                        ))}
                       </div>
                     </div>
                   </div>
