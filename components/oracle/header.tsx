@@ -476,11 +476,11 @@ export function Header({ onOpenServerModal }: HeaderProps) {
               ) : (
                 <div className="hidden lg:flex items-center gap-3">
                   {/* Segment Container: Search + Language + Login */}
-                  <div className="flex items-center bg-ink-800/60 rounded-xl border border-line/50 overflow-hidden">
+                  <div className="flex items-center bg-ink-800/60 rounded-xl border border-line/50">
                     {/* Search Segment */}
                     <button 
                       onClick={() => setSearchOpen(true)}
-                      className="flex items-center gap-2 h-10 px-3 hover:bg-ink-700/50 transition-all group border-r border-line/30"
+                      className="flex items-center gap-2 h-10 px-3 hover:bg-ink-700/50 transition-all group border-r border-line/30 rounded-l-xl"
                     >
                       <IconSearch className="w-4 h-4 text-cream-dim group-hover:text-gold-400 transition-colors" />
                     </button>
@@ -497,7 +497,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                       </button>
 
                       {langDropdownOpen && (
-                        <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-[60]">
+                        <div className="absolute top-full right-0 mt-2 w-44 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl z-[60]">
                           <div className="p-1.5">
                             {languages.map((lang) => (
                               <button
@@ -525,7 +525,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                     {/* Login Button V07 - Shimmer + Arrow (inside segment) */}
                     <button
                       onClick={() => setAuthModalOpen(true)}
-                      className="group relative flex items-center h-10 px-5 bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-sm overflow-hidden hover:brightness-110 transition rounded-r-xl"
+                      className="group relative flex items-center justify-center h-10 px-6 pr-10 bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-sm overflow-hidden hover:brightness-110 transition rounded-r-xl"
                     >
                       {/* Shimmer sweep effect */}
                       <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
@@ -535,7 +535,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                         Giris Yap
                       </span>
                       {/* Arrow reveal on hover */}
-                      <IconArrowRight className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+                      <IconArrowRight className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 opacity-0 translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
                     </button>
                   </div>
                 </div>
