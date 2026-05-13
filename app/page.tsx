@@ -13,7 +13,7 @@ import { ServerStatus2 } from "@/components/oracle/server-status2"
 import { ForumTopics } from "@/components/oracle/forum-topics"
 import { StaffKingsSection } from "@/components/oracle/staff-kings-section"
 import { RankingsSection } from "@/components/oracle/rankings-section"
-import { EventsV1Split } from "@/components/templates/event-widgets"
+import { EventsSection } from "@/components/oracle/events-section"
 import { Footer } from "@/components/oracle/footer"
 
 export default function Home() {
@@ -65,7 +65,7 @@ export default function Home() {
 
             {/* Events */}
             <section>
-              <EventsV1Split />
+              <EventsSection />
             </section>
 
             {/* Forum Topics */}

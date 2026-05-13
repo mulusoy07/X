@@ -72,15 +72,6 @@ export const events: GameEvent[] = [
     duration: 60,
     day: "Carsamba",
   },
-  {
-    id: 5,
-    title: "Daily Reward",
-    description: "Gunluk giris odullerini topla, sirini kaybetme.",
-    type: "event",
-    offsetSec: 12 * 3600,
-    duration: 15,
-    day: "Hergun",
-  },
 ]
 
 export const typeMeta: Record<
@@ -511,8 +502,7 @@ export function EventsV1Split() {
             <p className="text-sm text-cream-dim mt-1.5 leading-relaxed">{ev.description}</p>
 
             <div className="mt-5 flex items-baseline gap-3">
-              <div className="font-mono text-4xl font-bold text-gold-400 tabular-nums leading-none">{t.h}:{t.m}:{t.s}</div>
-              <span className="text-[10px] uppercase tracking-wider text-muted">kaldi</span>
+              <div className="font-mono text-4xl font-bold text-gold-400 tabular-nums leading-none">{t.h}:{t.m}:{t.s}</div>              
             </div>
 
             <div className="mt-5 flex items-center gap-4 text-[11px] text-cream-dim border-t border-line pt-3">
@@ -724,8 +714,7 @@ export function EventsV4Stack() {
                 <div className="text-[11px] text-cream-dim truncate">{e.day} · {e.duration} dk</div>
               </div>
               <div className="text-right shrink-0">
-                <div className="font-mono text-sm font-bold text-gold-400 tabular-nums leading-none">{t.h}:{t.m}:{t.s}</div>
-                <div className="text-[10px] text-muted mt-1">kaldi</div>
+                <div className="font-mono text-sm font-bold text-gold-400 tabular-nums leading-none">{t.h}:{t.m}:{t.s}</div>                
               </div>
               <button className="ml-1 w-8 h-8 grid place-items-center rounded-md border border-line bg-ink-900 text-cream-dim opacity-0 group-hover:opacity-100 hover:text-gold-400 hover:border-gold-500/40 transition" aria-label="Hatirlat">
                 <IconBell className="w-3.5 h-3.5" />
@@ -784,8 +773,7 @@ export function EventsV5HeroList() {
 
             <div className="mt-4 flex items-end justify-between gap-3 border-t border-line pt-3">
               <div>
-                <div className="font-mono text-2xl font-bold text-gold-400 tabular-nums leading-none">{ft.h}:{ft.m}:{ft.s}</div>
-                <div className="text-[10px] uppercase tracking-wider text-muted mt-1.5">kaldi</div>
+                <div className="font-mono text-2xl font-bold text-gold-400 tabular-nums leading-none">{ft.h}:{ft.m}:{ft.s}</div>                
               </div>
               <div className="text-right text-[11px] text-cream-dim space-y-1">
                 <div className="inline-flex items-center gap-1"><IconCalendar className="w-3.5 h-3.5" /> {featured.day}</div>
