@@ -33,8 +33,6 @@ import {
   IconMap,
   IconCoins,
   IconCrown,
-  IconFlame,
-  IconTarget,
   IconHeart,
   IconAward,
   IconBrandDiscord,
@@ -79,9 +77,8 @@ const menuItems = [
     icon: IconTrophy,
     submenu: [
       { label: "Oyuncu Siralamasi", href: "/siralamalar/oyuncu", icon: IconCrown, desc: "En guclu oyuncular" },
-      { label: "Lonca Siralamasi", href: "/siralamalar/lonca", icon: IconUsers, desc: "Klan siralamalari" },
-      { label: "PvP Siralamasi", href: "/siralamalar/pvp", icon: IconFlame, desc: "Kill sayilari" },
-      { label: "Haftalik Siralama", href: "/siralamalar/haftalik", icon: IconTarget, desc: "Bu hafta liderler" },
+      { label: "Klan Siralamasi", href: "/siralamalar/lonca", icon: IconUsers, desc: "Klan siralamalari" },
+      { label: "Krallik Secimleri", href: "/siralamalar/krallik", icon: IconCrown, desc: "Kral secim sonuclari" },
     ],
   },
   {
