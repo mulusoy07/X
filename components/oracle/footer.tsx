@@ -77,8 +77,10 @@ export function Footer() {
           {/* Footer Links */}
           {Object.entries(footerLinks).map(([key, section]) => (
             <div key={key} className="col-span-6 sm:col-span-4 lg:col-span-2">
-              <h5 className="font-display text-gold-400 text-sm tracking-[0.2em] uppercase">{section.title}</h5>
-              <div className="mt-2 h-px bg-gradient-to-r from-gold-500/40 to-transparent w-12" />
+              <div className="flex items-center gap-2 mb-4">
+                <span className="h-px w-6 bg-gold-500" />
+                <h4 className="text-[11px] uppercase tracking-[0.3em] text-gold-400 font-semibold">{section.title}</h4>
+              </div>
               <ul className="mt-4 space-y-2 text-sm">
                 {section.links.map((link, i) => (
                   <li key={i}>
@@ -98,28 +100,9 @@ export function Footer() {
             </div>
           ))}
 
-          {/* Newsletter */}
-          <div className="col-span-12 sm:col-span-6 lg:col-span-2">
-            <h5 className="font-display text-gold-400 text-sm tracking-[0.2em] uppercase">Bülten</h5>
-            <div className="mt-2 h-px bg-gradient-to-r from-gold-500/40 to-transparent w-12" />
-            <p className="text-xs text-cream-dim leading-relaxed mt-4">Etkinlik ve duyurular için e-postanı bırak.</p>
-            <form className="mt-3 flex flex-col gap-2">
-              <input
-                type="email"
-                placeholder="e-posta@oracle.gg"
-                className="h-10 px-3 rounded-md bg-ink-800 border border-line text-sm text-cream placeholder:text-muted focus:outline-none focus:border-gold-500 transition"
-              />
-              <button
-                type="button"
-                className="gold-btn h-10 rounded-md text-sm font-semibold flex items-center justify-center gap-2"
-              >
-                <IconSend className="w-4 h-4" /> Abone Ol
-              </button>
-            </form>
-          </div>
         </div>
 
-        {/* Bottom Bar */}
+          {/* Bottom Bar */}
         <div className="mt-12 pt-5 border-t border-line flex flex-col lg:flex-row items-center justify-between gap-4 text-xs text-muted pb-20 lg:pb-0">
           <span>© 2026 Oracle Gamer — Tüm hakları saklıdır.</span>
           <span className="font-display text-gold-400 tracking-wider hidden lg:block">KEHANET HENÜZ TAMAMLANMADI</span>

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { IconArrowLeft, IconLayout, IconMessage, IconActivityHeartbeat, IconNews, IconTrophy, IconBrain, IconCalendar, IconShield } from "@tabler/icons-react"
+import { IconArrowLeft, IconLayout, IconMessage, IconActivityHeartbeat, IconNews, IconTrophy, IconBrain, IconCalendar, IconShield, IconSparkles } from "@tabler/icons-react"
 
 const templates = [
   { 
@@ -59,6 +59,13 @@ const templates = [
     description: "Yönetici ve kral status widgetları",
     icon: IconShield,
     color: "hover:border-rose-500/50 hover:bg-rose-500/10"
+  },
+  { 
+    name: "Featured Widgetları", 
+    slug: "featured", 
+    description: "Hero bölümü ve featured news varyasyonları",
+    icon: IconSparkles,
+    color: "hover:border-gold-500/50 hover:bg-gold-500/10"
   },
 ]
 
