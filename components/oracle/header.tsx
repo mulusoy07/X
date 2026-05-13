@@ -45,6 +45,7 @@ import {
   IconBell,
   IconWallet,
   IconLogin,
+  IconArrowRight,
 } from "@tabler/icons-react"
 import { AuthModal } from "./auth-modal"
 import { SearchModal } from "./search-modal"
@@ -474,21 +475,21 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                 </div>
               ) : (
                 <div className="hidden lg:flex items-center gap-3">
-                  {/* Combined Search + Language + Login Container */}
-                  <div className="flex items-center bg-ink-800/60 rounded-xl border border-line/50">
-                    {/* Search */}
+                  {/* Segment Container: Search + Language + Login */}
+                  <div className="flex items-center bg-ink-800/60 rounded-xl border border-line/50 overflow-hidden">
+                    {/* Search Segment */}
                     <button 
                       onClick={() => setSearchOpen(true)}
-                      className="flex items-center gap-2 h-10 px-3 hover:bg-ink-700/50 rounded-l-xl transition-all group border-r border-line/30"
+                      className="flex items-center gap-2 h-10 px-3 hover:bg-ink-700/50 transition-all group border-r border-line/30"
                     >
                       <IconSearch className="w-4 h-4 text-cream-dim group-hover:text-gold-400 transition-colors" />
                     </button>
 
-                    {/* Language */}
-                    <div className="dropdown-container relative">
+                    {/* Language Segment */}
+                    <div className="dropdown-container relative border-r border-line/30">
                       <button
                         onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                        className="flex items-center gap-2 h-10 px-3 hover:bg-ink-700/50 rounded-r-xl transition-all group"
+                        className="flex items-center gap-2 h-10 px-3 hover:bg-ink-700/50 transition-all group"
                       >
                         <Image src={currentLang.flag} alt={currentLang.label} width={18} height={13} className="rounded-sm object-cover" />
                         <span className="text-sm font-medium text-cream">{currentLang.code.toUpperCase()}</span>
@@ -520,16 +521,23 @@ export function Header({ onOpenServerModal }: HeaderProps) {
                         </div>
                       )}
                     </div>
-                  </div>
 
-                  {/* Login Button */}
-                  <button
-                    onClick={() => setAuthModalOpen(true)}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-sm hover:from-gold-400 hover:to-gold-500 transition-all"
-                  >
-                    <IconLogin className="w-4 h-4" />
-                    Giris Yap
-                  </button>
+                    {/* Login Button V07 - Shimmer + Arrow (inside segment) */}
+                    <button
+                      onClick={() => setAuthModalOpen(true)}
+                      className="group relative flex items-center h-10 px-5 bg-gradient-to-r from-gold-500 to-gold-600 text-ink-900 font-bold text-sm overflow-hidden hover:brightness-110 transition rounded-r-xl"
+                    >
+                      {/* Shimmer sweep effect */}
+                      <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                      {/* Content with slide effect */}
+                      <span className="relative flex items-center gap-2 transition-transform duration-300 group-hover:-translate-x-1">
+                        <IconLogin className="w-4 h-4" />
+                        Giris Yap
+                      </span>
+                      {/* Arrow reveal on hover */}
+                      <IconArrowRight className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+                    </button>
+                  </div>
                 </div>
               )}
 
