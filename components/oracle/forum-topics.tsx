@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { IconMessageCircle, IconChevronRight } from "@tabler/icons-react"
+import { IconMessageCircle, IconChevronRight, IconClock } from "@tabler/icons-react"
 
 interface ForumTopic {
   id: number
@@ -11,14 +11,15 @@ interface ForumTopic {
   author: string
   replies: number
   isHot?: boolean
+  timeAgo?: string
 }
 
 const topics: ForumTopic[] = [
-  { id: 1, title: "Server acilis tarihi ne zaman?", category: "Genel Tartisma", categoryColor: "violet", author: "Thoketh914", replies: 12 },
-  { id: 2, title: "Upgrade scroll oranlari hakkinda", category: "Oyun Rehberi", categoryColor: "sky", author: "Gorus424", replies: 8 },
-  { id: 3, title: "BrutalGuard klan uye ariyor", category: "Klan Duyurulari", categoryColor: "emerald", author: "Kragath680", replies: 5, isHot: true },
-  { id: 4, title: "Nation War saatleri degisti mi?", category: "Genel Tartisma", categoryColor: "violet", author: "Cedion252", replies: 3 },
-  { id: 5, title: "Yeni baslayan olarak ne yapmaliyim?", category: "Oyun Rehberi", categoryColor: "sky", author: "Arthion93", replies: 21, isHot: true },
+  { id: 1, title: "Server acilis tarihi ne zaman?", category: "Genel Tartisma", categoryColor: "violet", author: "Thoketh914", replies: 12, timeAgo: "2s once" },
+  { id: 2, title: "Upgrade scroll oranlari hakkinda", category: "Oyun Rehberi", categoryColor: "sky", author: "Gorus424", replies: 8, timeAgo: "5s once" },
+  { id: 3, title: "BrutalGuard klan uye ariyor", category: "Klan Duyurulari", categoryColor: "emerald", author: "Kragath680", replies: 5, isHot: true, timeAgo: "1d once" },
+  { id: 4, title: "Nation War saatleri degisti mi?", category: "Genel Tartisma", categoryColor: "violet", author: "Cedion252", replies: 3, timeAgo: "3s once" },
+  { id: 5, title: "Yeni baslayan olarak ne yapmaliyim?", category: "Oyun Rehberi", categoryColor: "sky", author: "Arthion93", replies: 21, isHot: true, timeAgo: "6s once" },
 ]
 
 const colorClasses = {
@@ -47,7 +48,7 @@ const colorClasses = {
 export function ForumTopics() {
   return (
     <div className="card rounded-xl overflow-hidden h-full flex flex-col">
-      {/* Header */}
+      {/* V01 Style Header */}
       <div className="section-header">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-md bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-400">
@@ -63,43 +64,45 @@ export function ForumTopics() {
         </Link>
       </div>
 
-      {/* Topics List */}
-      <ul className="divide-y divide-line/50 flex-1">
-        {topics.map((topic) => {
-          const colors = colorClasses[topic.categoryColor]
-          return (
-            <li key={topic.id} className="hover:bg-ink-800/60 transition cursor-pointer">
-              <Link href={`/forum/konu/${topic.id}`} className="flex items-center gap-3 p-4">
-                {/* Avatar */}
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${colors.avatar} flex items-center justify-center shrink-0 relative`}>
-                  <IconMessageCircle className="w-4 h-4 text-white" />
-                  {topic.isHot && (
-                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-rose-500 rounded-full border-2 border-ink-800" />
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <h4 className="font-semibold text-sm text-cream truncate leading-tight">{topic.title}</h4>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border whitespace-nowrap shrink-0 ${colors.badge}`}>
-                      {topic.category}
+      {/* V03 Style Timeline Content */}
+      <div className="p-4 flex-1">
+        <div className="relative pl-6 space-y-4">
+          {/* Timeline line */}
+          <div className="absolute left-[7px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-gold-500/50 via-line to-transparent" />
+          
+          {topics.map((topic, i) => {
+            const colors = colorClasses[topic.categoryColor]
+            return (
+              <div key={topic.id} className="relative group">
+                {/* Timeline dot */}
+                <div className={`absolute -left-6 top-1 w-4 h-4 rounded-full ${i === 0 ? 'bg-gold-500 ring-4 ring-gold-500/20' : 'bg-ink-700 border-2 border-line'} transition-all group-hover:border-gold-500/50`} />
+                
+                <Link href={`/forum/konu/${topic.id}`} className="block">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] text-cream-dim flex items-center gap-1">
+                      <IconClock className="w-3 h-3" />
+                      {topic.timeAgo}
                     </span>
+                    {topic.isHot && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">HOT</span>
+                    )}
                   </div>
-                  <div className="flex items-center gap-2 mt-1.5 text-xs">
-                    <span className="text-gold-400 font-medium">{topic.author}</span>
+                  <h4 className="text-sm font-medium text-cream group-hover:text-gold-400 transition-colors mt-0.5">{topic.title}</h4>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded ${colors.badge}`}>{topic.category}</span>
+                    <span className="text-[10px] text-gold-400 font-medium">{topic.author}</span>
                     <span className="w-1 h-1 rounded-full bg-cream-dim/30" />
-                    <span className="text-cream-dim">{topic.replies} yanit</span>
+                    <span className="text-[10px] text-cream-dim">{topic.replies} yanit</span>
                   </div>
-                </div>
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+                </Link>
+              </div>
+            )
+          })}
+        </div>
+      </div>
 
-      {/* Footer */}
-      <div className="px-4 py-3 border-t border-line bg-ink-900/50">
+      {/* V01 Style Footer - Yeni Konu Ac */}
+      <div className="px-4 py-3 border-t border-line bg-ink-900/50 mt-auto">
         <Link 
           href="/forum/yeni-konu" 
           className="w-full h-10 rounded-lg border border-dashed border-gold-500/30 flex items-center justify-center text-sm text-gold-400 hover:bg-gold-500/5 hover:border-gold-500/50 transition-all gap-2"

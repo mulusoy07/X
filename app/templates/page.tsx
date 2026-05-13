@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { IconArrowLeft, IconLayout, IconMessage, IconActivityHeartbeat, IconNews } from "@tabler/icons-react"
+import { IconArrowLeft, IconLayout, IconMessage, IconActivityHeartbeat, IconNews, IconTrophy, IconBrain, IconCalendar } from "@tabler/icons-react"
 
 const templates = [
   { 
@@ -31,6 +31,27 @@ const templates = [
     description: "Haber akışı ve içerik widgetları",
     icon: IconNews,
     color: "hover:border-amber-500/50 hover:bg-amber-500/10"
+  },
+  { 
+    name: "En İyiler", 
+    slug: "topusers", 
+    description: "En iyi oyuncu ve yönetim sıralamaları",
+    icon: IconTrophy,
+    color: "hover:border-gold-500/50 hover:bg-gold-500/10"
+  },
+  { 
+    name: "SWE UX Test", 
+    slug: "swe", 
+    description: "UX tasarım yetenek testi",
+    icon: IconBrain,
+    color: "hover:border-violet-500/50 hover:bg-violet-500/10"
+  },
+  { 
+    name: "Event Widgetları", 
+    slug: "event-widgets", 
+    description: "Etkinlik takvimi ve countdown widgetları",
+    icon: IconCalendar,
+    color: "hover:border-gold-500/50 hover:bg-gold-500/10"
   },
 ]
 
