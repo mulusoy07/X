@@ -10,7 +10,7 @@ import {
   IconUsers,
   IconX,
   IconCalendar,
-  IconShield,
+  IconChevronRight,
 } from "@tabler/icons-react"
 import Link from "next/link"
 import { mockKingElections } from "@/lib/mock-data"
@@ -99,38 +99,23 @@ function getNationStyles(nation: string) {
   return {
     gradient: isKarus ? "from-red-500 to-red-600" : "from-blue-500 to-blue-600",
     text: isKarus ? "text-red-400" : "text-blue-400",
+    border: isKarus ? "border-red-500/30" : "border-blue-500/30",
     isKarus,
   }
 }
 
-// Simplified icon component
-function GameIcon({ icon, alt, className }: { icon: string; alt: string; className?: string }) {
-  const getIconBg = () => {
-    if (icon === "Karus") return "bg-gradient-to-br from-red-500/30 to-red-600/20 text-red-400"
-    if (icon === "Human") return "bg-gradient-to-br from-blue-500/30 to-blue-600/20 text-blue-400"
-    if (icon === "warrior") return "bg-gradient-to-br from-amber-500/30 to-amber-600/20 text-amber-400"
-    if (icon === "mage") return "bg-gradient-to-br from-purple-500/30 to-purple-600/20 text-purple-400"
-    if (icon === "priest") return "bg-gradient-to-br from-emerald-500/30 to-emerald-600/20 text-emerald-400"
-    if (icon === "rogue") return "bg-gradient-to-br from-rose-500/30 to-rose-600/20 text-rose-400"
-    if (icon?.startsWith("rank_1")) return "bg-gradient-to-br from-yellow-500/40 to-yellow-600/30"
-    if (icon?.startsWith("rank_2")) return "bg-gradient-to-br from-gray-400/40 to-gray-500/30"
-    if (icon?.startsWith("rank_3")) return "bg-gradient-to-br from-orange-500/40 to-orange-600/30"
-    return "bg-ink-700/50 text-cream-dim"
+// Rank icon component - uses CSS classes from globals.css
+const RankIcon = ({ rank }: { rank: number }) => {
+  if (rank <= 3) {
+    return (
+      <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+        <div className={`rank-icon rank-${rank}`} />
+      </div>
+    )
   }
-
-  const getIconText = () => {
-    if (icon?.startsWith("rank_")) {
-      const rank = icon.replace("rank_", "")
-      return rank === "1" ? <IconCrown className="w-4 h-4 text-yellow-400" /> : 
-             rank === "2" ? <IconCrown className="w-4 h-4 text-gray-300" /> :
-             <IconCrown className="w-4 h-4 text-orange-400" />
-    }
-    return icon?.charAt(0)?.toUpperCase() || "?"
-  }
-
   return (
-    <div className={cn("flex items-center justify-center rounded text-xs font-bold", getIconBg(), className)}>
-      {getIconText()}
+    <div className="w-8 h-8 rounded-lg bg-ink-700 border border-line flex items-center justify-center">
+      <span className="text-xs font-bold text-cream-dim">{rank}</span>
     </div>
   )
 }
@@ -145,10 +130,10 @@ function NationSectionHeader({ nation, title, subtitle }: { nation: string; titl
       <div className="relative flex items-center gap-3">
         <div className="flex-shrink-0">
           <div className={cn(
-            "w-12 h-12 rounded-lg overflow-hidden p-1 border border-line/30 flex items-center justify-center",
-            isKarus ? "bg-red-500/20" : "bg-blue-500/20"
+            "w-10 h-10 rounded-lg overflow-hidden p-0.5 border border-line/30",
+            isKarus ? "bg-ink-700/50" : "bg-ink-700/50"
           )}>
-            <IconShield className={cn("w-6 h-6", isKarus ? "text-red-400" : "text-blue-400")} />
+            <div className={`nation-icon nation-${isKarus ? "karus" : "human"}`} style={{ width: 36, height: 36 }} />
           </div>
         </div>
         <div className="flex-1">
@@ -168,62 +153,44 @@ function PlayerCard({
   rank,
   showVoteDate = false,
   voteDate,
-  isTopThree = false
 }: {
   player: { userId: number; userName: string; userSlug: string; clanId: number; clanName: string; clanSlug: string; clanIcon: string | null; className: string; classIcon: string }
   showRank?: boolean
   rank?: number
   showVoteDate?: boolean
   voteDate?: string
-  isTopThree?: boolean
 }) {
+  const classIconName = player.classIcon.toLowerCase()
+
   return (
     <div className="relative flex items-stretch">
       {showRank && rank !== undefined && (
-        <div className="flex items-center justify-center px-2 sm:px-4 py-2 sm:py-3 bg-ink-800/20 border-r border-line/50">
-          <div className="flex items-center justify-center">
-            {isTopThree ? (
-              <GameIcon 
-                icon={`rank_${rank}`} 
-                alt={`Rank ${rank}`} 
-                className="w-8 h-8 sm:w-10 sm:h-10" 
-              />
-            ) : (
-              <div className="bg-ink-700 rounded-lg w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center border border-line">
-                <span className="text-xs sm:text-sm font-bold text-muted">{rank}</span>
-              </div>
-            )}
-          </div>
+        <div className="flex items-center justify-center px-3 py-3 bg-ink-800/20 border-r border-line/50">
+          <RankIcon rank={rank} />
         </div>
       )}
 
-      <div className="flex-1 flex items-center px-2 sm:px-4 py-2 sm:py-3 gap-2 sm:gap-4">
-        <div className="flex gap-0.5 sm:gap-1 flex-shrink-0">
-          <GameIcon 
-            icon={player.classIcon} 
-            alt={player.className} 
-            className="w-8 h-8 sm:w-10 sm:h-10" 
-          />
+      <div className="flex-1 flex items-center px-3 py-3 gap-3">
+        <div className="w-8 h-8 rounded overflow-hidden bg-ink-700/50 p-0.5 shrink-0">
+          <div className={`class-icon class-${classIconName}`} style={{ width: 28, height: 28 }} />
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
-            <Link
-              href={`/profil/oyuncu/${player.userId}/${player.userSlug}`}
-              className="font-bold text-cream text-xs sm:text-sm hover:text-gold-400 transition-colors truncate max-w-[130px] sm:max-w-none"
-            >
-              {player.userName}
-            </Link>
-          </div>
+          <Link
+            href={`/profil/oyuncu/${player.userId}/${player.userSlug}`}
+            className="font-bold text-cream text-sm hover:text-gold-400 transition-colors truncate block max-w-[150px]"
+          >
+            {player.userName}
+          </Link>
 
           {player.clanId > 0 && (
-            <div className="hidden sm:flex items-center gap-0.5 mt-0.5">
+            <div className="flex items-center gap-1 mt-0.5">
               <Link
                 href={`/profil/klan/${player.clanId}/${player.clanSlug}`}
-                className="flex items-center gap-0.5 hover:text-gold-400 transition-colors"
+                className="flex items-center gap-1 hover:text-gold-400 transition-colors"
               >
                 <IconUsers className="w-3 h-3 text-cream-dim" />
-                <span className="text-[11px] font-semibold text-cream tracking-wide truncate max-w-[80px]">
+                <span className="text-[11px] text-cream-dim truncate max-w-[80px]">
                   {player.clanName}
                 </span>
               </Link>
@@ -232,11 +199,9 @@ function PlayerCard({
         </div>
 
         {showVoteDate && voteDate && (
-          <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-ink-700/30 border border-line/50">
-              <IconCalendar className="w-3.5 h-3.5 text-cream-dim" />
-              <span className="text-xs text-cream-dim">{voteDate}</span>
-            </div>
+          <div className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-lg bg-ink-700/30 border border-line/50 shrink-0">
+            <IconCalendar className="w-3 h-3 text-cream-dim" />
+            <span className="text-xs text-cream-dim">{voteDate}</span>
           </div>
         )}
       </div>
@@ -246,6 +211,8 @@ function PlayerCard({
 
 function KingCard({ king, onOpenModal }: { king: King; onOpenModal: (king: King) => void }) {
   const { gradient, text, isKarus } = getNationStyles(king.nation)
+  const classIconName = king.classIcon.toLowerCase()
+  const nationClass = isKarus ? "karus" : "human"
 
   return (
     <div className={cn(
@@ -266,13 +233,16 @@ function KingCard({ king, onOpenModal }: { king: King; onOpenModal: (king: King)
         <div className="p-4 rounded-xl border bg-ink-700/40 border-line/50 mb-4">
           <div className="flex items-center gap-3 justify-between">
             <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="flex-shrink-0">
-                <GameIcon 
-                  icon={king.classIcon} 
-                  alt={king.className} 
-                  className="w-10 h-10 sm:w-12 sm:h-12" 
-                />
+              {/* Nation & Class Icons */}
+              <div className="flex gap-1 shrink-0">
+                <div className="w-10 h-10 rounded overflow-hidden bg-ink-700/50 p-0.5">
+                  <div className={`nation-icon nation-${nationClass}`} style={{ width: 36, height: 36 }} />
+                </div>
+                <div className="w-10 h-10 rounded overflow-hidden bg-ink-700/50 p-0.5">
+                  <div className={`class-icon class-${classIconName}`} style={{ width: 36, height: 36 }} />
+                </div>
               </div>
+
               <div className="flex-1 min-w-0">
                 <div className="text-base sm:text-lg font-bold text-cream truncate">
                   {king.userName}
@@ -331,13 +301,7 @@ function KingCard({ king, onOpenModal }: { king: King; onOpenModal: (king: King)
 
         <button
           onClick={() => onOpenModal(king)}
-          className={cn(
-            "w-full flex items-center justify-center gap-2 px-4 py-3",
-            "rounded-lg text-sm font-semibold",
-            "transition-all duration-200",
-            "gold-btn",
-            "active:scale-[0.98]"
-          )}
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-200 gold-btn active:scale-[0.98]"
         >
           <IconUsers className="w-4 h-4" />
           <span>Oy Verenleri Gor</span>
@@ -363,6 +327,15 @@ function VoteRanking({
 }) {
   const { gradient, text } = getNationStyles(nation)
 
+  // Row background styling based on rank
+  const getRowBg = (rank: number) => {
+    const baseHover = "hover:shadow-lg hover:shadow-black/20"
+    if (rank === 1) return `bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border-amber-500/20 hover:border-amber-500/40 hover:from-amber-500/15 ${baseHover}`
+    if (rank === 2) return `bg-gradient-to-r from-slate-400/10 via-slate-400/5 to-transparent border-slate-400/20 hover:border-slate-400/40 hover:from-slate-400/15 ${baseHover}`
+    if (rank === 3) return `bg-gradient-to-r from-amber-700/10 via-amber-700/5 to-transparent border-amber-700/20 hover:border-amber-700/40 hover:from-amber-700/15 ${baseHover}`
+    return `border-line hover:border-gold-500/30 hover:bg-ink-800/40 ${baseHover}`
+  }
+
   return (
     <div className="relative bg-ink-800 border border-line rounded-2xl overflow-hidden transition-all duration-300 hover:border-line/80">
       <NationSectionHeader
@@ -373,75 +346,69 @@ function VoteRanking({
 
       <div className="p-4 sm:p-6 space-y-2">
         {candidates.map((candidate) => {
-          const isTopThree = candidate.rank <= 3
+          const classIconName = candidate.classIcon.toLowerCase()
 
           return (
             <div
               key={candidate.userId}
-              className={cn(
-                "group relative overflow-hidden rounded-xl border transition-all duration-200",
-                "hover:shadow-lg hover:shadow-black/20",
-                isTopThree && candidate.rank === 1 && "bg-gradient-to-r from-yellow-500/10 to-yellow-600/5 border-yellow-500/30 hover:from-yellow-500/15 hover:to-yellow-600/10",
-                isTopThree && candidate.rank === 2 && "bg-gradient-to-r from-gray-400/10 to-gray-500/5 border-gray-400/30 hover:from-gray-400/15 hover:to-gray-500/10",
-                isTopThree && candidate.rank === 3 && "bg-gradient-to-r from-orange-500/10 to-orange-600/5 border-orange-500/30 hover:from-orange-500/15 hover:to-orange-600/10",
-                !isTopThree && "bg-ink-700/30 border-line/50 hover:bg-ink-700/50"
-              )}
+              className={`relative overflow-hidden rounded-xl border transition-all duration-200 ${getRowBg(candidate.rank)}`}
             >
-              <div className="flex flex-row items-center gap-2 sm:gap-3">
-                <div className="flex-1 min-w-0">
-                  <PlayerCard
-                    player={candidate}
-                    showRank={true}
-                    rank={candidate.rank}
-                    isTopThree={isTopThree}
-                  />
+              <div className="flex items-center">
+                {/* Rank */}
+                <div className="flex items-center justify-center px-3 py-3 bg-ink-800/20 border-r border-line/50">
+                  <RankIcon rank={candidate.rank} />
                 </div>
 
-                <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-                  <div className="hidden sm:block w-40 flex-shrink-0">
-                    <div className="space-y-2">
-                      <div>
-                        <div className="flex items-center justify-between mb-1">
-                          <div className="flex items-center gap-1.5">
-                            <IconThumbUp className="w-3.5 h-3.5 text-emerald-400" />
-                            <span className="text-sm font-bold text-cream">
-                              {candidate.formattedVotes}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <IconChartPie className={cn("w-3.5 h-3.5", text)} />
-                            <span className={cn("text-xs font-bold", text)}>
-                              %{candidate.percentage}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="h-1.5 bg-ink-900 rounded-full overflow-hidden">
-                          <div
-                            className={cn("h-full transition-all duration-500 bg-gradient-to-r", gradient)}
-                            style={{ width: `${candidate.percentage}%` }}
-                          />
-                        </div>
-                      </div>
-                    </div>
+                {/* Player Info */}
+                <div className="flex-1 flex items-center px-3 py-3 gap-3">
+                  <div className="w-8 h-8 rounded overflow-hidden bg-ink-700/50 p-0.5 shrink-0">
+                    <div className={`class-icon class-${classIconName}`} style={{ width: 28, height: 28 }} />
                   </div>
 
-                  <button
-                    onClick={() => onOpenModal(candidate)}
-                    className={cn(
-                      "flex items-center justify-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2",
-                      "rounded-lg text-xs font-semibold",
-                      "transition-all duration-200 flex-shrink-0 ml-1 mr-3",
-                      "gold-btn",
-                      "active:scale-[0.98]"
+                  <div className="min-w-0 flex-1">
+                    <Link
+                      href={`/profil/oyuncu/${candidate.userId}/${candidate.userSlug}`}
+                      className="font-bold text-cream text-sm hover:text-gold-400 transition-colors truncate block max-w-[120px]"
+                    >
+                      {candidate.userName}
+                    </Link>
+                    {candidate.clanId > 0 && (
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <IconUsers className="w-3 h-3 text-cream-dim" />
+                        <span className="text-[11px] text-cream-dim truncate max-w-[60px]">{candidate.clanName}</span>
+                      </div>
                     )}
-                  >
-                    <IconUsers className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                    <span className="hidden sm:inline">Oylar</span>
-                    <span className="px-1.5 py-0.5 rounded-full bg-black/20 text-[10px] sm:text-xs">
-                      {candidate.formattedVotes}
-                    </span>
-                  </button>
+                  </div>
                 </div>
+
+                {/* Vote Stats */}
+                <div className="hidden sm:block w-32 pr-2">
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-1">
+                      <IconThumbUp className="w-3 h-3 text-emerald-400" />
+                      <span className="text-xs font-bold text-cream">{candidate.formattedVotes}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <IconChartPie className={cn("w-3 h-3", text)} />
+                      <span className={cn("text-xs font-bold", text)}>%{candidate.percentage}</span>
+                    </div>
+                  </div>
+                  <div className="h-1.5 bg-ink-900 rounded-full overflow-hidden">
+                    <div
+                      className={cn("h-full transition-all duration-500 bg-gradient-to-r", gradient)}
+                      style={{ width: `${candidate.percentage}%` }}
+                    />
+                  </div>
+                </div>
+
+                {/* Button */}
+                <button
+                  onClick={() => onOpenModal(candidate)}
+                  className="flex items-center justify-center gap-1 px-3 py-1.5 mr-3 rounded-lg text-xs font-semibold transition-all duration-200 gold-btn active:scale-[0.98] shrink-0"
+                >
+                  <IconUsers className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Oylar</span>
+                </button>
               </div>
             </div>
           )
@@ -510,12 +477,9 @@ function VoterModal({
 
         <div className="overflow-y-auto max-h-[60vh]">
           {voters.length > 0 ? (
-            <div className="divide-y divide-line">
+            <div className="divide-y divide-line/50">
               {voters.map((voter, index) => (
-                <div
-                  key={voter.userId}
-                  className="group relative overflow-hidden border-0 transition-colors duration-200"
-                >
+                <div key={voter.userId} className="hover:bg-ink-700/30 transition-colors">
                   <PlayerCard
                     player={voter}
                     showRank={true}
@@ -528,7 +492,7 @@ function VoterModal({
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-8">
-              <IconUsers className="w-12 h-12 text-cream-dim mb-3" />
+              <IconUsers className="w-12 h-12 text-cream-dim mb-3 opacity-50" />
               <p className="text-sm text-cream-dim">Henuz oy yok</p>
             </div>
           )}
@@ -544,46 +508,54 @@ export default function KingElectionsPage() {
   const { karusKing, humanKing, karusVotes, humanVotes } = mockKingElections
 
   return (
-    <div className="min-h-screen bg-ink-900">
+    <div className="min-h-screen pb-16 lg:pb-0">
       <Header />
       
-      <div className="bg-gradient-to-br from-ink-900 via-ink-800 to-ink-900 min-h-screen">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-6 py-6">
-          {/* Page Header */}
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 flex items-center justify-center">
-              <IconCrown className="w-6 h-6 text-gold-400" />
+      <main className="mx-auto max-w-[1400px] px-4 lg:px-6 py-8 lg:py-12">
+        {/* Page Header */}
+        <div className="card rounded-xl overflow-hidden mb-6">
+          <div className="section-header">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-md bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                <IconCrown className="w-4 h-4" />
+              </div>
+              <div>
+                <h1 className="font-semibold text-cream text-lg">Krallik Secimleri</h1>
+                <p className="text-xs text-cream-dim">Ulusal liderlik secim sonuclari</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-cream">Krallik Secimleri</h1>
-              <p className="text-sm text-cream-dim">Ulusal liderlik secim sonuclari</p>
-            </div>
-          </div>
-
-          <div className="mt-6 space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <KingCard king={karusKing} onOpenModal={openVotersModal} />
-              <KingCard king={humanKing} onOpenModal={openVotersModal} />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <VoteRanking
-                title="Karus Adaylari"
-                candidates={karusVotes}
-                nation="karus"
-                onOpenModal={openVotersModal}
-              />
-              <VoteRanking
-                title="Human Adaylari"
-                candidates={humanVotes}
-                nation="human"
-                onOpenModal={openVotersModal}
-              />
-            </div>
+            <Link href="/siralamalar" className="text-xs text-gold-400 hover:text-gold-300 flex items-center gap-1">
+              Tum Siralamalar <IconChevronRight className="w-3 h-3" />
+            </Link>
           </div>
         </div>
-      </div>
 
+        {/* Kings Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <KingCard king={karusKing} onOpenModal={openVotersModal} />
+          <KingCard king={humanKing} onOpenModal={openVotersModal} />
+        </div>
+
+        {/* Vote Rankings */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <VoteRanking
+            title="Karus Aday Siralamasi"
+            candidates={karusVotes}
+            nation="karus"
+            onOpenModal={openVotersModal}
+          />
+          <VoteRanking
+            title="El Morad Aday Siralamasi"
+            candidates={humanVotes}
+            nation="human"
+            onOpenModal={openVotersModal}
+          />
+        </div>
+      </main>
+
+      <Footer />
+
+      {/* Voter Modal */}
       <VoterModal
         isOpen={isModalOpen}
         onClose={closeModal}
@@ -591,8 +563,6 @@ export default function KingElectionsPage() {
         nation={selectedCandidate?.nation}
         voters={voters}
       />
-
-      <Footer />
     </div>
   )
 }
