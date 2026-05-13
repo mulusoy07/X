@@ -176,16 +176,54 @@ export function Hero() {
               {slide.description}
             </p>
 
-            <button 
-              className="gold-btn mt-8 inline-flex items-center gap-2 px-8 py-4 rounded-md text-lg font-bold hover:scale-105 transition-transform"
+            {/* V08 Aura + Icon Morph Button */}
+            <div 
+              className="mt-8 flex gap-4"
               style={{
                 transform: `translateY(${index === currentSlide ? 0 : 20}px)`,
                 transition: "transform 0.5s ease-out 0.3s",
               }}
             >
-              <IconDownload className="w-5 h-5" />
-              {slide.cta}
-            </button>
+              {/* Primary CTA Button */}
+              <button className="group relative px-8 py-4 rounded-xl font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-105">
+                {/* Aura glow effect */}
+                <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-gold-500/20 via-gold-400/30 to-gold-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-150" />
+                {/* Pulsing ring */}
+                <span className="absolute inset-0 rounded-xl border-2 border-gold-400/50 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                {/* Button background */}
+                <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-600 group-hover:from-gold-500 group-hover:via-gold-400 group-hover:to-gold-500 transition-all duration-300" />
+                {/* Content */}
+                <span className="relative flex items-center gap-3 text-ink-950">
+                  <span className="relative w-5 h-5 flex items-center justify-center">
+                    {/* Default icon */}
+                    <IconDownload className="w-5 h-5 absolute transition-all duration-300 group-hover:opacity-0 group-hover:rotate-90 group-hover:scale-0" />
+                    {/* Hover icon */}
+                    <IconStar className="w-5 h-5 absolute transition-all duration-300 opacity-0 -rotate-90 scale-0 group-hover:opacity-100 group-hover:rotate-0 group-hover:scale-100" />
+                  </span>
+                  {slide.cta}
+                </span>
+              </button>
+
+              {/* Secondary Ghost Button */}
+              <button className="group relative px-8 py-4 rounded-xl font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-105">
+                {/* Aura glow effect */}
+                <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-cream/10 via-cream/20 to-cream/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-150" />
+                {/* Pulsing ring */}
+                <span className="absolute inset-0 rounded-xl border-2 border-cream/30 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                {/* Button background */}
+                <span className="absolute inset-0 rounded-xl bg-ink-800/80 border border-line group-hover:border-cream/50 group-hover:bg-ink-700/80 transition-all duration-300" />
+                {/* Content */}
+                <span className="relative flex items-center gap-3 text-cream group-hover:text-gold-400">
+                  <span className="relative w-5 h-5 flex items-center justify-center">
+                    {/* Default icon */}
+                    <IconChevronRight className="w-5 h-5 absolute transition-all duration-300 group-hover:opacity-0 group-hover:translate-x-2" />
+                    {/* Hover icon */}
+                    <IconStar className="w-5 h-5 absolute transition-all duration-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0" />
+                  </span>
+                  Daha Fazla
+                </span>
+              </button>
+            </div>
           </div>
         ))}
 
