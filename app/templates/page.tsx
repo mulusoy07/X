@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { IconArrowLeft, IconLayout, IconMessage, IconActivityHeartbeat, IconNews, IconTrophy, IconBrain, IconCalendar, IconShield, IconSparkles, IconLayoutBottombar, IconBook } from "@tabler/icons-react"
+import { IconArrowLeft, IconLayout, IconMessage, IconActivityHeartbeat, IconNews, IconTrophy, IconBrain, IconCalendar, IconShield, IconSparkles, IconLayoutBottombar, IconBook, IconArchive, IconHeading } from "@tabler/icons-react"
 
 const templates = [
   { 
@@ -87,6 +87,27 @@ const templates = [
     description: "Eski sayfa adaptasyon test alanı",
     icon: IconBook,
     color: "hover:border-cyan-500/50 hover:bg-cyan-500/10"
+  },
+  { 
+    name: "Rankings", 
+    slug: "rankings", 
+    description: "Player ve clan sıralamaları",
+    icon: IconTrophy,
+    color: "hover:border-gold-500/50 hover:bg-gold-500/10"
+  },
+  { 
+    name: "Page Headers", 
+    slug: "page-headers", 
+    description: "Breadcrumb ve sayfa başlık varyasyonları",
+    icon: IconHeading,
+    color: "hover:border-cyan-500/50 hover:bg-cyan-500/10"
+  },
+  { 
+    name: "Extra", 
+    slug: "extra", 
+    description: "Saklanan, kullanılmayan tasarım varyasyonları",
+    icon: IconArchive,
+    color: "hover:border-gold-500/50 hover:bg-gold-500/10"
   },
 ]
 

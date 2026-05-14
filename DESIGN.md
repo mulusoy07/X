@@ -678,6 +678,583 @@ Tum resimlere anlamli `alt` text eklenmeli.
 
 ---
 
+## Sayfa Sablonu Patterns (Templates)
+
+Bu bolum sayfa-bazli bilesenler ve uygulanmis kararlari icerir. Yeni sayfa yaparken bu patterns'lere uy.
+
+### 1. Sayfa Header (Breadcrumb + Heading)
+
+Tum ic sayfalarda (Rankings, Guide, vs.) bu kombin kullanilir:
+
+**Standart: B2 Breadcrumb + H2 Heading**
+
+```tsx
+<div className="max-w-7xl mx-auto px-4 pt-6">
+  {/* Breadcrumb (icon prefixed + slash separator) */}
+  <nav aria-label="breadcrumb" className="flex items-center gap-2 text-sm">
+    <Link href="/" className="inline-flex items-center gap-1.5 text-cream-dim hover:text-cream transition-colors">
+      <IconHome className="w-4 h-4" />
+      Ana Sayfa
+    </Link>
+    <IconSlash className="w-3.5 h-3.5 text-cream-dim/40 -rotate-12" />
+    <Link href="/rankings" className="inline-flex items-center gap-1.5 text-cream-dim hover:text-cream transition-colors">
+      <IconTrophy className="w-4 h-4" />
+      Rankings
+    </Link>
+    <IconSlash className="w-3.5 h-3.5 text-cream-dim/40 -rotate-12" />
+    <span className="inline-flex items-center gap-1.5 font-semibold text-gold-300">
+      <IconUsers className="w-4 h-4" />
+      Users
+    </span>
+  </nav>
+</div>
+
+<div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
+  {/* H2 Heading (icon badge + title) */}
+  <div className="flex items-center gap-3">
+    <div className="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-400">
+      <IconTrophy className="w-6 h-6" />
+    </div>
+    <div>
+      <h1 className="font-display text-2xl font-bold text-cream tracking-tight">Sayfa Basligi</h1>
+      <p className="text-sm text-cream-dim">Sayfa aciklamasi</p>
+    </div>
+  </div>
+  ...
+</div>
+```
+
+**Kurallar:**
+- Breadcrumb son segmenti `text-gold-300 font-semibold`, oncekiler `text-cream-dim hover:text-cream`
+- Separator: `IconSlash w-3.5 h-3.5 text-cream-dim/40 -rotate-12`
+- Heading icon badge: `w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 text-gold-400`
+- Title: `font-display text-2xl font-bold text-cream tracking-tight`
+- Subtitle: `text-sm text-cream-dim`
+
+Diger varyasyonlar `/templates/page-headers` sayfasinda gosterilmistir (B1/B3/B4, H1/H3/H4).
+
+---
+
+### 2. Themed Select (Custom Dropdown)
+
+Native `<select>` yerine kullanilir. Header dil dropdown'i pattern'i baz alinmistir.
+
+**Yapi:**
+
+```tsx
+function ThemedSelect<T extends string | number>({
+  value, onChange, options, placeholder, width = "w-full sm:w-40"
+}: {
+  value: T
+  onChange: (v: T) => void
+  options: { value: T; label: string }[]
+  placeholder?: string
+  width?: string
+}) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  // Click outside + ESC kapatma
+  useEffect(() => {
+    if (!open) return
+    const onDoc = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false)
+    }
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false)
+    document.addEventListener("mousedown", onDoc)
+    document.addEventListener("keydown", onKey)
+    return () => {
+      document.removeEventListener("mousedown", onDoc)
+      document.removeEventListener("keydown", onKey)
+    }
+  }, [open])
+
+  const current = options.find((o) => o.value === value)
+
+  return (
+    <div ref={ref} className={`relative ${width}`}>
+      {/* Trigger */}
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="w-full h-10 px-3 flex items-center gap-2 rounded-xl bg-ink-800/60 border border-line/60 hover:border-gold-500/30 transition-all text-sm group"
+      >
+        <span className={`flex-1 truncate text-left ${current ? "text-cream" : "text-cream-dim/60"}`}>
+          {current?.label ?? placeholder}
+        </span>
+        <IconChevronDown className={`w-4 h-4 text-cream-dim group-hover:text-gold-400 transition-all ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      {/* Panel */}
+      {open && (
+        <div className="absolute top-full left-0 right-0 mt-2 bg-ink-800/95 backdrop-blur-xl border border-gold-500/20 rounded-xl shadow-2xl overflow-hidden z-[60] p-1.5 max-h-72 overflow-y-auto">
+          {options.map((opt) => {
+            const active = opt.value === value
+            return (
+              <button
+                key={String(opt.value)}
+                type="button"
+                onClick={() => { onChange(opt.value); setOpen(false) }}
+                className={`w-full px-3 py-2 rounded-lg flex items-center gap-2 text-left text-sm transition-all ${
+                  active
+                    ? "bg-gold-500/10 text-gold-300"
+                    : "text-cream hover:bg-ink-700/50 hover:text-gold-300"
+                }`}
+              >
+                <span className="flex-1 truncate">{opt.label}</span>
+                {active && <IconCheck className="w-3.5 h-3.5 text-gold-400 shrink-0" />}
+              </button>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+**Style spec:**
+| Parca | Class |
+|-------|-------|
+| Trigger | `h-10 px-3 rounded-xl bg-ink-800/60 border-line/60 hover:border-gold-500/30` |
+| Trigger text | `text-sm text-cream` (active) / `text-cream-dim/60` (placeholder) |
+| Chevron | `w-4 h-4 text-cream-dim group-hover:text-gold-400` + `rotate-180` aktifken |
+| Panel | `mt-2 bg-ink-800/95 backdrop-blur-xl border-gold-500/20 rounded-xl shadow-2xl z-[60]` |
+| Panel padding | `p-1.5 max-h-72 overflow-y-auto` |
+| Item normal | `text-cream hover:bg-ink-700/50 hover:text-gold-300` |
+| Item active | `bg-gold-500/10 text-gold-300` + `IconCheck` saginda |
+
+**Klipleme uyarisi:** Select'in bulundugu container'da `overflow-hidden` KULLANMAYIN — dropdown panel kirpilir. Gerekirse `overflow-visible` zorunlu.
+
+---
+
+### 3. Search Input (Icon Prefixed)
+
+```tsx
+<div className="relative w-full sm:flex-1 min-w-[220px]">
+  <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cream-dim/70" />
+  <input
+    type="text"
+    placeholder="Kullanici adi ara..."
+    value={value}
+    onChange={(e) => setValue(e.target.value)}
+    onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+    className="w-full h-10 pl-9 pr-3 rounded-xl bg-ink-800/60 border border-line/60 text-sm text-cream placeholder:text-cream-dim/50 hover:border-gold-500/30 focus:outline-none focus:border-gold-500/50 focus:bg-ink-800 transition disabled:opacity-50"
+  />
+</div>
+```
+
+**Spec:**
+- Container `relative` + min genislik (250px civari)
+- Icon `absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cream-dim/70`
+- Input padding: `pl-9 pr-3` (sol icon icin yer)
+- Input: `h-10 rounded-xl bg-ink-800/60 border-line/60`
+- Hover: `hover:border-gold-500/30`
+- Focus: `focus:border-gold-500/50 focus:bg-ink-800`
+
+---
+
+### 4. Filter Section Pattern
+
+Sayfa filtreleme bilesenlerinin standart kabugu. **Smart Compact (V4)** pattern resmi olarak secildi.
+
+**Yapi:** Top bar (search + Filtrele toggle + Ara) + Active chips alani (kosullu) + Expandable panel (acilinca).
+
+```tsx
+<div className="rounded-2xl border border-line bg-ink-900/40">
+  {/* Top bar */}
+  <div className="p-3 sm:p-4 flex flex-wrap items-center gap-2 sm:gap-3">
+    {/* Search input */}
+    {/* Filtrele toggle button — aktif filter sayisi rozetli */}
+    {/* Primary "Ara" button — gradient gold */}
+  </div>
+
+  {/* Active filter chips (kosullu) */}
+  {activeChips.length > 0 && (
+    <div className="px-3 sm:px-4 pb-3 flex items-center gap-2 flex-wrap">
+      <span className="text-[10px] font-black uppercase tracking-widest text-cream-dim/60">Aktif:</span>
+      {activeChips.map((chip) => (
+        <FilterChip key={chip.key} {...chip} />
+      ))}
+      <button onClick={onReset} className="text-[11px] text-cream-dim/70 hover:text-cream-dim font-semibold underline-offset-2 hover:underline ml-1">
+        Tumunu temizle
+      </button>
+    </div>
+  )}
+
+  {/* Expandable filter panel */}
+  {open && (
+    <div className="border-t border-line bg-ink-900/40 p-3 sm:p-4 space-y-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <LabelledField label="Nation"><ThemedSelect ... /></LabelledField>
+        ...
+      </div>
+      <div className="flex justify-end pt-1 border-t border-line/60">
+        <button className="mt-2 inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-cream-dim text-xs font-semibold hover:text-cream hover:bg-ink-800 transition">
+          <IconEraser className="w-3.5 h-3.5" />
+          Filtreleri sifirla
+        </button>
+      </div>
+    </div>
+  )}
+</div>
+```
+
+**Container:** `rounded-2xl border-line bg-ink-900/40` (overflow-hidden YOK)
+
+**Filtrele toggle button:**
+- Inactive: `bg-ink-800/60 border-line/60 text-cream-dim`
+- Active veya filtre var: `bg-gold-500/10 border-gold-500/40 text-gold-300`
+- Active count rozeti: `min-w-[18px] h-[18px] rounded-full bg-gold-500 text-ink-950 text-[10px] font-black`
+
+**Filter Chip (active filter rozeti):**
+```tsx
+<button
+  onClick={onClear}
+  className="group inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-xs font-semibold text-gold-300 hover:bg-gold-500/20 transition"
+>
+  <span>{label}</span>
+  <IconX className="w-3 h-3 opacity-60 group-hover:opacity-100" />
+</button>
+```
+
+---
+
+### 5. Form Field Label
+
+Filter panel ve form alanlarinda kullanilan kucuk label:
+
+```tsx
+function LabelledField({ label, children }) {
+  return (
+    <div className="space-y-1.5">
+      <label className="text-[10px] font-black uppercase tracking-widest text-cream-dim/60 px-1">
+        {label}
+      </label>
+      {children}
+    </div>
+  )
+}
+```
+
+**Spec:** `text-[10px] font-black uppercase tracking-widest text-cream-dim/60`
+
+---
+
+### 6. Custom Tooltip (CSS-only group hover)
+
+Shadcn Tooltip yerine **CSS-only named group** pattern'i kullanilir. Quick-actions component'inden alinmistir.
+
+```tsx
+<span className="relative group/np inline-block">
+  {/* Trigger content (tikladiginda hover edilen) */}
+  <span className="cursor-help">{compactValue}</span>
+
+  {/* Tooltip — named group hover ile gosterilir */}
+  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-lg bg-ink-800 border border-line text-sm text-cream font-medium whitespace-nowrap opacity-0 group-hover/np:opacity-100 group-hover/np:translate-y-0 translate-y-1 transition-all duration-200 pointer-events-none shadow-xl z-20">
+    {fullValue}
+  </div>
+</span>
+```
+
+**Kullanim:**
+- **Named group** (`group/np`, `group/info`, vs.) — outer hover'larla karismaz
+- **Trigger:** `cursor-help` (degeri full-text icin)
+- **Position:** `absolute bottom-full left-1/2 -translate-x-1/2 mb-2`
+- **Style:** `bg-ink-800 border-line shadow-xl rounded-lg z-20`
+- **Animation:** `opacity-0 → opacity-100` + `translate-y-1 → translate-y-0`
+- **Pointer:** `pointer-events-none` zorunlu (mouse trap'lemesin)
+
+Boyut:
+- Tablo/satir tooltip: `px-3 py-1.5 text-sm`
+- Mini tooltip (icon-only buton): `px-2 py-1 text-xs`
+
+---
+
+### 7. Number Formatting (Compact Display)
+
+Buyuk sayilar icin kompakt format. Tooltip ile tam degeri gosterir.
+
+```tsx
+function compactNumber(n: number): string {
+  if (n >= 1_000_000) {
+    const v = n / 1_000_000
+    return `${v >= 10 ? Math.round(v) : v.toFixed(1).replace(/\.0$/, "")}M`
+  }
+  if (n >= 1_000) {
+    const v = n / 1_000
+    return `${v >= 10 ? Math.round(v) : v.toFixed(1).replace(/\.0$/, "")}K`
+  }
+  return n.toString()
+}
+```
+
+**Cikti ornekleri:**
+- `1.500.000` → `1.5M`
+- `12.500.000` → `13M` (10+ icin tam sayi)
+- `275.512` → `276K`
+- `8.250` → `8.3K`
+- `850` → `850` (1000 alti tam)
+
+**Birlikte kullanim:** Hover'da custom tooltip ile **tam degeri** goster. `formattedLoyalty` (`1.500.000`) tooltip'te, `compactNumber(loyalty)` (`1.5M`) ekranda.
+
+---
+
+### 8. Top 3 Rank Accent (Sira Vurgusu)
+
+Listelerde ilk 3'e ozel renk paleti:
+
+| Sira | Border / BG | Icon | HEX |
+|------|-------------|------|-----|
+| #1 (Gold) | `from-yellow-500/10 to-yellow-600/5 border-yellow-500/30` | `IconCrown` | `#eab308` |
+| #2 (Silver) | `from-zinc-400/10 to-zinc-500/5 border-zinc-400/30` | `IconMedal` | `#a1a1aa` |
+| #3 (Bronze) | `from-orange-500/10 to-orange-600/5 border-orange-500/30` | `IconAward` | `#f97316` |
+| 4+ (Normal) | Cift: `bg-ink-900/40 border-line` / Tek: `bg-ink-800/30 border-line/60` | Sayi | `text-cream-dim` |
+
+```tsx
+function rankAccent(rank: number) {
+  if (rank === 1) return { bg: "from-yellow-500/10 to-yellow-600/5", border: "border-yellow-500/30", icon: IconCrown, color: "#eab308" }
+  if (rank === 2) return { bg: "from-zinc-400/10 to-zinc-500/5", border: "border-zinc-400/30", icon: IconMedal, color: "#a1a1aa" }
+  if (rank === 3) return { bg: "from-orange-500/10 to-orange-600/5", border: "border-orange-500/30", icon: IconAward, color: "#f97316" }
+  return null
+}
+```
+
+Top 3 rank kutusu icin inline style ile renk uygulamasi (Tailwind safelist disinda kalmasin diye):
+```tsx
+<div
+  className="w-10 h-10 rounded-lg flex items-center justify-center"
+  style={{ backgroundColor: `${accent.color}15`, border: `1px solid ${accent.color}50` }}
+>
+  <Icon style={{ color: accent.color }} />
+</div>
+```
+
+---
+
+### 9. Buton — Icon Morph Variant
+
+Hover'da icon degisen buton (V4 stilinde). Ranking "Ara" butonu disindan secildi olmadi ama showcase olarak buton template'lerinde kayitli (`/templates/buttons` v04).
+
+```tsx
+<button className="group relative h-10 px-5 rounded-xl bg-gradient-to-b from-gold-400 to-gold-500 text-ink-950 text-sm font-bold hover:brightness-110 transition overflow-hidden">
+  <span className="relative h-4 w-4 inline-block">
+    <IconSearch className="absolute inset-0 h-4 w-4 transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-2 group-hover:rotate-45" />
+    <IconListSearch className="absolute inset-0 h-4 w-4 opacity-0 translate-y-2 -rotate-45 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:rotate-0" />
+  </span>
+  <span>Ara</span>
+</button>
+```
+
+**Onemli:** `tracking-wider` veya genislik degistiren transition KULLANMAYIN — buton boyutu sabit kalmali yoksa cevre elemanlar zıplar.
+
+---
+
+### 10. Standart Buton Hover Tercihi
+
+Gold gradient butonlarda **iki yaklasim** mumkun:
+
+| Yaklasim | Class | Kullanim |
+|----------|-------|----------|
+| **Brightness (tercih)** | `hover:brightness-110` | Filter, action butonlari |
+| **Lift glow** | `hover:shadow-lg hover:shadow-gold-500/20` | Hero CTA, prominent buttons |
+
+**ONEMLI:** Yine de tek butonda iki yaklasim KARISTIRILMAZ.
+
+---
+
+### 11. Buton/Input Tutarli Yukseklik ve Radius
+
+Filter ve form kapsayicisindaki tum kontroller **ayni boyut**:
+
+| Element | Yukseklik | Radius |
+|---------|-----------|--------|
+| Input | `h-10` | `rounded-xl` |
+| Themed Select | `h-10` | `rounded-xl` |
+| Buton (medium) | `h-10` | `rounded-xl` |
+| Buton (hero) | `h-12` | `rounded-xl` |
+| Mini buton (panel ici) | `h-9` | `rounded-lg` |
+
+---
+
+### 12. Transparency Tier System (cream-dim opacity)
+
+Metnin gorsel hiyerarsisi icin `text-cream-dim` ust uste opacity tier'leri:
+
+| Class | Kullanim |
+|-------|----------|
+| `text-cream-dim` | Ikincil metin (default) |
+| `text-cream-dim/80` | Hafif soluk meta |
+| `text-cream-dim/70` | Iconlar, kucuk meta |
+| `text-cream-dim/60` | Form label, tracking-widest baslik |
+| `text-cream-dim/50` | Placeholder, disabled-yakin |
+| `text-cream-dim/40` | Separator icon, en soluk (slash, divider) |
+
+Ayni mantik border icin: `border-line`, `border-line/60`, `border-line/50`.
+
+---
+
+### 13. Background Tier System
+
+Layered bg paleti (transparent dark tones):
+
+| Class | Kullanim |
+|-------|----------|
+| `bg-ink-950` | Ana sayfa zemin |
+| `bg-ink-900/50` | Sticky header |
+| `bg-ink-900/40` | Filter container, kart panel |
+| `bg-ink-900/30` | Card variant subtle |
+| `bg-ink-800/95 backdrop-blur-xl` | Dropdown panel (yuksek z-index, blur ile ayri katman) |
+| `bg-ink-800/60` | Input, select, secondary buton |
+| `bg-ink-800/30` | Player row tek satir (zebra) |
+| `bg-ink-800` | Tooltip, en sade ozel kutu |
+
+---
+
+### 14. Gold Tinted Container Pattern
+
+Vurgulu kucuk kutular (heading icon badge, count rozeti):
+
+```html
+<!-- Heading icon badge (H2) -->
+<div class="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-400">
+  <Icon class="w-6 h-6" />
+</div>
+
+<!-- Active state (filter toggle, breadcrumb son) -->
+<button class="bg-gold-500/10 border-gold-500/40 text-gold-300">
+
+<!-- Mini count rozeti -->
+<span class="min-w-[18px] h-[18px] rounded-full bg-gold-500 text-ink-950 text-[10px] font-black">
+  3
+</span>
+```
+
+**Kurallar:**
+- Background `bg-gold-500/10` veya `bg-gold-500/15` (badge) — 0.05 araliginda
+- Border `border-gold-500/30` veya `border-gold-500/40`
+- Text `text-gold-300` (vurgulu) veya `text-gold-400` (ikon)
+- Solid gold (`bg-gold-500`) sadece counter rozetlerde + ana CTA gradientinde
+
+---
+
+### 15. Pagination — "Daha Fazla Yukle"
+
+Liste sayfalarinda standart load-more butonu:
+
+```tsx
+<button
+  onClick={() => setPage((p) => p + 1)}
+  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-ink-900 border border-line text-cream-dim hover:text-gold-400 hover:border-gold-500/40 transition text-sm font-semibold"
+>
+  <IconChevronsDown className="w-4 h-4" />
+  Daha fazla yukle
+</button>
+```
+
+Tamami listelendiyse:
+```tsx
+<p className="text-sm text-cream-dim/80">
+  Toplam <span className="font-bold text-cream tabular-nums">{count}</span> oyuncu listelendi.
+</p>
+```
+
+---
+
+### 16. Empty State
+
+Sonuc bulunamadi durumu:
+
+```tsx
+<div className="rounded-xl border border-line bg-ink-900/30 p-12 text-center">
+  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-ink-800 border border-line flex items-center justify-center">
+    <IconSearch className="w-7 h-7 text-cream-dim" />
+  </div>
+  <h3 className="font-display text-lg font-bold text-cream mb-1">Sonuc bulunamadi</h3>
+  <p className="text-sm text-cream-dim">Filtreyi degistirip tekrar dene.</p>
+</div>
+```
+
+---
+
+### 17. Tabular Numbers
+
+Sayilar **mutlaka** `tabular-nums` ile yazilir:
+
+```html
+<span class="tabular-nums">{compactNumber(value)}</span>
+<span class="font-bold text-cream tabular-nums">{level}/{rebirth}</span>
+```
+
+Liste icindeki rakamlar dikey hizalansin diye.
+
+---
+
+### 18. Click-Outside ve ESC Pattern
+
+Custom dropdown / popover / modal'larda:
+
+```tsx
+useEffect(() => {
+  if (!open) return
+  const onDoc = (e: MouseEvent) => {
+    if (!ref.current?.contains(e.target as Node)) setOpen(false)
+  }
+  const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false)
+  document.addEventListener("mousedown", onDoc)
+  document.addEventListener("keydown", onKey)
+  return () => {
+    document.removeEventListener("mousedown", onDoc)
+    document.removeEventListener("keydown", onKey)
+  }
+}, [open])
+```
+
+Header'daki dropdownlar `.dropdown-container` class'i ve global click handler kullanir (eski yaklasim). **Yeni** custom dropdown'larda yukaridaki ref-based pattern tercih edilir.
+
+---
+
+## Renk Paleti (Guncellemeler)
+
+### Top 3 Rank Renkleri (yeni)
+
+| Sira | Renk | HEX |
+|------|------|-----|
+| #1 Gold | `yellow-500` / `yellow-600` | `#eab308` / `#ca8a04` |
+| #2 Silver | `zinc-400` / `zinc-500` | `#a1a1aa` / `#71717a` |
+| #3 Bronze | `orange-500` / `orange-600` | `#f97316` / `#ea580c` |
+
+### Rebirth/Premium Vurgu (yeni)
+
+| Token | HEX | Kullanim |
+|-------|-----|----------|
+| `violet-500` | `#8b5cf6` | Rebirth level metni gradient basi |
+| `fuchsia-500` | `#d946ef` | Rebirth gradient bitisi |
+| `violet-300` / `violet-400` | `#c4b5fd` / `#a78bfa` | Rebirth label, exp bar |
+
+```html
+<!-- Rebirth seviyesi -->
+<span class="font-bold text-violet-300 tabular-nums">{level}<span class="text-violet-400/80">/{rebirth}</span></span>
+
+<!-- Rebirth EXP bar -->
+<div class="bg-gradient-to-r from-violet-500 to-fuchsia-500" style="width:{percent}%" />
+```
+
+---
+
+## Z-Index (Guncel)
+
+| Deger | Kullanim |
+|-------|----------|
+| `z-10` | Floating elemanlar, sticky header |
+| `z-20` | Tooltip (custom) |
+| `z-40` | Header (sticky high) |
+| `z-50` | Header ustu |
+| `z-[60]` | Custom dropdown panel (Themed Select, header dropdown) |
+| `z-[100]` | Modal, mobile menu |
+
+---
+
 ## Dosya Yapisi
 
 ```

@@ -8,8 +8,7 @@ import { QuickActions } from "@/components/oracle/quick-actions"
 import { ScrollProgress } from "@/components/oracle/scroll-progress"
 import { FeaturedNews } from "@/components/oracle/featured-news"
 import { NewsGrid } from "@/components/oracle/news-grid"
-import { ServerStatus, type ServerStatusHandle } from "@/components/oracle/server-status"
-import { ServerStatus2 } from "@/components/oracle/server-status2"
+import { ServerStatus } from "@/components/oracle/server-status"
 import { ForumTopics } from "@/components/oracle/forum-topics"
 import { StaffKingsSection } from "@/components/oracle/staff-kings-section"
 import { RankingsSection } from "@/components/oracle/rankings-section"
@@ -59,7 +58,7 @@ export default function Home() {
           <div className="lg:col-span-1 flex flex-col gap-6">
             {/* Server Status 2 - Preview */}
             <section>
-              <ServerStatus2 />
+              <ServerStatus />
             </section>
 
 
