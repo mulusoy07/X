@@ -42,7 +42,7 @@ export function MobileBottomNav({ isLoggedIn = false, onAuthStateChange }: Mobil
     <>
       <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
         <div className="bg-ink-900/98 backdrop-blur-xl border-t border-gold-500/10 safe-area-bottom">
-          <div className="grid grid-cols-5 h-14">
+          <div className="grid grid-cols-5 h-16">
             {navItems.map((item, idx) => {
               const Icon = item.icon
               const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))

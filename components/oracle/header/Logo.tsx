@@ -9,10 +9,10 @@ interface LogoProps {
 }
 
 export function Logo({ className = "", size = "md" }: LogoProps) {
-  const sizes = {
-    sm: "h-8",
-    md: "h-10 lg:h-14",
-    lg: "h-14",
+  const heights = {
+    sm: 32,
+    md: 40,
+    lg: 56,
   }
 
   return (
@@ -21,9 +21,8 @@ export function Logo({ className = "", size = "md" }: LogoProps) {
         src="https://media.oraclegamer.net/game/logo/logov4.webp"
         alt="Oracle Gamer"
         width={200}
-        height={56}
-        className={`${sizes[size]}`}
-        style={{ width: "auto", height: "auto" }}
+        height={heights[size]}
+        className="h-10 lg:h-14 w-auto"
         priority
       />
     </Link>

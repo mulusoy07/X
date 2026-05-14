@@ -23,7 +23,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen pb-14 lg:pb-0">
+    <div className="min-h-screen pb-16 lg:pb-0">
       <Header onOpenServerModal={handleServerClick} />
       <Hero />
 

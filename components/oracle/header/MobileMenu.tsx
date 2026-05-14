@@ -67,14 +67,13 @@ export function MobileMenu({
       {/* Content with slide animation */}
       <div className="relative h-full flex flex-col animate-in slide-in-from-right duration-300">
         {/* Fixed Mobile Header - consistent sizing */}
-        <div className="flex-shrink-0 flex items-center justify-between h-14 px-4 border-b border-gold-500/10 bg-ink-900/95">
+        <div className="flex-shrink-0 flex items-center justify-between h-16 px-4 border-b border-gold-500/10 bg-ink-900/95">
           <Image
             src="https://media.oraclegamer.net/game/logo/logov4.webp"
             alt="Oracle Gamer"
             width={120}
             height={34}
-            className="h-8"
-            style={{ width: "auto", height: "32px" }}
+            className="h-8 w-auto"
             priority
           />
           <button
