@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { Header } from "@/components/oracle/header"
+import { Header } from "@/components/oracle/header/index"
 import { Hero } from "@/components/oracle/hero"
 import { GameFeed } from "@/components/oracle/game-feed"
 import { QuickActions } from "@/components/oracle/quick-actions"
@@ -23,7 +23,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen pb-16 lg:pb-0">
+    <div className="min-h-screen pb-14 lg:pb-0">
       <Header onOpenServerModal={handleServerClick} />
       <Hero />
 

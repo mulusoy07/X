@@ -1,0 +1,101 @@
+import {
+  IconHome,
+  IconBook,
+  IconStar,
+  IconShield,
+  IconMap,
+  IconSword,
+  IconCoins,
+  IconTrophy,
+  IconCrown,
+  IconUsers,
+  IconFlame,
+  IconTarget,
+  IconShoppingCart,
+  IconGift,
+  IconHeart,
+  IconAward,
+  IconPlus,
+  IconMessageCircle,
+  IconBrandDiscord,
+  IconNews,
+  IconQuestionMark,
+  IconInfoCircle,
+  IconDownload,
+} from "@tabler/icons-react"
+
+export const menuItems = [
+  {
+    id: "home",
+    label: "Ana Sayfa",
+    href: "/",
+    icon: IconHome,
+  },
+  {
+    id: "guide",
+    label: "Rehber",
+    href: "/rehber",
+    icon: IconBook,
+    submenu: [
+      { label: "Baslangic Rehberi", href: "/rehber/baslangic", icon: IconStar, desc: "Yeni oyuncular icin" },
+      { label: "Sinif Rehberleri", href: "/rehber/siniflar", icon: IconShield, desc: "Warrior, Rogue, Mage, Priest" },
+      { label: "Harita Rehberi", href: "/rehber/harita", icon: IconMap, desc: "Bolgeler ve rotalar" },
+      { label: "PvP Rehberi", href: "/rehber/pvp", icon: IconSword, desc: "Savas taktikleri" },
+      { label: "Ekonomi Rehberi", href: "/rehber/ekonomi", icon: IconCoins, desc: "Ticaret ve kazanc" },
+    ],
+  },
+  {
+    id: "rankings",
+    label: "Siralamalar",
+    href: "/siralamalar",
+    icon: IconTrophy,
+    submenu: [
+      { label: "Oyuncu Siralamasi", href: "/siralamalar/oyuncu", icon: IconCrown, desc: "En guclu oyuncular" },
+      { label: "Lonca Siralamasi", href: "/siralamalar/lonca", icon: IconUsers, desc: "Klan siralamalari" },
+      { label: "PvP Siralamasi", href: "/siralamalar/pvp", icon: IconFlame, desc: "Kill sayilari" },
+      { label: "Haftalik Siralama", href: "/siralamalar/haftalik", icon: IconTarget, desc: "Bu hafta liderler" },
+    ],
+  },
+  {
+    id: "shop",
+    label: "Magaza",
+    href: "/magaza",
+    icon: IconShoppingCart,
+    submenu: [
+      { label: "Premium Paketler", href: "/magaza/premium", icon: IconGift, desc: "VIP avantajlar" },
+      { label: "Kostumler", href: "/magaza/kostumler", icon: IconHeart, desc: "Gorsel ogeler" },
+      { label: "Ozel Esyalar", href: "/magaza/ozel", icon: IconAward, desc: "Nadir itemler" },
+      { label: "Bakiye Yukle", href: "/magaza/bakiye", icon: IconPlus, desc: "Coin satin al" },
+    ],
+  },
+  {
+    id: "community",
+    label: "Topluluk",
+    href: "/topluluk",
+    icon: IconUsers,
+    submenu: [
+      { label: "Forum", href: "/forum", icon: IconMessageCircle, desc: "Tartismalar" },
+      { label: "Discord", href: "https://discord.gg/oracle", icon: IconBrandDiscord, desc: "Canli sohbet", external: true },
+      { label: "Haberler", href: "/haberler", icon: IconNews, desc: "Son gelismeler" },
+      { label: "Etkinlikler", href: "/etkinlikler", icon: IconStar, desc: "Ozel eventler" },
+    ],
+  },
+  {
+    id: "support",
+    label: "Destek",
+    href: "/destek",
+    icon: IconQuestionMark,
+    submenu: [
+      { label: "Yardim Merkezi", href: "/destek/yardim", icon: IconInfoCircle, desc: "SSS ve cozumler" },
+      { label: "Indirme", href: "/indir", icon: IconDownload, desc: "Oyun istemcisi" },
+      { label: "Hesap Kurtarma", href: "/destek/hesap", icon: IconShield, desc: "Sifre sifirlama" },
+    ],
+  },
+]
+
+export const languages = [
+  { code: "tr", label: "Turkce", flag: "https://flagcdn.com/w40/tr.png" },
+  { code: "en", label: "English", flag: "https://flagcdn.com/w40/gb.png" },
+  { code: "de", label: "Deutsch", flag: "https://flagcdn.com/w40/de.png" },
+  { code: "ru", label: "Русский", flag: "https://flagcdn.com/w40/ru.png" },
+]
