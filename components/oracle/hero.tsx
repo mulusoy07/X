@@ -91,7 +91,7 @@ export function Hero() {
   return (
     <section 
       ref={containerRef}
-      className="relative bg-hero overflow-hidden"
+      className="relative bg-hero overflow-hidden overflow-x-clip"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => {

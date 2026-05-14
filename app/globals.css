@@ -105,11 +105,12 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html,
   body {
-    @apply bg-ink-900 text-cream;
+    @apply bg-ink-900 overflow-x-hidden;
   }
-  html {
-    @apply bg-ink-900;
+  body {
+    @apply text-cream;
   }
 }
 
