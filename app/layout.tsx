@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { MobileBottomNav } from '@/components/oracle/MobileBottomNav'
 import './globals.css'
 
 const inter = Inter({
@@ -42,7 +41,6 @@ export default function RootLayout({
     <html lang="tr" className={`${inter.variable} bg-ink-900`}>
       <body className="font-sans antialiased min-h-screen">
         {children}
-        <MobileBottomNav />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

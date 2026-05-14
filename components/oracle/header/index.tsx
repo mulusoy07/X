@@ -45,7 +45,7 @@ export function Header({ onOpenServerModal }: HeaderProps) {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-ink-900 border-b border-gold-500/10">
+      <header className="lg:sticky lg:top-0 z-50 bg-ink-900 lg:border-b lg:border-gold-500/10">
         <div className="max-w-[1400px] mx-auto px-4 lg:px-6">
           <div className="h-16 lg:h-[72px] flex items-center justify-between gap-4">
             {/* Logo */}

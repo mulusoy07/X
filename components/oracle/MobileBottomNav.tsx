@@ -40,7 +40,7 @@ export function MobileBottomNav({ isLoggedIn = false, onAuthStateChange }: Mobil
 
   return (
     <>
-      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
+      <div className="lg:hidden">
         <div className="bg-ink-900 border-t border-gold-500/10 safe-area-bottom">
           <div className="grid grid-cols-5 h-16">
             {navItems.map((item, idx) => {
